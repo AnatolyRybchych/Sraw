@@ -1,7 +1,8 @@
 
-
 out		:= Sraw.exe
 objects	:= obj/main.o
+objects	+= obj/Window.o
+objects	+= obj/MainWindow.o
 
 build:$(objects)
 	g++ -o $(out) $^
