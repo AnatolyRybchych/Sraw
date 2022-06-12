@@ -11,8 +11,29 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
 
 
 MainWindow::MainWindow(HINSTANCE hInstance)
-    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUPWINDOW){
+    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU){
+    dc = GetDC(GetHWnd());
 
+    PIXELFORMATDESCRIPTOR pfd =
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),
+		1,
+		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,  
+		PFD_TYPE_RGBA,      
+		32,                  
+		0, 0, 0, 0, 0, 0,
+		0,0,0,0, 0, 0, 0,
+		24,                  
+		8,                  
+		0,                    
+		PFD_MAIN_PLANE,
+		0,0, 0, 0
+	};
+    SetPixelFormat(dc, ChoosePixelFormat(dc, &pfd), &pfd);
+    glRc = wglCreateContext(dc);
+	wglMakeCurrent(dc, glRc);
+
+    if(!gladLoadGL()) throw std::runtime_error("cannot load glad");
 }
 
 MainWindow::~MainWindow(){
@@ -37,6 +58,17 @@ void MainWindow::SetCurrState(HMONITOR monitor){
             return;
         }
     }
-    currState = std::shared_ptr<MainWindowState>(new MainWindowState(monitor));
+    currState = std::shared_ptr<MainWindowState>(new MainWindowState(this, monitor));
     windowStates.push_back(currState);
+}
+
+void MainWindow::MakeCurrent() const noexcept{
+    wglMakeCurrent(dc, glRc);
+}
+void MainWindow::SwapBuffers() const noexcept{
+    ::SwapBuffers(dc);
+}
+
+void MainWindow::Hide() const noexcept{
+    ShowWindow(GetHWnd(), SW_HIDE);
 }

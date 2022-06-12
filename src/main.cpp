@@ -1,23 +1,6 @@
-#include <iostream>
-#include "UnicodeWindows.hpp"
-#include "MainWindow.hpp"
-
-static int run(HINSTANCE instance);
-static MainWindow *window;
+#include "App.hpp"
 
 int main(int argc, char const *argv[]){
-    return run(GetModuleHandleW(NULL));
-}
-
-static int run(HINSTANCE instance){
-    window = new MainWindow(instance);
-
-    window->Show();
-    
-    MSG msg;
-    while (GetMessageW(&msg, nullptr, 0, 0)){
-        TranslateMessage(&msg);
-        DispatchMessageW(&msg);
-    }
-    return msg.wParam;
+    App app(GetModuleHandleW(NULL));
+    return app.Run();
 }
