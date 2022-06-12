@@ -1,9 +1,10 @@
 #pragma once
 #include "UnicodeWindows.hpp"
+#include "MonitorInfo.hpp"
 
 class MainWindowState{
 private:
-    HMONITOR monitor;
+    MonitorInfo monitorInfo;
 public:
     MainWindowState(HMONITOR monitor);
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
