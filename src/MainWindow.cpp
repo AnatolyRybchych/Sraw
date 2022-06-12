@@ -1,6 +1,19 @@
 #include "MainWindow.hpp"
 
 LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept{
+    switch (msg)
+    {
+    case WM_SHOWWINDOW:{
+        SetFocus(hWnd);
+        SetActiveWindow(hWnd);
+    } break;
+    case WM_ACTIVATE:{
+        if(wParam != WA_INACTIVE) break;
+    }
+    case WM_KILLFOCUS:{
+        Hide();
+    }return 0;
+    }
     if(currState != nullptr){
         return currState->WndProc(hWnd, msg, wParam, lParam);
     }
