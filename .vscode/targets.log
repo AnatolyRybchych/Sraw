@@ -1,0 +1,361 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make.exe: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.2
+This program is built by Equation Solution <http://www.Equation.com>.
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed Jun 15 20:24:04 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# makefile
+MAKEFLAGS = pqrR
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+HOMEDRIVE = C:
+# automatic
+@F = $(notdir $@)
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# makefile
+CURDIR := c:/Users/Velichaisyi/Desktop/Sraw
+# default
+SHELL := C:/Program Files/Git/usr/bin/sh.exe
+# environment
+WINDIR = C:\Windows
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+ONEDRIVE = C:\Users\Velichaisyi\OneDrive
+# makefile (from 'makefile', line 12)
+objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o
+# environment
+MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+TMP = C:\Temp
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PROGRAMDATA = C:\ProgramData
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-af4d395c-59bc-44c6-9a62-f0ee6515f294-sock
+# environment
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
+# environment
+OPENCV_DIR = C:\opencv\build\
+# default
+MAKE_HOST := x86_64-w64-mingw32
+# environment
+PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Users\Velichaisyi\gcc\bin;C:\Users\Velichaisyi\gcc\libexec\gcc\x86_64-w64-mingw32\11.1.0;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\Gpg4win\..\GnuPG\bin;C:\Users\Velichaisyi\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Velichaisyi\AppData\Local\Programs\Python\Python39\;C:\Users\Velichaisyi\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\Velichaisyi\gcc\bin;C:\Program Files\NASM;C:\Users\Velichaisyi\Desktop\scripts;C:\Program Files\Azure Data Studio\bin;C:\Users\Velichaisyi\.dotnet\tools;C:\Users\Velichaisyi\AppData\Local\Programs\Fiddler;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\bin\Hostx64\x86;C:\Program Files (x86)\GnuWin32\bin;�:\opencv\build\x64\vc15\bin;�:\opencv\build\x64\vc15\bin;C:\Users\Velichaisyi\.dotnet\tools;C:\Users\Velichaisyi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Velichaisyi\AppData\Roaming\npm;C:\emsdk\emsdk_ln;C:\Users\Velichaisyi\Desktop\sdecl\sdecl\bin\Debug\net6.0;
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+USERPROFILE = C:\Users\Velichaisyi
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+VSCODE_LOG_STACK = false
+# environment
+NUMBER_OF_PROCESSORS = 4
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync load
+# automatic
+%F = $(notdir $%)
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6300_IBXZBUHPKQRJBXQM
+# makefile (from 'makefile', line 2)
+out := Sraw.exe
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+COMPUTERNAME = HOME-PC
+# environment
+PROGRAMFILES = C:\Program Files
+# default
+.LOADED := 
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERNAME = Velichaisyi
+# environment
+PUBLIC = C:\Users\Public
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# environment
+LOGONSERVER = \\HOME-PC
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+USERDOMAIN = HOME-PC
+# environment
+MSMPI_BENCHMARKS = C:\Program Files\Microsoft MPI\Benchmarks\
+# environment
+MIC_LD_LIBRARY_PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\compiler\lib\mic
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_DEVICE_PIXEL_RATIO = auto
+# default
+MAKE_VERSION := 4.2
+# makefile
+.DEFAULT_GOAL := build
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# environment
+LOCALAPPDATA = C:\Users\Velichaisyi\AppData\Local
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+# environment
+OS = Windows_NT
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.68.0-main-sock
+# environment
+HOMEPATH = \Users\Velichaisyi
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+PROMPT = $P$G
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PT8HOME = C:\Program Files\Cisco Packet Tracer 8.0.1
+# environment
+INTEL_DEV_REDIST = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\
+# environment
+SYSTEMROOT = C:\Windows
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# automatic
++F = $(notdir $+)
+# environment
+APPDATA = C:\Users\Velichaisyi\AppData\Roaming
+# environment
+TEMP = C:\Temp
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+SYSTEMDRIVE = C:
+# environment
+SESSIONNAME = Console
+# environment
+PROCESSOR_REVISION = 8e09
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+VSCODE_PID = 6300
+# environment
+USERDOMAIN_ROAMINGPROFILE = HOME-PC
+# variable set hash-table stats:
+# Load=99/1024=10%, Rehash=0, Collisions=15/138=11%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655313771ll): 9 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655311836ll): No files, no impossibilities so far.
+
+# 9 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+obj/%.o: src/%.cpp
+#  recipe to execute (from 'makefile', line 18):
+	g++ -g -ggdb -Iglad/ -c -o $@ $<
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+gdb: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 27):
+	gdb ./$(out)
+
+# Not a target:
+obj/MainWindow.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+obj/DrawingCanvas.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/glad.o: glad/glad.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 21):
+	gcc -Iglad/ -c -o $@ $<
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/MainWindowState.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-15 20:23:57
+#  File has been updated.
+#  Successfully updated.
+
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 15):
+	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
+
+# Not a target:
+obj/MonitorInfo.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/Window.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/GlobalWindowInput.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run: build
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 24):
+	./$(out)
+
+# Not a target:
+glad/glad.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/App.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/ShaderProgram.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=18/1024=2%, Rehash=0, Collisions=0/42=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 28 / storage = 282 B / avg = 10 B
+# current buf: size = 8162 B / used = 282 B / count = 28 / avg = 10 B
+
+# strcache performance: lookups = 39 / hit rate = 28%
+# hash-table stats:
+# Load=28/8192=0%, Rehash=0, Collisions=1/39=3%
+# Finished Make data base on Wed Jun 15 20:24:04 2022
+
+ 

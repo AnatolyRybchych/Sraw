@@ -1,10 +1,29 @@
 #include "MainWindowState.hpp"
 #include "MainWindow.hpp"
 
-MainWindowState::MainWindowState(MainWindow *window, HMONITOR monitor)
-    :monitorInfo(monitor){
+MainWindowState::MainWindowState(MainWindow &window, HMONITOR monitor)
+    :monitorInfo(monitor), window(window){
     stage = MainWindowStateStage::CopyScreenImage;
-    this->window = window;
+}
+
+void MainWindowState::GetScreenshot() noexcept{
+    if(screenshotDc != nullptr) DeleteDC(screenshotDc);
+    if(screenshot != nullptr) DeleteObject(screenshot);
+
+    MONITORINFO info = monitorInfo.Get();
+    int cxMonitor = info.rcMonitor.right - info.rcMonitor.left;
+    int cyMonitor = info.rcMonitor.bottom - info.rcMonitor.top;
+
+    HDC screenDc = GetDC(NULL);
+    screenshotDc = CreateCompatibleDC(screenDc);
+
+    screenshot = CreateCompatibleBitmap(screenDc, cxMonitor, cyMonitor);
+    SelectObject(screenshotDc, screenshot);
+    BitBlt(screenshotDc, 0, 0, cxMonitor, cyMonitor, screenDc, info.rcMonitor.left, info.rcMonitor.top, SRCCOPY);
+
+    DeleteDC(screenDc);
+    stage = MainWindowStateStage::KeepScreenSate;
+    Canvas = std::unique_ptr<DrawingCanvas>(new DrawingCanvas(cxMonitor, cyMonitor, screenshot));
 }
 
 LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept{
@@ -12,25 +31,12 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
     {
     case WM_SHOWWINDOW:{
         MONITORINFO info = monitorInfo.Get();
-
         int cxMonitor = info.rcMonitor.right - info.rcMonitor.left;
         int cyMonitor = info.rcMonitor.bottom - info.rcMonitor.top;
-
-        if(stage == MainWindowStateStage::CopyScreenImage){
-            if(screenshotDc != nullptr) DeleteDC(screenshotDc);
-            if(screenshot != nullptr) DeleteObject(screenshot);
-
-            HDC screenDc = GetDC(NULL);
-            screenshotDc = CreateCompatibleDC(screenDc);
-
-            screenshot = CreateCompatibleBitmap(screenDc, cxMonitor, cyMonitor);
-            SelectObject(screenshotDc, screenshot);
-            BitBlt(screenshotDc, 0, 0, cxMonitor, cyMonitor, screenDc, info.rcMonitor.left, info.rcMonitor.top, SRCCOPY);
-
-            DeleteDC(screenDc);
-            stage = MainWindowStateStage::KeepScreenSate;
-        }
         
+        if(stage == MainWindowStateStage::CopyScreenImage)
+            GetScreenshot();
+            
         SetWindowPos(
             hWnd, HWND_TOPMOST, 
             info.rcMonitor.left, 
@@ -41,15 +47,11 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
         );
     } return 0;
     case WM_PAINT:{
-        MONITORINFO info = monitorInfo.Get();
-
-        int cxMonitor = info.rcMonitor.right - info.rcMonitor.left;
-        int cyMonitor = info.rcMonitor.bottom - info.rcMonitor.top;
-
         PAINTSTRUCT ps;
-        HDC dc = BeginPaint(hWnd, &ps);
+        BeginPaint(hWnd, &ps);
 
-        BitBlt(dc, 0, 0, cxMonitor, cyMonitor, screenshotDc, 0, 0, SRCCOPY);
+        Canvas->Draw();
+        window.SwapBuffers();
 
         EndPaint(hWnd, &ps);
     } return 0;

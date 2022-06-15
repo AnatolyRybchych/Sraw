@@ -4,11 +4,8 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
     switch (msg)
     {
     case WM_SHOWWINDOW:{
-        SetFocus(hWnd);
-        SetActiveWindow(hWnd);
-    } break;
-    case WM_ACTIVATE:{
-        if(wParam != WA_INACTIVE) break;
+        if(!lParam)
+            break;
     }
     case WM_KILLFOCUS:{
         Hide();
@@ -62,6 +59,7 @@ void MainWindow::Show(){
 
     ShowWindow(GetHWnd(), SW_SHOW);
     UpdateWindow(GetHWnd());
+    SetFocus(GetHWnd());
 }
 
 void MainWindow::SetCurrState(HMONITOR monitor){
@@ -71,7 +69,7 @@ void MainWindow::SetCurrState(HMONITOR monitor){
             return;
         }
     }
-    currState = std::shared_ptr<MainWindowState>(new MainWindowState(this, monitor));
+    currState = std::shared_ptr<MainWindowState>(new MainWindowState(*this, monitor));
     windowStates.push_back(currState);
 }
 
