@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun 18 23:58:32 2022
+# Make data base, printed on Sun Jun 19 00:47:45 2022
 
 # Variables
 
@@ -33,7 +33,8 @@ HOMEDRIVE = C:
 # automatic
 @F = $(notdir $@)
 # automatic
-^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+^D = $(patsubst %/,%,$( 
+patsubst %\,%,$(dir $^)))
 # makefile
 CURDIR := c:/Users/Velichaisyi/Desktop/Sraw
 # default
@@ -44,8 +45,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 14)
-objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o
+# makefile (from 'makefile', line 15)
+objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -211,7 +212,7 @@ VSCODE_PID = 6328
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/142=11%
+# Load=99/1024=10%, Rehash=0, Collisions=15/144=10%
 
 # Pattern-specific Variable Values
 
@@ -219,26 +220,32 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655585508ll): 9 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655585890ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655588859ll): 8 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655588102ll): No files, no impossibilities so far.
 
-# 9 files, no impossibilities in 2 directories.
+# 8 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 20):
+#  recipe to execute (from 'makefile', line 21):
 	g++ -g -ggdb -Iglad/ -c -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
+# Not a target:
+obj/DrawImage.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 29):
+#  recipe to execute (from 'makefile', line 30):
 	gdb ./$(out)
 
 # Not a target:
@@ -264,7 +271,7 @@ obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 23):
+#  recipe to execute (from 'makefile', line 24):
 	gcc -Iglad/ -c -o $@ $<
 
 # Not a target:
@@ -294,15 +301,15 @@ obj/main.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-18 23:58:31
+#  Last modified 2022-06-19 00:47:35
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 17):
+#  recipe to execute (from 'makefile', line 18):
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 # Not a target:
@@ -327,7 +334,7 @@ run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 26):
+#  recipe to execute (from 'makefile', line 27):
 	./$(out)
 
 # Not a target:
@@ -355,19 +362,20 @@ obj/ShaderProgram.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=20/1024=2%, Rehash=0, Collisions=0/46=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 30 / storage = 314 B / avg = 10 B
-# current buf: size = 8162 B / used = 314 B / count = 30 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 321 B / avg = 10 B
+# current buf: size = 8162 B / used = 321 B / count = 30  
+/ avg = 10 B
 
 # strcache performance: lookups = 41 / hit rate = 26%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=1/41=2%
-# Finished Make data base on Sat Jun 18 23:58:32 2022
+# Finished Make data base on Sun Jun 19 00:47:45 2022
 
  

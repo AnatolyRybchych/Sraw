@@ -12,6 +12,7 @@ objects	+= obj/DrawingCanvas.o
 objects	+= obj/ShaderProgram.o
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o
+objects	+= obj/DrawImage.o
 
 build:$(objects)
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
