@@ -7,23 +7,23 @@ MainWindowState::MainWindowState(MainWindow &window, HMONITOR monitor)
 }
 
 void MainWindowState::GetScreenshot() noexcept{
-    if(screenshotDc != nullptr) DeleteDC(screenshotDc);
-    if(screenshot != nullptr) DeleteObject(screenshot);
-
     MONITORINFO info = monitorInfo.Get();
     int cxMonitor = info.rcMonitor.right - info.rcMonitor.left;
     int cyMonitor = info.rcMonitor.bottom - info.rcMonitor.top;
 
     HDC screenDc = GetDC(NULL);
-    screenshotDc = CreateCompatibleDC(screenDc);
+    HDC screenshotDc = CreateCompatibleDC(screenDc);
+    HBITMAP screenshotBmp = CreateCompatibleBitmap(screenDc, cxMonitor, cyMonitor);
+        SelectObject(screenshotDc, screenshotBmp);
+        BitBlt(screenshotDc, 0, 0, cxMonitor, cyMonitor, screenDc, info.rcMonitor.left, info.rcMonitor.top, SRCCOPY);
 
-    screenshot = CreateCompatibleBitmap(screenDc, cxMonitor, cyMonitor);
-    SelectObject(screenshotDc, screenshot);
-    BitBlt(screenshotDc, 0, 0, cxMonitor, cyMonitor, screenDc, info.rcMonitor.left, info.rcMonitor.top, SRCCOPY);
-
+        screenshot = std::unique_ptr<Texture>(new Texture(screenshotBmp));
+    DeleteObject(screenshotBmp);
+    DeleteDC(screenshotDc);
     DeleteDC(screenDc);
+
     stage = MainWindowStateStage::KeepScreenSate;
-    Canvas = std::unique_ptr<DrawingCanvas>(new DrawingCanvas(cxMonitor, cyMonitor, screenshot));
+    canvas = std::unique_ptr<DrawingCanvas>(new DrawingCanvas(*screenshot.get()));
 }
 
 LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept{
@@ -45,12 +45,15 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
             cyMonitor, 
             0
         );
+
+        canvas->OnShow(cxMonitor, cyMonitor);
     } return 0;
     case WM_PAINT:{
         PAINTSTRUCT ps;
         BeginPaint(hWnd, &ps);
 
-        Canvas->Draw();
+        glClear(GL_COLOR_BUFFER_BIT);
+        canvas->Draw();
         window.SwapBuffers();
 
         EndPaint(hWnd, &ps);
@@ -65,8 +68,4 @@ HMONITOR MainWindowState::GetMonitor() const noexcept{
 }
 
 MainWindowState::~MainWindowState() noexcept{
-    if(stage != MainWindowStateStage::CopyScreenImage){
-        DeleteObject(screenshot);
-        DeleteDC(screenshotDc);
-    }
 }

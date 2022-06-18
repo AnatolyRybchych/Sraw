@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <glad/glad.h>
 #include "UnicodeWindows.hpp"
 #include "MonitorInfo.hpp"
 #include "MainWindowStateStage.hpp"
@@ -13,9 +14,9 @@ private:
     MainWindow &window; 
     MonitorInfo monitorInfo;
     MainWindowStateStage stage;
-    std::unique_ptr<DrawingCanvas> Canvas = nullptr;
-    HBITMAP screenshot = nullptr;
-    HDC screenshotDc = nullptr;
+    std::unique_ptr<Texture> screenshot;
+    std::unique_ptr<DrawingCanvas> canvas = nullptr;
+
     void GetScreenshot() noexcept;
 public:
     MainWindowState(MainWindow &window, HMONITOR monitor);

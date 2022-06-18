@@ -1,22 +1,25 @@
 #pragma once
+#include <memory>
 #include "UnicodeWindows.hpp"
+#include "Texture.hpp"
+#include "Framebuffer.hpp"
 #include <glad/glad.h>
 
 class DrawingCanvas
 {
 private:
-    HBITMAP bg;
-    int cx, cy;
-
-    GLuint bgTexture;
+    Texture &bg;
+    std::unique_ptr<Texture> currState;
+    Framebuffer frameBuffer;
     GLuint drawImageProgram;
-
     GLint drawImageVertexP;
     GLint drawImageTex;
 
-    void DrawBG() const noexcept;
+    int cx, cy;
 public:
-    DrawingCanvas(int cx, int cy, HBITMAP bg);
+    const Texture &GetBackground() const noexcept;
+    DrawingCanvas(Texture &bg);
     ~DrawingCanvas() noexcept;
+    void OnShow(int cx, int cy);
     void Draw();
 };

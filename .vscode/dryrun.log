@@ -1,5 +1,7 @@
 make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
-g++ -g -ggdb -Iglad/ -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o -lgdi32 -lopengl32
+g++ -g -ggdb -Iglad/ -c -o obj/Framebuffer.o src/Framebuffer.cpp
+ 
+g++ -g -ggdb -Iglad/ -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o -lgdi32 -lopengl32
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  

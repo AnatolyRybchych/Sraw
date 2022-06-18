@@ -21,7 +21,7 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
 
 
 MainWindow::MainWindow(HINSTANCE hInstance)
-    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU){
+    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU, nullptr, WS_EX_TOOLWINDOW | WS_EX_TOPMOST){
     dc = GetDC(GetHWnd());
 
     PIXELFORMATDESCRIPTOR pfd =

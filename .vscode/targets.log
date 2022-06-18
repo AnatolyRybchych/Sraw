@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 15 20:24:04 2022
+# Make data base, printed on Sat Jun 18 23:58:32 2022
 
 # Variables
 
@@ -44,8 +44,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 12)
-objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o
+# makefile (from 'makefile', line 14)
+objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -61,7 +61,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-af4d395c-59bc-44c6-9a62-f0ee6515f294-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-8ed85b7d-afb6-4222-8230-9d40fd7a5e33-sock
 # environment
 VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
 # environment
@@ -89,7 +89,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6300_IBXZBUHPKQRJBXQM
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6328_QIWZYISFNDKAFLGR
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -111,7 +111,7 @@ PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -157,7 +157,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.68.0-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.68.1-main-sock
 # environment
 HOMEPATH = \Users\Velichaisyi
 # environment
@@ -207,11 +207,11 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 6300
+VSCODE_PID = 6328
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/138=11%
+# Load=99/1024=10%, Rehash=0, Collisions=15/142=11%
 
 # Pattern-specific Variable Values
 
@@ -219,15 +219,15 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655313771ll): 9 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655311836ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655585508ll): 9 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655585890ll): No files, no impossibilities so far.
 
 # 9 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 18):
+#  recipe to execute (from 'makefile', line 20):
 	g++ -g -ggdb -Iglad/ -c -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -238,7 +238,7 @@ gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 27):
+#  recipe to execute (from 'makefile', line 29):
 	gdb ./$(out)
 
 # Not a target:
@@ -264,7 +264,7 @@ obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 21):
+#  recipe to execute (from 'makefile', line 23):
 	gcc -Iglad/ -c -o $@ $<
 
 # Not a target:
@@ -280,6 +280,12 @@ obj/MainWindowState.o:
 #  File has not been updated.
 
 # Not a target:
+obj/Framebuffer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 obj/main.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -288,15 +294,15 @@ obj/main.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 20:23:57
+#  Last modified 2022-06-18 23:58:31
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 15):
+#  recipe to execute (from 'makefile', line 17):
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 # Not a target:
@@ -321,8 +327,14 @@ run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 24):
+#  recipe to execute (from 'makefile', line 26):
 	./$(out)
+
+# Not a target:
+obj/Texture.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 glad/glad.c:
@@ -343,19 +355,19 @@ obj/ShaderProgram.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/42=0%
+# Load=20/1024=2%, Rehash=0, Collisions=0/46=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 28 / storage = 282 B / avg = 10 B
-# current buf: size = 8162 B / used = 282 B / count = 28 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 314 B / avg = 10 B
+# current buf: size = 8162 B / used = 314 B / count = 30 / avg = 10 B
 
-# strcache performance: lookups = 39 / hit rate = 28%
+# strcache performance: lookups = 41 / hit rate = 26%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=1/39=3%
-# Finished Make data base on Wed Jun 15 20:24:04 2022
+# Load=30/8192=0%, Rehash=0, Collisions=1/41=2%
+# Finished Make data base on Sat Jun 18 23:58:32 2022
 
  

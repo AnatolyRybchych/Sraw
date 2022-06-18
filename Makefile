@@ -10,6 +10,8 @@ objects	+= obj/GlobalWindowInput.o
 objects	+= obj/App.o
 objects	+= obj/DrawingCanvas.o
 objects	+= obj/ShaderProgram.o
+objects	+= obj/Texture.o
+objects	+= obj/Framebuffer.o
 
 build:$(objects)
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
