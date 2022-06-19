@@ -13,6 +13,7 @@ objects	+= obj/ShaderProgram.o
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o
 objects	+= obj/DrawImage.o
+objects	+= obj/MouseHighlight.o
 
 build:$(objects)
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32

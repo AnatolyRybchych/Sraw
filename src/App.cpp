@@ -1,5 +1,6 @@
 #include "App.hpp"
 #include "DrawImage.hpp"
+#include "MouseHighlight.hpp"
 
 App::App(HINSTANCE hInstance){
     this->hInstance = hInstance;
@@ -9,7 +10,11 @@ int App::Run(){
     window = new MainWindow(hInstance);
     GlobalWindowInput::Init(*this);
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
+
     DrawImage::Init();
+    MouseHighlight::Init();
 
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0)){

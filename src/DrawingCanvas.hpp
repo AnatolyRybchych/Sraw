@@ -2,6 +2,7 @@
 #include <memory>
 #include "UnicodeWindows.hpp"
 #include "DrawImage.hpp"
+#include "MouseHighlight.hpp"
 #include "Texture.hpp"
 #include "Framebuffer.hpp"
 #include <glad/glad.h>
@@ -13,6 +14,7 @@ private:
     std::unique_ptr<Texture> currState = nullptr;
     Framebuffer frameBuffer;
     int cx, cy;
+    int mX, mY;
 public:
     const Texture &GetBackground() const noexcept;
     DrawingCanvas(Texture &bg);

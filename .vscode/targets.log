@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 19 17:47:45 2022
+# Make data base, printed on Sun Jun 19 18:00:58 2022
 
 # Variables
 
@@ -44,8 +44,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 15)
-objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o
+# makefile (from 'makefile', line 16)
+objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -211,7 +211,7 @@ VSCODE_PID = 6996
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/144=10%
+# Load=99/1024=10%, Rehash=0, Collisions=15/146=10%
 
 # Pattern-specific Variable Values
 
@@ -219,15 +219,15 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655589030ll): 9 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655588102ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655650628ll): 9 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655650816ll): No files, no impossibilities so far.
 
 # 9 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 21):
+#  recipe to execute (from 'makefile', line 22):
 	g++ -g -ggdb -Iglad/ -c -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -244,7 +244,7 @@ gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 30):
+#  recipe to execute (from 'makefile', line 31):
 	gdb ./$(out)
 
 # Not a target:
@@ -270,7 +270,7 @@ obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 24):
+#  recipe to execute (from 'makefile', line 25):
 	gcc -Iglad/ -c -o $@ $<
 
 # Not a target:
@@ -300,15 +300,15 @@ obj/main.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-19 00:47:35
+#  Last modified 2022-06-19 18:00:57
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 18):
+#  recipe to execute (from 'makefile', line 19):
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 # Not a target:
@@ -329,11 +329,17 @@ obj/GlobalWindowInput.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+obj/MouseHighlight.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 27):
+#  recipe to execute (from 'makefile', line 28):
 	./$(out)
 
 # Not a target:
@@ -361,19 +367,19 @@ obj/ShaderProgram.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/48=0%
+# Load=22/1024=2%, Rehash=0, Collisions=2/50=4%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 31 / storage = 330 B / avg = 10 B
-# current buf: size = 8162 B / used = 330 B / count = 31 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 32 / storage = 351 B / avg = 10 B
+# current buf: size = 8162 B / used = 351 B / count = 32 / avg = 10 B
 
-# strcache performance: lookups = 42 / hit rate = 26%
+# strcache performance: lookups = 43 / hit rate = 25%
 # hash-table stats:
-# Load=31/8192=0%, Rehash=0, Collisions=1/42=2%
-# Finished Make data base on Sun Jun 19 17:47:45 2022
+# Load=32/8192=0%, Rehash=0, Collisions=1/43=2%
+# Finished Make data base on Sun Jun 19 18:00:58 2022
 
  

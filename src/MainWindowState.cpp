@@ -48,6 +48,11 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
 
         canvas->OnShow(cxMonitor, cyMonitor);
     } return 0;
+    case WM_MOUSEMOVE:{
+        if(canvas){
+            if(canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+        }
+    }return 0;
     case WM_PAINT:{
         PAINTSTRUCT ps;
         BeginPaint(hWnd, &ps);
