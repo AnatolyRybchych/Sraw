@@ -23,6 +23,17 @@ constexpr const char *DrawImageFragment =
 "}\n"
 "";
 
+DrawImage *DrawImage::renderer = nullptr;
+
+void DrawImage::Init() noexcept{
+    if(renderer != nullptr) delete renderer;
+    renderer = new DrawImage();
+}
+
+const DrawImage &DrawImage::GetRenderer() noexcept{
+    return *renderer;
+}
+
 DrawImage::DrawImage() noexcept{
     prog = BuildShaderProgram(DrawImageVertex, DrawImageFragment);
     drawImageVertexP = glGetAttribLocation(prog, "vertex_p");

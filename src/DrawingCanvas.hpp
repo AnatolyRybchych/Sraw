@@ -12,11 +12,13 @@ private:
     Texture &bg;
     std::unique_ptr<Texture> currState = nullptr;
     Framebuffer frameBuffer;
-    DrawImage drawImage;
     int cx, cy;
 public:
     const Texture &GetBackground() const noexcept;
     DrawingCanvas(Texture &bg);
+    bool OnMouseMove(int x, int y);
+    bool OnLMouseDown(int x, int y);
+    bool OnLMouseUp(int x, int y);
     void OnShow(int cx, int cy);
     void Draw();
 };

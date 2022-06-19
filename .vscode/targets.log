@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 19 00:47:45 2022
+# Make data base, printed on Sun Jun 19 17:47:45 2022
 
 # Variables
 
@@ -33,8 +33,7 @@ HOMEDRIVE = C:
 # automatic
 @F = $(notdir $@)
 # automatic
-^D = $(patsubst %/,%,$( 
-patsubst %\,%,$(dir $^)))
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # makefile
 CURDIR := c:/Users/Velichaisyi/Desktop/Sraw
 # default
@@ -62,9 +61,9 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-8ed85b7d-afb6-4222-8230-9d40fd7a5e33-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ca8e4d68-c084-464e-a761-d90c84cf8b42-sock
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -90,7 +89,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6328_QIWZYISFNDKAFLGR
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6996_NKTIGDDGQJFGLCEP
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -208,7 +207,7 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 6328
+VSCODE_PID = 6996
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
@@ -220,10 +219,10 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655588859ll): 8 files, no impossibilities.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655589030ll): 9 files, no impossibilities.
 # src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655588102ll): No files, no impossibilities so far.
 
-# 8 files, no impossibilities in 2 directories.
+# 9 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -369,13 +368,12 @@ obj/ShaderProgram.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 30 / storage = 321 B / avg = 10 B
-# current buf: size = 8162 B / used = 321 B / count = 30  
-/ avg = 10 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 330 B / avg = 10 B
+# current buf: size = 8162 B / used = 330 B / count = 31 / avg = 10 B
 
-# strcache performance: lookups = 41 / hit rate = 26%
+# strcache performance: lookups = 42 / hit rate = 26%
 # hash-table stats:
-# Load=30/8192=0%, Rehash=0, Collisions=1/41=2%
-# Finished Make data base on Sun Jun 19 00:47:45 2022
+# Load=31/8192=0%, Rehash=0, Collisions=1/42=2%
+# Finished Make data base on Sun Jun 19 17:47:45 2022
 
  

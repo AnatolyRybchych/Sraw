@@ -13,8 +13,21 @@ DrawingCanvas::DrawingCanvas(Texture &bg)
 
 void DrawingCanvas::Draw(){
     glViewport(0, 0, cx, cy);
-    drawImage.Draw(currState->GetGLID());
+    DrawImage::GetRenderer().Draw(currState->GetGLID());
 }
+
+bool DrawingCanvas::OnMouseMove(int x, int y){
+    return false;
+}
+
+bool DrawingCanvas::OnLMouseDown(int x, int y){
+    return false;
+}
+
+bool DrawingCanvas::OnLMouseUp(int x, int y){
+    return false;
+}
+
 
 void DrawingCanvas::OnShow(int cx, int cy){
     this->cx = cx;
@@ -26,7 +39,7 @@ void DrawingCanvas::OnShow(int cx, int cy){
         frameBuffer.Bind();
         glViewport(0, 0, cx, cy);
         frameBuffer.AttachTexture2D(currState->GetGLID());
-        drawImage.Draw(bg.GetGLID());
+        DrawImage::GetRenderer().Draw(bg.GetGLID());
         frameBuffer.Unbind();  
     }
 }

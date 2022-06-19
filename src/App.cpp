@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "DrawImage.hpp"
 
 App::App(HINSTANCE hInstance){
     this->hInstance = hInstance;
@@ -7,6 +8,8 @@ App::App(HINSTANCE hInstance){
 int App::Run(){
     window = new MainWindow(hInstance);
     GlobalWindowInput::Init(*this);
+
+    DrawImage::Init();
 
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0)){

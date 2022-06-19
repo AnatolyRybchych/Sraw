@@ -1,5 +1,25 @@
-make.exe --dry-run --keep-going --print-directory
+make.exe --dry-run --always-make --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
+g++ -g -ggdb -Iglad/ -c -o obj/main.o src/main.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/Window.o src/Window.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/MainWindow.o src/MainWindow.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/MainWindowState.o src/MainWindowState.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/MonitorInfo.o src/MonitorInfo.cpp
+ 
+gcc -Iglad/ -c -o obj/glad.o glad/glad.c
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/GlobalWindowInput.o src/GlobalWindowInput.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/App.o src/App.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/DrawingCanvas.o src/DrawingCanvas.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/ShaderProgram.o src/ShaderProgram.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/Texture.o src/Texture.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/Framebuffer.o src/Framebuffer.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/DrawImage.o src/DrawImage.cpp
 g++ -g -ggdb -Iglad/ -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o -lgdi32 -lopengl32
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  
