@@ -43,7 +43,8 @@ bool App::OnKeyboardHookLL(KeyboardMessages message, KBDLLHOOKSTRUCT *args) noex
     }
 
     if(control && win && (args->vkCode == VK_LCONTROL || args->vkCode == VK_LWIN)){
-        window->Show();
+        if(IsWindowVisible(window->GetHWnd()))window ->Hide();
+        else window->Show();
     }
 
     return true;

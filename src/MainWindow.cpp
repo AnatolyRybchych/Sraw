@@ -7,6 +7,9 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
         if(!lParam)
             break;
     }
+    case WM_ERASEBKGND:{
+
+    } return 0;
     case WM_KILLFOCUS:{
         Hide();
     }return 0;
