@@ -53,6 +53,16 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
             if(canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
         }
     }return 0;
+    case WM_LBUTTONDOWN:{
+        if(canvas){
+            if(canvas->OnLMouseDown(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+        }
+    }return 0;
+    case WM_LBUTTONUP:{
+        if(canvas){
+            if(canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+        }
+    }return 0;
     case WM_PAINT:{
         PAINTSTRUCT ps;
         BeginPaint(hWnd, &ps);
