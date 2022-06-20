@@ -20,39 +20,44 @@ void MouseHighlightTool::OnDraw() const noexcept{
 
 void MouseHighlightTool::OnResize(int cx, int cy) noexcept{}
 
-void MouseHighlightTool::OnMouseMove(int x, int y) noexcept {
+bool MouseHighlightTool::OnMouseMove(int x, int y) noexcept {
     mX = x;
     mY = y;
+    return true;
 }
 
-void MouseHighlightTool::OnLMouseDown(int x, int y) noexcept{
+bool MouseHighlightTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     mX = x;
     mY = y;
     mdX = x;
     mdY = y;
+    return true;
 }
 
-void MouseHighlightTool::OnLMouseUp(int x, int y) noexcept{
+bool MouseHighlightTool::OnLMouseUp(int x, int y) noexcept{
     isMouseDown = false;
     mX = x;
     mY = y;
+    return true;
 }
 
-void MouseHighlightTool::OnKeyDown(int vkCode, int repeat) noexcept{}
-void MouseHighlightTool::OnKeyUp(int vkCode) noexcept{}
-void MouseHighlightTool::OnTextInput(std::wstring str) noexcept{}
+bool MouseHighlightTool::OnKeyDown(int vkCode, int repeat) noexcept{return false;}
+bool MouseHighlightTool::OnKeyUp(int vkCode) noexcept{return false;}
+bool MouseHighlightTool::OnTextInput(std::wstring str) noexcept{return false;}
 
-void MouseHighlightTool::OnScrollUp() noexcept{
+bool MouseHighlightTool::OnScrollUp() noexcept{
     radius -= 0.02;
     
     if(radius < 0.05) radius = 0.05;
     if(radius > 1) radius = 1;
+    return true;
 }
-void MouseHighlightTool::OnScrollDown() noexcept{
+bool MouseHighlightTool::OnScrollDown() noexcept{
     radius += 0.02;
     
     if(radius < 0.05) radius = 0.05;
     if(radius > 1) radius = 1;
+    return true;
 }
 

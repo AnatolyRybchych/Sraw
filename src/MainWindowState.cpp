@@ -50,50 +50,53 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
     } return 0;
     case WM_MOUSEMOVE:{
         if(canvas){
-            canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+            if(canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_LBUTTONDOWN:{
         if(canvas){
-            canvas->OnLMouseDown(LOWORD(lParam), HIWORD(lParam));
+            if(canvas->OnLMouseDown(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_LBUTTONUP:{
         if(canvas){
-            canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam));
+            if(canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_KEYDOWN:{
         if(canvas){
-            canvas->OnkeyDown(wParam, (lParam & 0xffff0000) >> 16);
+            if(canvas->OnkeyDown(wParam, (lParam & 0xffff0000) >> 16))InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_KEYUP:{
         if(canvas){
-            canvas->Onkeyup(wParam);
+            if(canvas->Onkeyup(wParam)) InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_UNICHAR:
     case WM_CHAR:{
         if(canvas){
             wchar_t ch[] = {(wchar_t)wParam, 0,};
-            canvas->OnTextInput(std::wstring(ch));
+            if(canvas->OnTextInput(std::wstring(ch))) InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
     case WM_PAINT:{
         glClear(GL_COLOR_BUFFER_BIT);
+        PAINTSTRUCT ps;
+        BeginPaint(hWnd, &ps);
         if(canvas){
             canvas->Draw();
         }
         window.SwapBuffers();
+        EndPaint(hWnd, &ps);
     } return 0;
     case WM_MOUSEWHEEL:{
         if(canvas){
             if(GET_WHEEL_DELTA_WPARAM(wParam) > 0){
-                canvas->OnScrollDown();
+                if(canvas->OnScrollDown())InvalidateRect(window.GetHWnd(), nullptr, false);
             }
             else{
-                canvas->OnScrollUp();
+                if(canvas->OnScrollUp())InvalidateRect(window.GetHWnd(), nullptr, false);
             }
         }
     }return 0;

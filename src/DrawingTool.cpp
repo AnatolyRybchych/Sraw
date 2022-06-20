@@ -38,34 +38,34 @@ void DrawingTool::Resize(int cx, int cy) noexcept{
     OnResize(cx, cy);
 }
 
-void DrawingTool::MouseMove(int x, int y) noexcept{
-    OnMouseMove(x, y);
+bool DrawingTool::MouseMove(int x, int y) noexcept{
+    return OnMouseMove(x, y);
 }
 
-void DrawingTool::LMouseDown(int x, int y) noexcept{
-    OnLMouseDown(x, y);
+bool DrawingTool::LMouseDown(int x, int y) noexcept{
+    return OnLMouseDown(x, y);
 }
 
-void DrawingTool::LMouseUp(int x, int y) noexcept{
-    OnLMouseUp(x, y);
+bool DrawingTool::LMouseUp(int x, int y) noexcept{
+    return OnLMouseUp(x, y);
 }
 
-void DrawingTool::KeyDown(int vkCode, int repeat) noexcept{
-    OnKeyDown(vkCode, repeat);
+bool DrawingTool::KeyDown(int vkCode, int repeat) noexcept{
+    return OnKeyDown(vkCode, repeat);
 }
 
-void DrawingTool::KeyUp(int vkCode) noexcept{
-    OnKeyUp(vkCode);
+bool DrawingTool::KeyUp(int vkCode) noexcept{
+    return OnKeyUp(vkCode);
 }
 
-void DrawingTool::TextInput(std::wstring str) noexcept{
-    OnTextInput(str);
+bool DrawingTool::TextInput(std::wstring str) noexcept{
+    return OnTextInput(str);
 }
 
-void DrawingTool::ScrollUp() noexcept{
-    OnScrollUp();
+bool DrawingTool::ScrollUp() noexcept{
+    return OnScrollUp();
 }
 
-void DrawingTool::ScrollDown() noexcept{
-    OnScrollDown();
+bool DrawingTool::ScrollDown() noexcept{
+    return OnScrollDown();
 }

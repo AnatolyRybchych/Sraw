@@ -10,14 +10,14 @@ private:
 protected:
     virtual void OnDraw() const noexcept override;
     virtual void OnResize(int cx, int cy) noexcept override;
-    virtual void OnMouseMove(int x, int y) noexcept override; 
-    virtual void OnLMouseDown(int x, int y) noexcept override;
-    virtual void OnLMouseUp(int x, int y) noexcept override;
-    virtual void OnKeyDown(int vkCode, int repeat) noexcept override;
-    virtual void OnKeyUp(int vkCode) noexcept override;
-    virtual void OnTextInput(std::wstring str) noexcept override;
-    virtual void OnScrollUp() noexcept override;
-    virtual void OnScrollDown() noexcept override;
+    virtual bool OnMouseMove(int x, int y) noexcept override; 
+    virtual bool OnLMouseDown(int x, int y) noexcept override;
+    virtual bool OnLMouseUp(int x, int y) noexcept override;
+    virtual bool OnKeyDown(int vkCode, int repeat) noexcept override;
+    virtual bool OnKeyUp(int vkCode) noexcept override;
+    virtual bool OnTextInput(std::wstring str) noexcept override;
+    virtual bool OnScrollUp() noexcept override;
+    virtual bool OnScrollDown() noexcept override;
 public:
     MouseHighlightTool(int cx, int cy) noexcept;
 };

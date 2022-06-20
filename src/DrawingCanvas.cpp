@@ -23,32 +23,31 @@ void DrawingCanvas::Draw(){
     }
 }
 
-void DrawingCanvas::OnMouseMove(int x, int y){
+bool DrawingCanvas::OnMouseMove(int x, int y){
     if(drawingTool){
-        drawingTool->MouseMove(x, y);
+        return drawingTool->MouseMove(x, y);
     }
+    return false;
 }
 
-void DrawingCanvas::OnLMouseDown(int x, int y){
+bool DrawingCanvas::OnLMouseDown(int x, int y){
     if(drawingTool){
-        drawingTool->LMouseDown(x, y);
+        return drawingTool->LMouseDown(x, y);
     }
+    return false;
 }
 
-void DrawingCanvas::OnLMouseUp(int x, int y){
+bool DrawingCanvas::OnLMouseUp(int x, int y){
     if(drawingTool){
-        drawingTool->LMouseUp(x, y);
+        return drawingTool->LMouseUp(x, y);
     }
+    return false;
 }
 
 
 void DrawingCanvas::OnShow(int cx, int cy){
     this->cx = cx;
     this->cy = cy;
-
-    if(drawingTool){
-        drawingTool->Resize(cx, cy);
-    }
 
     if(currState == nullptr){
         currState = std::unique_ptr<Texture>(new Texture(cx, cy));
@@ -59,34 +58,43 @@ void DrawingCanvas::OnShow(int cx, int cy){
         DrawImage::GetRenderer().Draw(bg.GetGLID());
         frameBuffer.Unbind();  
     }
-}
 
-void DrawingCanvas::OnkeyDown(int vkCode, int repeat){
     if(drawingTool){
-        drawingTool->KeyDown(vkCode, repeat);
+        drawingTool->Resize(cx, cy);
     }
 }
 
-void DrawingCanvas::Onkeyup(int vkCode){
+bool DrawingCanvas::OnkeyDown(int vkCode, int repeat){
     if(drawingTool){
-        drawingTool->KeyUp(vkCode);
+        return drawingTool->KeyDown(vkCode, repeat);
     }
+    return false;
 }
 
-void DrawingCanvas::OnScrollUp() noexcept{
+bool DrawingCanvas::Onkeyup(int vkCode){
     if(drawingTool){
-        drawingTool->ScrollUp();
+        return drawingTool->KeyUp(vkCode);
     }
+    return false;
 }
 
-void DrawingCanvas::OnScrollDown() noexcept{
+bool DrawingCanvas::OnScrollUp() noexcept{
     if(drawingTool){
-        drawingTool->ScrollDown();
+        return drawingTool->ScrollUp();
     }
+    return false;
 }
 
-void DrawingCanvas::OnTextInput(std::wstring str){
+bool DrawingCanvas::OnScrollDown() noexcept{
     if(drawingTool){
-        drawingTool->TextInput(str);
+        return drawingTool->ScrollDown();
     }
+    return false;
+}
+
+bool DrawingCanvas::OnTextInput(std::wstring str){
+    if(drawingTool){
+        return drawingTool->TextInput(str);
+    }
+    return false;
 }

@@ -19,14 +19,14 @@ private:
 public:
     const Texture &GetBackground() const noexcept;
     DrawingCanvas(Texture &bg);
-    void OnMouseMove(int x, int y);
-    void OnLMouseDown(int x, int y);
-    void OnLMouseUp(int x, int y);
+    bool OnMouseMove(int x, int y);
+    bool OnLMouseDown(int x, int y);
+    bool OnLMouseUp(int x, int y);
     void OnShow(int cx, int cy);
-    void OnkeyDown(int vkCode, int repeat);
-    void Onkeyup(int vkCode);
-    void OnScrollUp() noexcept;
-    void OnScrollDown() noexcept;
-    void OnTextInput(std::wstring str);
+    bool OnkeyDown(int vkCode, int repeat);
+    bool Onkeyup(int vkCode);
+    bool OnScrollUp() noexcept;
+    bool OnScrollDown() noexcept;
+    bool OnTextInput(std::wstring str);
     void Draw();
 };

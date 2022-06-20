@@ -46,6 +46,8 @@ bool App::OnKeyboardHookLL(KeyboardMessages message, KBDLLHOOKSTRUCT *args) noex
         if(IsWindowVisible(window->GetHWnd()))window ->Hide();
         else
             window->Show();
+        win = false;
+            control = false;
     }
 
     return true;
