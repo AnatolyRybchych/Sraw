@@ -28,6 +28,7 @@ void DrawingTool::Commit() const noexcept{
 }
 
 void DrawingTool::Draw() const noexcept{
+    glViewport(0, 0, vpCx, vpCy);
     OnDraw();
 }
 

@@ -50,28 +50,23 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
     } return 0;
     case WM_MOUSEMOVE:{
         if(canvas){
-            if(canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+            canvas->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
         }
     }return 0;
     case WM_LBUTTONDOWN:{
         if(canvas){
-            if(canvas->OnLMouseDown(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+            canvas->OnLMouseDown(LOWORD(lParam), HIWORD(lParam));
         }
     }return 0;
     case WM_LBUTTONUP:{
         if(canvas){
-            if(canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam))) InvalidateRect(hWnd, NULL, false);
+            canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam));
         }
     }return 0;
     case WM_PAINT:{
-        PAINTSTRUCT ps;
-        BeginPaint(hWnd, &ps);
-
         glClear(GL_COLOR_BUFFER_BIT);
         canvas->Draw();
         window.SwapBuffers();
-
-        EndPaint(hWnd, &ps);
     } return 0;
     default: return DefWindowProcW(hWnd, msg, wParam, lParam);
     }

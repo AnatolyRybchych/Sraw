@@ -1,5 +1,6 @@
 #include "DrawingCanvas.hpp"
 #include "ShaderProgram.hpp"
+#include "MouseHighlightTool.hpp"
 
 
 #include <iostream>
@@ -10,37 +11,44 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
 
 DrawingCanvas::DrawingCanvas(Texture &bg)
     :bg(bg) {
+    drawingTool = std::unique_ptr<DrawingTool>(new MouseHighlightTool(100, 100));
 }
 
 void DrawingCanvas::Draw(){
     glViewport(0, 0, cx, cy);
     DrawImage::GetRenderer().Draw(currState->GetGLID());
 
-    MouseHighlight::GetRenderer().Draw(mX * 2.0 / cx - 1.0 ,1.0 - mY * 2.0 / cy, 0, 0, 0, 0.6, 0.9, 0.3);
+    if(drawingTool){
+        drawingTool->Draw();
+    }
 }
 
-bool DrawingCanvas::OnMouseMove(int x, int y){
-    mX = x;
-    mY = y;
-    return true;
+void DrawingCanvas::OnMouseMove(int x, int y){
+    if(drawingTool){
+        drawingTool->MouseMove(x, y);
+    }
 }
 
-bool DrawingCanvas::OnLMouseDown(int x, int y){
-    mX = x;
-    mY = y;
-    return false;
+void DrawingCanvas::OnLMouseDown(int x, int y){
+    if(drawingTool){
+        drawingTool->LMouseDown(x, y);
+    }
 }
 
-bool DrawingCanvas::OnLMouseUp(int x, int y){
-    mX = x;
-    mY = y;
-    return false;
+void DrawingCanvas::OnLMouseUp(int x, int y){
+    if(drawingTool){
+        drawingTool->LMouseDown(x, y);
+    }
 }
 
 
 void DrawingCanvas::OnShow(int cx, int cy){
     this->cx = cx;
     this->cy = cy;
+
+    if(drawingTool){
+        drawingTool->Resize(cx, cy);
+    }
 
     if(currState == nullptr){
         currState = std::unique_ptr<Texture>(new Texture(cx, cy));

@@ -15,6 +15,7 @@ objects	+= obj/Framebuffer.o
 objects	+= obj/DrawImage.o
 objects	+= obj/MouseHighlight.o
 objects	+= obj/DrawingTool.o
+objects	+= obj/MouseHighlightTool.o
 
 build:$(objects)
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
