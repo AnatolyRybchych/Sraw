@@ -5,6 +5,8 @@ class MouseHighlightTool: public DrawingTool{
 private:
     int mX, mY;
     float radius = 0.3;
+    bool isMouseDown = false;
+    int mdX, mdY;
 protected:
     virtual void OnDraw() const noexcept override;
     virtual void OnResize(int cx, int cy) noexcept override;

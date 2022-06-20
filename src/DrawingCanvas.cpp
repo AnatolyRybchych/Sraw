@@ -37,7 +37,7 @@ void DrawingCanvas::OnLMouseDown(int x, int y){
 
 void DrawingCanvas::OnLMouseUp(int x, int y){
     if(drawingTool){
-        drawingTool->LMouseDown(x, y);
+        drawingTool->LMouseUp(x, y);
     }
 }
 
