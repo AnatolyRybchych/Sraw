@@ -60,3 +60,33 @@ void DrawingCanvas::OnShow(int cx, int cy){
         frameBuffer.Unbind();  
     }
 }
+
+void DrawingCanvas::OnkeyDown(int vkCode, int repeat){
+    if(drawingTool){
+        drawingTool->KeyDown(vkCode, repeat);
+    }
+}
+
+void DrawingCanvas::Onkeyup(int vkCode){
+    if(drawingTool){
+        drawingTool->KeyUp(vkCode);
+    }
+}
+
+void DrawingCanvas::OnScrollUp() noexcept{
+    if(drawingTool){
+        drawingTool->ScrollUp();
+    }
+}
+
+void DrawingCanvas::OnScrollDown() noexcept{
+    if(drawingTool){
+        drawingTool->ScrollDown();
+    }
+}
+
+void DrawingCanvas::OnTextInput(std::wstring str){
+    if(drawingTool){
+        drawingTool->TextInput(str);
+    }
+}

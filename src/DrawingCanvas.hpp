@@ -23,5 +23,10 @@ public:
     void OnLMouseDown(int x, int y);
     void OnLMouseUp(int x, int y);
     void OnShow(int cx, int cy);
+    void OnkeyDown(int vkCode, int repeat);
+    void Onkeyup(int vkCode);
+    void OnScrollUp() noexcept;
+    void OnScrollDown() noexcept;
+    void OnTextInput(std::wstring str);
     void Draw();
 };

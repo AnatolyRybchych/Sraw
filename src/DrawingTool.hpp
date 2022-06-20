@@ -17,6 +17,8 @@ protected:
     virtual void OnKeyDown(int vkCode, int repeat) noexcept = 0;
     virtual void OnKeyUp(int vkCode) noexcept = 0;
     virtual void OnTextInput(std::wstring str) noexcept = 0;
+    virtual void OnScrollUp() noexcept = 0;
+    virtual void OnScrollDown() noexcept = 0;
 public:
     DrawingTool(int cx, int cy) noexcept;
     void SetOnCommitHandler(std::function<void()> handler) noexcept;
@@ -35,6 +37,8 @@ public:
     void KeyDown(int vkCode, int repeat) noexcept;
     void KeyUp(int vkCode) noexcept;
     void TextInput(std::wstring str) noexcept;
+    void ScrollUp() noexcept;
+    void ScrollDown() noexcept;
 
     virtual ~DrawingTool() noexcept = default;
 };

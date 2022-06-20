@@ -61,3 +61,11 @@ void DrawingTool::KeyUp(int vkCode) noexcept{
 void DrawingTool::TextInput(std::wstring str) noexcept{
     OnTextInput(str);
 }
+
+void DrawingTool::ScrollUp() noexcept{
+    OnScrollUp();
+}
+
+void DrawingTool::ScrollDown() noexcept{
+    OnScrollDown();
+}

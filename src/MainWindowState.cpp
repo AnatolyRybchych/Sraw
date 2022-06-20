@@ -63,11 +63,40 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
             canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam));
         }
     }return 0;
+    case WM_KEYDOWN:{
+        if(canvas){
+            canvas->OnkeyDown(wParam, (lParam & 0xffff0000) >> 16);
+        }
+    }return 0;
+    case WM_KEYUP:{
+        if(canvas){
+            canvas->Onkeyup(wParam);
+        }
+    }return 0;
+    case WM_UNICHAR:
+    case WM_CHAR:{
+        if(canvas){
+            wchar_t ch[] = {(wchar_t)wParam, 0,};
+            canvas->OnTextInput(std::wstring(ch));
+        }
+    }return 0;
     case WM_PAINT:{
         glClear(GL_COLOR_BUFFER_BIT);
-        canvas->Draw();
+        if(canvas){
+            canvas->Draw();
+        }
         window.SwapBuffers();
     } return 0;
+    case WM_MOUSEWHEEL:{
+        if(canvas){
+            if(GET_WHEEL_DELTA_WPARAM(wParam) > 0){
+                canvas->OnScrollDown();
+            }
+            else{
+                canvas->OnScrollUp();
+            }
+        }
+    }return 0;
     default: return DefWindowProcW(hWnd, msg, wParam, lParam);
     }
 }
