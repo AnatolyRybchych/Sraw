@@ -63,6 +63,16 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
             if(canvas->OnLMouseUp(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
         }
     }return 0;
+    case WM_RBUTTONDOWN:{
+        if(canvas){
+            if(canvas->OnRMouseDown(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
+        }
+    }return 0;
+    case WM_RBUTTONUP:{
+        if(canvas){
+            if(canvas->OnRMouseUp(LOWORD(lParam), HIWORD(lParam)))InvalidateRect(window.GetHWnd(), nullptr, false);
+        }
+    }return 0;
     case WM_KEYDOWN:{
         if(canvas){
             if(canvas->OnkeyDown(wParam, (lParam & 0xffff0000) >> 16))InvalidateRect(window.GetHWnd(), nullptr, false);

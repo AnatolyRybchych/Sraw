@@ -6,6 +6,7 @@
 #include "Texture.hpp"
 #include "Framebuffer.hpp"
 #include "DrawingTool.hpp"
+#include "SelectMenuToolNode.hpp"
 #include <glad/glad.h>
 
 class DrawingCanvas
@@ -14,6 +15,7 @@ private:
     Texture &bg;
     std::unique_ptr<Texture> currState = nullptr;
     std::unique_ptr<DrawingTool> drawingTool = nullptr;
+    std::unique_ptr<SelectMenuToolNode> rootSelectMenuNode = nullptr;
     Framebuffer frameBuffer;
     int cx, cy;
 public:
@@ -22,6 +24,8 @@ public:
     bool OnMouseMove(int x, int y);
     bool OnLMouseDown(int x, int y);
     bool OnLMouseUp(int x, int y);
+    bool OnRMouseDown(int x, int y);
+    bool OnRMouseUp(int x, int y);
     void OnShow(int cx, int cy);
     bool OnkeyDown(int vkCode, int repeat);
     bool Onkeyup(int vkCode);

@@ -1,7 +1,7 @@
 #include "DrawingCanvas.hpp"
 #include "ShaderProgram.hpp"
 #include "MouseHighlightTool.hpp"
-
+#include "SelectToolTool.hpp"
 
 #include <iostream>
 
@@ -12,6 +12,13 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
 DrawingCanvas::DrawingCanvas(Texture &bg)
     :bg(bg) {
     drawingTool = std::unique_ptr<DrawingTool>(new MouseHighlightTool(100, 100));
+
+    rootSelectMenuNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+            std::vector<std::shared_ptr<SelectToolNode>>(), 
+            L"root", 
+            0)
+        );
 }
 
 void DrawingCanvas::Draw(){
@@ -42,6 +49,15 @@ bool DrawingCanvas::OnLMouseUp(int x, int y){
         return drawingTool->LMouseUp(x, y);
     }
     return false;
+}
+
+bool DrawingCanvas::OnRMouseDown(int x, int y){
+    drawingTool = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, *(SelectToolNode*)rootSelectMenuNode.get()));
+    return true;
+}
+
+bool DrawingCanvas::OnRMouseUp(int x, int y){
+    return true;
 }
 
 
