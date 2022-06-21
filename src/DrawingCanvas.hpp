@@ -15,7 +15,6 @@ class DrawingCanvas
 private:
     Texture &bg;
     std::unique_ptr<Texture> currState = nullptr;
-    std::unique_ptr<DrawingTool> drawingTool = nullptr;
     SelectToolMenuManager toolMenuManager;
     Framebuffer frameBuffer;
     int cx, cy;
