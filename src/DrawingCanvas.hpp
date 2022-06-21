@@ -7,6 +7,7 @@
 #include "Framebuffer.hpp"
 #include "DrawingTool.hpp"
 #include "SelectMenuToolNode.hpp"
+#include "SelectToolMenuManager.hpp"
 #include <glad/glad.h>
 
 class DrawingCanvas
@@ -15,7 +16,7 @@ private:
     Texture &bg;
     std::unique_ptr<Texture> currState = nullptr;
     std::unique_ptr<DrawingTool> drawingTool = nullptr;
-    std::unique_ptr<SelectMenuToolNode> rootSelectMenuNode = nullptr;
+    SelectToolMenuManager toolMenuManager;
     Framebuffer frameBuffer;
     int cx, cy;
 public:

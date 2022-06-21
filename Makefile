@@ -19,6 +19,8 @@ objects	+= obj/MouseHighlightTool.o
 objects	+= obj/SelectToolTool.o
 objects	+= obj/SelectToolNode.o
 objects	+= obj/SelectMenuToolNode.o
+objects	+= obj/SelectActionToolNode.o
+objects	+= obj/SelectToolMenuManager.o
 
 build:$(objects)
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32

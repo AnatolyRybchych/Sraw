@@ -37,6 +37,10 @@ Texture::Texture(HBITMAP hbmp){
     glId = TextureFromBitmap(hbmp);
 }
 
+Texture::Texture(GLuint texture){
+    glId = texture;
+}
+
 Texture::Texture(int cx, int cy){
     GLuint result;
 

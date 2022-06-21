@@ -1,11 +1,17 @@
 make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
-g++ -g -ggdb -Iglad/ -c -o obj/SelectToolTool.o src/SelectToolTool.cpp
+g++ -g -ggdb -Iglad/ -c -o obj/DrawingCanvas.o src/DrawingCanvas.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/Texture.o src/Texture.cpp
  
 g++ -g -ggdb -Iglad/ -c -o obj/SelectToolNode.o src/SelectToolNode.cpp
  
 g++ -g -ggdb -Iglad/ -c -o obj/SelectMenuToolNode.o src/SelectMenuToolNode.cpp
-g++ -g -ggdb -Iglad/ -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o -lgdi32 -lopengl32
  
+g++ -g -ggdb -Iglad/ -c -o obj/SelectActionToolNode.o src/SelectActionToolNode.cpp
+ 
+g++ -g -ggdb -Iglad/ -c -o obj/SelectToolMenuManager.o src/SelectToolMenuManager.cpp
+ 
+g++ -g -ggdb -Iglad/ -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o -lgdi32 -lopengl32
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  

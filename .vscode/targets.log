@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun 21 23:11:55 2022
+# Make data base, printed on Wed Jun 22 01:31:26 2022
 
 # Variables
 
@@ -44,8 +44,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 21)
-objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o
+# makefile (from 'makefile', line 23)
+objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -211,7 +211,7 @@ VSCODE_PID = 5388
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/156=10%
+# Load=99/1024=10%, Rehash=0, Collisions=15/160=9%
 
 # Pattern-specific Variable Values
 
@@ -219,20 +219,26 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655823140ll): 9 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655842308ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655849097ll): 9 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655850581ll): No files, no impossibilities so far.
 
 # 9 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 27):
+#  recipe to execute (from 'makefile', line 29):
 	g++ -g -ggdb -Iglad/ -c -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
+
+# Not a target:
+obj/SelectToolMenuManager.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/DrawImage.o:
@@ -244,7 +250,7 @@ gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 36):
+#  recipe to execute (from 'makefile', line 38):
 	gdb ./$(out)
 
 # Not a target:
@@ -270,7 +276,7 @@ obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 30):
+#  recipe to execute (from 'makefile', line 32):
 	gcc -Iglad/ -c -o $@ $<
 
 # Not a target:
@@ -298,17 +304,23 @@ obj/main.o:
 #  File has not been updated.
 
 # Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-21 23:11:54
-#  File has been updated.
-#  Successfully updated.
-
-build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o
+obj/SelectActionToolNode.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 24):
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-22 01:31:25
+#  File has been updated.
+#  Successfully updated.
+
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 26):
 	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 # Not a target:
@@ -339,7 +351,7 @@ run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 33):
+#  recipe to execute (from 'makefile', line 35):
 	./$(out)
 
 # Not a target:
@@ -397,19 +409,20 @@ obj/MouseHighlightTool.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=27/1024=3%, Rehash=0, Collisions=2/60=3%
+# Load=29/1024=3%, Rehash=0, Collisions=2/64=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 37 / storage = 461 B / avg = 12 B
-# current buf: size = 8162 B / used = 461 B / count = 37 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 39 / storage = 516 B / avg = 13 B
+# current buf: size = 816 
+2 B / used = 516 B / count = 39 / avg = 13 B
 
-# strcache performance: lookups = 48 / hit rate = 22%
+# strcache performance: lookups = 50 / hit rate = 22%
 # hash-table stats:
-# Load=37/8192=0%, Rehash=0, Collisions=1/48=2%
-# Finished Make data base on Tue Jun 21 23:11:55 2022
+# Load=39/8192=0%, Rehash=0, Collisions=1/50=2%
+# Finished Make data base on Wed Jun 22 01:31:26 2022
 
  

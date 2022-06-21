@@ -3,8 +3,6 @@
 const int SelectToolNode::MaxToolNodes = 5;
 const float SelectToolNode::CircleScale = 0.5;
 
-void SelectToolNode::Select() noexcept{ OnSelect();}
-
 constexpr const char *MenuBgVertex = 
 "#version 110\n"
 "\n"
@@ -55,6 +53,8 @@ void SelectToolNode::DrawSelectToolMenu(int cx, int cy, int mouseOverTool) noexc
     for(int i = 0 ; i < GetToolNodes().size(); i++)
         GetToolNodes()[i]->Draw(cx, cy, i, i == mouseOverTool);
 }
+
+void SelectToolNode::Select() noexcept{ OnSelect();}
 
 SelectToolNode::SelectToolNode() noexcept{
     float vertices[] = {
