@@ -12,7 +12,7 @@ const std::wstring &SelectActionToolNode::GetText() const noexcept{
     return text;
 }
 
-const std::vector<std::shared_ptr<SelectToolNode>> &SelectActionToolNode::GetToolNodes() const noexcept{
+const std::vector<SelectToolNode *> &SelectActionToolNode::GetToolNodes() const noexcept{
     return emptyNodesList;
 }
 

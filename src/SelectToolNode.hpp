@@ -22,7 +22,7 @@ protected:
     virtual void OnSelect() noexcept = 0;
     virtual const GLuint GetImage() const noexcept = 0;
     virtual const std::wstring &GetText() const noexcept = 0;
-    virtual const std::vector<std::shared_ptr<SelectToolNode>> &GetToolNodes() const noexcept = 0;
+    virtual const std::vector<SelectToolNode *> &GetToolNodes() const noexcept = 0;
 public:
     SelectToolNode() noexcept;
 
