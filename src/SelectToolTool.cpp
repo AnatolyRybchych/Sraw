@@ -26,7 +26,7 @@ bool SelectToolTool::OnMouseMove(int x, int y) noexcept{
 }
 
 bool SelectToolTool::OnLMouseDown(int x, int y) noexcept{
-    return false;
+    return currNode->SelectNode(currNode->GetNodeIdByPoint(GetViewportWidth(), GetViewportHeight(), x, y));
 }
 
 bool SelectToolTool::OnLMouseUp(int x, int y) noexcept{

@@ -35,13 +35,14 @@ protected:
     virtual const GLuint GetImage() const noexcept = 0;
     virtual const std::wstring &GetText() const noexcept = 0;
     virtual const std::vector<SelectToolNode *> &GetToolNodes() const noexcept = 0;
+    virtual void Select() noexcept;
 public:
     SelectToolNode() noexcept;
 
     static const float CircleScale;
     static const int MaxToolNodes;
 
-    virtual void Select() noexcept;
+    bool SelectNode(int id) const noexcept;
     int GetNodeIdByPoint(int cx, int cy, int x, int y) const noexcept;
     void Draw(int cx, int cy, int pos, bool mouseOver) noexcept;
     void DrawSelectToolMenu(int cx, int cy, int mouseOverTool) noexcept;

@@ -90,6 +90,12 @@ void SelectToolNode::DrawSelectToolMenuBG(int cx, int cy) const noexcept{
     glUseProgram(0);
 }
 
+bool SelectToolNode::SelectNode(int id) const noexcept{
+    if(id < 0 || GetToolNodes().size() <= id) return false;
+    GetToolNodes()[id]->Select();
+    return true;
+}
+
 int SelectToolNode::GetNodeIdByPoint(int cx, int cy, int x, int y) const noexcept{
     float glX = ((x / (float)cx) - 0.5) * 2.0 * (cx / (float)cy);
     float glY = (0.5 - (y / (float)cy)) * 2.0;
