@@ -1,11 +1,11 @@
 
 out		:= Sraw.exe
-objects	:= obj/main.o
+objects	:= obj/glad.o
+objects	+= obj/main.o
 objects	+= obj/Window.o
 objects	+= obj/MainWindow.o
 objects	+= obj/MainWindowState.o
 objects	+= obj/MonitorInfo.o
-objects	+= obj/glad.o
 objects	+= obj/GlobalWindowInput.o
 objects	+= obj/App.o
 objects	+= obj/DrawingCanvas.o

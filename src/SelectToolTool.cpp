@@ -1,4 +1,5 @@
 #include "SelectToolTool.hpp"
+#include <iostream>
 
 SelectToolTool::SelectToolTool(int cx, int cy, SelectToolNode &rootToolNode) noexcept
     :DrawingTool(cx, cy), rootNode(rootToolNode){
@@ -14,15 +15,22 @@ void SelectToolTool::OnResize(int cx, int cy) noexcept{
 }
 
 bool SelectToolTool::OnMouseMove(int x, int y) noexcept{
-    return true;
+    int node = currNode->GetNodeIdByPoint(GetViewportWidth(), GetViewportHeight(), x, y);
+
+    if(nodeOver != node){
+        nodeOver = node;
+        return true;
+    }
+
+    return false;
 }
 
 bool SelectToolTool::OnLMouseDown(int x, int y) noexcept{
-    return true;
+    return false;
 }
 
 bool SelectToolTool::OnLMouseUp(int x, int y) noexcept{
-    return true;
+    return false;
 }
 
 bool SelectToolTool::OnKeyDown(int vkCode, int repeat) noexcept{

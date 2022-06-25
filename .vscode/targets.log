@@ -7,9 +7,8 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Wed Jun 22 14:40:43 2022
+# Make data base, printed on Sat Jun 25 16:35:45 2022
 
 # Variables
 
@@ -46,7 +45,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
 # makefile (from 'makefile', line 23)
-objects := obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
+objects := obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -62,9 +61,9 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-4be0fff2-8454-492e-8e62-feffdee9f271-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-854e4785-3871-456f-9512-d53c0546a470-sock
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -90,7 +89,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4360_UYQZPLWSSAIYMMRB
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8224_LEAPBWZWOGIBQVFF
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -206,10 +205,9 @@ PROCESSOR_REVISION = 8e09
 # environment
 LANG = C
 # environment
-PROCESSOR_LEVEL = 6 
-
+PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 4360
+VSCODE_PID = 8224
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
@@ -221,7 +219,7 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1655852798ll): 9 files, no impossibilities.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656164134ll): 9 files, no impossibilities.
 # src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1655850581ll): No files, no impossibilities so far.
 
 # 9 files, no impossibilities in 2 directories.
@@ -314,11 +312,11 @@ obj/SelectActionToolNode.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-22 01:31:25
+#  Last modified 2022-06-25 16:35:28
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/glad.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
+build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -424,6 +422,6 @@ obj/MouseHighlightTool.o:
 # strcache performance: lookups = 50 / hit rate = 22%
 # hash-table stats:
 # Load=39/8192=0%, Rehash=0, Collisions=1/50=2%
-# Finished Make data base on Wed Jun 22 14:40:43 2022
+# Finished Make data base on Sat Jun 25 16:35:45 2022
 
  
