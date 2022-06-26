@@ -2,6 +2,9 @@
 #include "DrawImage.hpp"
 #include "MouseHighlight.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 App::App(HINSTANCE hInstance){
     this->hInstance = hInstance;
 }

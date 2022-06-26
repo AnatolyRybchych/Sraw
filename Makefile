@@ -1,5 +1,6 @@
 
 out		:= Sraw.exe
+
 objects	:= obj/glad.o
 objects	+= obj/main.o
 objects	+= obj/Window.o
@@ -21,15 +22,16 @@ objects	+= obj/SelectToolNode.o
 objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
 objects	+= obj/SelectToolMenuManager.o
+objects	+= obj/ResourceProvider.o
 
 build:$(objects)
-	g++ -g -ggdb -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
+	g++ -g -ggdb -Istbimage -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 obj/%.o:src/%.cpp
-	g++ -g -ggdb -Iglad/ -c -o $@ $<
+	g++ -g -ggdb -Istbimage -Iglad/ -c -o $@ $<
 
 obj/glad.o: glad/glad.c
-	gcc -Iglad/ -c -o $@ $<
+	gcc -Istbimage -Iglad/ -c -o $@ $<
 
 run:build
 	./$(out)

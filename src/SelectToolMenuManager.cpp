@@ -1,13 +1,15 @@
 #include "SelectToolMenuManager.hpp"
 #include "MouseHighlightTool.hpp"
+#include "ResourceProvider.hpp"
 
 
 SelectToolMenuManager::SelectToolMenuManager()
-    :emptyTexture((GLuint)0){
+    :emptyTexture((GLuint)0),
+    MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            emptyTexture, 
+            MouseHighlightTexture, 
             L"Mouse highlight", 
             std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
         )

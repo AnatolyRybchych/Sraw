@@ -7,6 +7,7 @@
 class SelectToolMenuManager{
 private:
     Texture emptyTexture;
+    Texture MouseHighlightTexture;
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
 

@@ -30,6 +30,7 @@ private:
     GLint segmentPosMenuItem;
     GLint is_mouse_overPosMenuItem;
     GLint alphaPosMenuItem;
+    GLint texPosMenuItem;
 protected:
     virtual void OnSelect() noexcept = 0;
     virtual const GLuint GetImage() const noexcept = 0;

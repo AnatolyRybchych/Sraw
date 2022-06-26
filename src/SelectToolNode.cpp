@@ -1,78 +1,9 @@
 #include "SelectToolNode.hpp"
+#include "ResourceProvider.hpp"
 #define PI 3.14159
 
 const int SelectToolNode::MaxToolNodes = 5;
 const float SelectToolNode::CircleScale = 0.5;
-
-constexpr const char *MenuBgVertex = 
-"#version 110\n"
-"\n"
-"attribute vec4 vertex_p;\n"
-"varying vec2 frag_coord;\n"
-"\n"
-"void main(){\n"
-"   frag_coord = vertex_p.xy;\n"
-"   gl_Position = vertex_p;\n"
-"}\n"
-"";
-
-constexpr const char *MenuBgFragment = 
-"#version 110\n"
-"\n"
-"uniform float circle_scale;\n"
-"uniform vec2 viewport;\n"
-"varying vec2 frag_coord;\n"
-"\n"
-"void main(){\n"
-"   float alpha = clamp((1.0 - distance(frag_coord / vec2((viewport.y / viewport.x) * circle_scale,  circle_scale), vec2(0, 0))) * viewport.y * 0.5, 0.5, 0.8);\n"
-"   gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);\n"
-"}\n"
-"";
-
-constexpr const char *MenuItemVertex = 
-"#version 110\n"
-"\n"
-"attribute vec4 vertex_p;\n"
-"\n"
-"uniform vec2 viewport;\n"
-"uniform float circle_scale;\n"
-"uniform float alpha;\n"
-"uniform int segment_count;\n"
-"uniform int segment;\n"
-"uniform int is_mouse_over;\n"
-"\n"
-"varying vec2 frag_coord;\n"
-"\n"
-"void main(){\n"
-"   gl_Position = vertex_p;\n"
-"   gl_Position.xy += vec2(sin(alpha), cos(alpha))\n;"
-"   gl_Position.y *= circle_scale * 0.5;\n"
-"   gl_Position.x *= circle_scale * 0.5 * viewport.y / viewport.x;\n"
-"   frag_coord = vertex_p.xy;\n"
-"}\n"
-"";
-
-constexpr const char *MenuItemFragment = 
-"#version 110\n" 
-"\n"
-"#define PI 3.14159\n"
-"\n"
-"uniform vec2 viewport;\n"
-"uniform float circle_scale;\n"
-"uniform float alpha;\n"
-"uniform int segment_count;\n"
-"uniform int segment;\n"
-"uniform int is_mouse_over;\n"
-"\n"
-"varying vec2 frag_coord;\n"
-"\n"
-"void main(){\n"
-"   vec3 color;\n"
-"   if(is_mouse_over != 0) color = vec3(0.8, 0.4, 0.2);\n"
-"   else color = vec3(0.5, 0.5, 0.5);\n"
-"   gl_FragColor = vec4(color, 0.5 - distance(vec2(sin(alpha) * 0.5, cos(alpha) * 0.5), frag_coord));\n"
-"}\n"
-"";
 
 void SelectToolNode::DrawSelectToolMenuBG(int cx, int cy) const noexcept{
     glUseProgram(progMenuBg);
@@ -87,6 +18,31 @@ void SelectToolNode::DrawSelectToolMenuBG(int cx, int cy) const noexcept{
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(vertex_pPosMenuBg);
+    glUseProgram(0);
+}
+
+void SelectToolNode::Draw(int cx, int cy, int pos, bool mouseOver) noexcept{
+    glUseProgram(progMenuItem);
+    glBindTexture(GL_TEXTURE_2D, GetImage());
+    glBindBuffer(GL_ARRAY_BUFFER, VBOMenuItem);
+    
+    glActiveTexture(GL_TEXTURE0);
+    glUniform1i(texPosMenuItem, 0);
+
+    glUniform2f(viewportPosMenuItem, (float)cx, (float)cy);
+    glUniform1f(circle_scalePosMenuItem, CircleScale);
+    glUniform1f(alphaPosMenuItem, pos / (MaxToolNodes * PI));
+    glUniform1i(segment_countPosMenuItem, MaxToolNodes);
+    glUniform1i(segmentPosMenuItem, pos);
+    glUniform1i(is_mouse_overPosMenuItem, (int)mouseOver);
+
+    glEnableVertexAttribArray(vertex_pPosMenuItem);
+    glVertexAttribPointer(vertex_pPosMenuItem, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisableVertexAttribArray(vertex_pPosMenuItem);
     glUseProgram(0);
 }
 
@@ -118,26 +74,6 @@ int SelectToolNode::GetNodeIdByPoint(int cx, int cy, int x, int y) const noexcep
     return -1;
 }
 
-void SelectToolNode::Draw(int cx, int cy, int pos, bool mouseOver) noexcept{
-    glUseProgram(progMenuItem);
-    glEnableVertexAttribArray(vertex_pPosMenuItem);
-    glBindBuffer(GL_ARRAY_BUFFER, VBOMenuItem);
-
-    glUniform2f(viewportPosMenuItem, (float)cx, (float)cy);
-    glUniform1f(circle_scalePosMenuItem, CircleScale);
-    glUniform1f(alphaPosMenuItem, pos / (MaxToolNodes * 3.14159f));
-    glUniform1i(segment_countPosMenuItem, MaxToolNodes);
-    glUniform1i(segmentPosMenuItem, pos);
-    glUniform1i(is_mouse_overPosMenuItem, (int)mouseOver);
-
-    glVertexAttribPointer(vertex_pPosMenuItem, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glDisableVertexAttribArray(vertex_pPosMenuItem);
-    glUseProgram(0);
-}
-
 void SelectToolNode::DrawSelectToolMenu(int cx, int cy, int mouseOverTool) noexcept{
     DrawSelectToolMenuBG(cx, cy);
     for(int i = 0 ; i < GetToolNodes().size(); i++)
@@ -158,7 +94,7 @@ SelectToolNode::SelectToolNode() noexcept{
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    progMenuBg = BuildShaderProgram(MenuBgVertex, MenuBgFragment);
+    progMenuBg = BuildShaderProgram(ResourceProvider::GetProvider().GetMenuBgVertex().c_str(), ResourceProvider::GetProvider().GetMenuBgFragment().c_str());
     vertex_pPosMenuBg = glGetAttribLocation(progMenuBg, "vertex_p");
     viewportPosMenuBg = glGetUniformLocation(progMenuBg, "viewport");
     circle_scalePosMenuBg = glGetUniformLocation(progMenuBg, "circle_scale");
@@ -169,8 +105,10 @@ SelectToolNode::SelectToolNode() noexcept{
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    progMenuItem = BuildShaderProgram(MenuItemVertex, MenuItemFragment);
+    progMenuItem = BuildShaderProgram(ResourceProvider::GetProvider().GetMenuItemVertex().c_str(), ResourceProvider::GetProvider().GetMenuItemFragment().c_str());
+    
     vertex_pPosMenuItem = glGetAttribLocation(progMenuItem, "vertex_p");
+    texPosMenuItem = glGetUniformLocation(progMenuItem, "tex");
     viewportPosMenuItem = glGetUniformLocation(progMenuItem, "viewport");
     circle_scalePosMenuItem = glGetUniformLocation(progMenuItem, "circle_scale");
     alphaPosMenuItem = glGetUniformLocation(progMenuItem, "alpha");
