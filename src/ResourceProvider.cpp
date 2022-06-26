@@ -37,6 +37,14 @@ std::string ResourceProvider::GetMenuBgVertex() const noexcept{
     return FReadAllText(FileMenuBgVertex);
 }
 
+std::string ResourceProvider::GetDrawImageVertex() const noexcept{
+    return FReadAllText(FileDrawImageVertex);
+}
+
+std::string ResourceProvider::GetDrawImageFragment() const noexcept{
+    return FReadAllText(FileDrawImageFragment);
+}
+
 std::string ResourceProvider::GetMenuItemFragment() const noexcept{
     return FReadAllText(FileMenuItemFragment);
 }
