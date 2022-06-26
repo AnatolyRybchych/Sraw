@@ -11,6 +11,7 @@ public:
     static const ResourceProvider &GetProvider() noexcept;
 
     GLuint GetMouseHighlightIcon() const noexcept;
+    GLuint GetBrushIcon() const noexcept;
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetMenuItemFragment() const noexcept;

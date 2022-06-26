@@ -1,48 +1,9 @@
-make.exe --dry-run --always-make --keep-going --print-directory
+make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
-gcc -Istbimage -Iglad/ -c -o obj/glad.o glad/glad.c
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/main.o src/main.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Window.o src/Window.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MainWindow.o src/MainWindow.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MainWindowState.o src/MainWindowState.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MonitorInfo.o src/MonitorInfo.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/GlobalWindowInput.o src/GlobalWindowInput.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/App.o src/App.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawingCanvas.o src/DrawingCanvas.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/ShaderProgram.o src/ShaderProgram.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Texture.o src/Texture.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Framebuffer.o src/Framebuffer.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawImage.o src/DrawImage.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MouseHighlight.o src/MouseHighlight.cpp
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawingTool.o src/DrawingTool.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MouseHighlightTool.o src/MouseHighlightTool.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolTool.o src/SelectToolTool.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolNode.o src/SelectToolNode.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectMenuToolNode.o src/SelectMenuToolNode.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectActionToolNode.o src/SelectActionToolNode.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolMenuManager.o src/SelectToolMenuManager.cpp
  
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/ResourceProvider.o src/ResourceProvider.cpp
+g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/BrushTool.o src/BrushTool.cpp
  
-g++ -g -ggdb -Istbimage -Iglad/ -o Sraw.exe obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o -lgdi32 -lopengl32
+g++ -g -ggdb -Istbimage -Iglad/ -o Sraw.exe obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/BrushTool.o -lgdi32 -lopengl32
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  

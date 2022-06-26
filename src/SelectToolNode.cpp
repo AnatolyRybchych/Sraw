@@ -31,7 +31,7 @@ void SelectToolNode::Draw(int cx, int cy, int pos, bool mouseOver) noexcept{
 
     glUniform2f(viewportPosMenuItem, (float)cx, (float)cy);
     glUniform1f(circle_scalePosMenuItem, CircleScale);
-    glUniform1f(alphaPosMenuItem, pos / (MaxToolNodes * PI));
+    glUniform1f(alphaPosMenuItem, pos * PI * 2.0 / (float)MaxToolNodes);
     glUniform1i(segment_countPosMenuItem, MaxToolNodes);
     glUniform1i(segmentPosMenuItem, pos);
     glUniform1i(is_mouse_overPosMenuItem, (int)mouseOver);

@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 26 06:59:46 2022
+# Make data base, printed on Mon Jun 27 00:22:11 2022
 
 # Variables
 
@@ -44,8 +44,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 25)
-objects := obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o
+# makefile (from 'makefile', line 26)
+objects := obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/BrushTool.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -61,9 +61,9 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-151559c0-64c2-40bb-b950-cf2db0fdeb33-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-aeb41c94-e0df-4fcd-92a7-f8845b8fddb9-sock
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -89,7 +89,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7768_KBNNDGTGBFCEKOJX
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7836_SKQVJTULSFXKRZTP
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -207,11 +207,11 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 7768
+VSCODE_PID = 7836
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/162=9%
+# Load=99/1024=10%, Rehash=0, Collisions=15/164=9%
 
 # Pattern-specific Variable Values
 
@@ -219,15 +219,15 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # Directories
 
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656215769ll): 13 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656215667ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656278216ll): 14 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656278517ll): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 2 directories.
+# 14 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 31):
+#  recipe to execute (from 'makefile', line 32):
 	g++ -g -ggdb -Istbimage -Iglad/ -c -o $@ $<
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -250,7 +250,7 @@ gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 40):
+#  recipe to execute (from 'makefile', line 41):
 	gdb ./$(out)
 
 # Not a target:
@@ -276,7 +276,7 @@ obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 34):
+#  recipe to execute (from 'makefile', line 35):
 	gcc -Istbimage -Iglad/ -c -o $@ $<
 
 # Not a target:
@@ -312,15 +312,15 @@ obj/SelectActionToolNode.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-26 06:54:55
+#  Last modified 2022-06-27 00:22:09
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o
+build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/Texture.o obj/Framebuffer.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/MouseHighlightTool.o obj/SelectToolTool.o obj/SelectToolNode.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/BrushTool.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 28):
+#  recipe to execute (from 'makefile', line 29):
 	g++ -g -ggdb -Istbimage -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
 
 # Not a target:
@@ -357,7 +357,7 @@ run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 37):
+#  recipe to execute (from 'makefile', line 38):
 	./$(out)
 
 # Not a target:
@@ -414,20 +414,26 @@ obj/MouseHighlightTool.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+obj/BrushTool.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=30/1024=3%, Rehash=0, Collisions=2/66=3%
+# Load=31/1024=3%, Rehash=0, Collisions=2/68=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 44 / storage = 589 B / avg = 13 B
-# current buf: size = 8162 B / used = 589 B / count = 44 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 46 / storage = 619 B / avg = 13 B
+# current buf: size = 8162 B / used = 619 B / count = 46 / avg = 13 B
 
-# strcache performance: lookups = 55 / hit rate = 20%
+# strcache performance: lookups = 57 / hit rate = 19%
 # hash-table stats:
-# Load=44/8192=1%, Rehash=0, Collisions=1/55=2%
-# Finished Make data base on Sun Jun 26 06:59:46 2022
+# Load=46/8192=1%, Rehash=0, Collisions=1/57=2%
+# Finished Make data base on Mon Jun 27 00:22:11 2022
 
  

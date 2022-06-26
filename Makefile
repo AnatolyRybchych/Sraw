@@ -23,6 +23,7 @@ objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
 objects	+= obj/SelectToolMenuManager.o
 objects	+= obj/ResourceProvider.o
+objects	+= obj/BrushTool.o
 
 build:$(objects)
 	g++ -g -ggdb -Istbimage -Iglad/ -o $(out) $^ -lgdi32 -lopengl32

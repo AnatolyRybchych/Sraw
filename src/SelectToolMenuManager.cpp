@@ -5,7 +5,8 @@
 
 SelectToolMenuManager::SelectToolMenuManager()
     :emptyTexture((GLuint)0),
-    MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()){
+    MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
+    BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
@@ -15,16 +16,29 @@ SelectToolMenuManager::SelectToolMenuManager()
         )
     );
 
+    brushToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            BrushTexture, 
+            L"Brush", 
+            std::bind(SelectToolMenuManager::OpenBrush, this)
+        )
+    );
+
     rootMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
-            mouseHighlightToolNode.get()
+            mouseHighlightToolNode.get(),
+            brushToolNode.get(),
+            mouseHighlightToolNode.get(),
+            mouseHighlightToolNode.get(),
+            mouseHighlightToolNode.get(),
         }, 
         L"root", 
         emptyTexture)
     );
 
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -43,6 +57,10 @@ void SelectToolMenuManager::SetCurrTool(DrawingTool *tool) noexcept{
 
 void SelectToolMenuManager::OpenToolMenu() noexcept{
     SetCurrTool(selectToolmenu.get());
+}
+
+void SelectToolMenuManager::OpenBrush() noexcept{
+    SetCurrTool(brushTool.get());
 }
 
 void SelectToolMenuManager::OpenMouseHighlightTool() noexcept{
