@@ -1,6 +1,9 @@
+#include <stb_image.h>
 #include "App.hpp"
 #include "DrawImage.hpp"
-#include "MouseHighlight.hpp"
+#include "Tools/MouseHighlight.hpp"
+#include <iostream>
+#include "UnicodeWindows.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>

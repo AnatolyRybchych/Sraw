@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include <string>
-#include "Framebuffer.hpp"
+#include "GlWrappers/Framebuffer.hpp"
 
 class DrawingTool{
 private:

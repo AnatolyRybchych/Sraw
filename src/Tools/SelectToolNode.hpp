@@ -6,8 +6,8 @@
 #include <memory>
 #include <functional>
 #include <stdexcept>
-#include "Texture.hpp"
-#include "ShaderProgram.hpp"
+#include "../GlWrappers/Texture.hpp"
+#include "../GlWrappers/ShaderProgram.hpp"
 
 class SelectToolNode{
 private:

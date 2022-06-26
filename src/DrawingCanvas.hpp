@@ -2,11 +2,11 @@
 #include <memory>
 #include "UnicodeWindows.hpp"
 #include "DrawImage.hpp"
-#include "MouseHighlight.hpp"
-#include "Texture.hpp"
-#include "Framebuffer.hpp"
+#include "Tools/MouseHighlight.hpp"
+#include "GlWrappers/Texture.hpp"
+#include "GlWrappers/Framebuffer.hpp"
 #include "DrawingTool.hpp"
-#include "SelectMenuToolNode.hpp"
+#include "Tools/SelectMenuToolNode.hpp"
 #include "SelectToolMenuManager.hpp"
 #include <glad/glad.h>
 

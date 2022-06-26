@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include "UnicodeWindows.hpp"
+
 #include "MainWindow.hpp"
 #include "GlobalWindowInput.hpp"
 

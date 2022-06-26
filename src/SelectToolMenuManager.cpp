@@ -1,5 +1,5 @@
 #include "SelectToolMenuManager.hpp"
-#include "MouseHighlightTool.hpp"
+#include "Tools/MouseHighlightTool.hpp"
 #include "ResourceProvider.hpp"
 
 

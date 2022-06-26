@@ -1,8 +1,13 @@
 #pragma once
-#include "DrawingTool.hpp"
+#include "../DrawingTool.hpp"
 
-class BrushTool:public DrawingTool{
-protected://handlers should return true if requires to redraw
+class MouseHighlightTool: public DrawingTool{
+private:
+    int mX, mY;
+    float radius = 0.3;
+    bool isMouseDown = false;
+    int mdX, mdY;
+protected:
     virtual void OnDraw() const noexcept override;
     virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
@@ -14,5 +19,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    BrushTool(int cx, int cy) noexcept;
+    MouseHighlightTool(int cx, int cy) noexcept;
 };
+

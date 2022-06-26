@@ -1,7 +1,7 @@
 #include "DrawingCanvas.hpp"
-#include "ShaderProgram.hpp"
-#include "MouseHighlightTool.hpp"
-#include "SelectToolTool.hpp"
+#include "GlWrappers/ShaderProgram.hpp"
+#include "Tools/MouseHighlightTool.hpp"
+#include "Tools/SelectToolTool.hpp"
 
 #include <iostream>
 

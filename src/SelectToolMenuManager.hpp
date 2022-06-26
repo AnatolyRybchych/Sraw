@@ -1,9 +1,9 @@
 #pragma once
-#include "SelectToolTool.hpp"
-#include "SelectMenuToolNode.hpp"
-#include "SelectActionToolNode.hpp"
-#include "MouseHighlightTool.hpp"
-#include "BrushTool.hpp"
+#include "Tools/SelectToolTool.hpp"
+#include "Tools/SelectMenuToolNode.hpp"
+#include "Tools/SelectActionToolNode.hpp"
+#include "Tools/MouseHighlightTool.hpp"
+#include "Tools/BrushTool.hpp"
 
 class SelectToolMenuManager{
 private:

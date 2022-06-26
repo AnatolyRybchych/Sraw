@@ -1,5 +1,5 @@
 #include "SelectToolNode.hpp"
-#include "ResourceProvider.hpp"
+#include "../ResourceProvider.hpp"
 #define PI 3.14159
 
 const int SelectToolNode::MaxToolNodes = 5;

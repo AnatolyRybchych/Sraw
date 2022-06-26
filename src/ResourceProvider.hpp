@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
-#include "Texture.hpp"
+#include <glad/glad.h>
 
 class ResourceProvider{
 private:

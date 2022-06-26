@@ -1,5 +1,5 @@
 #pragma once
-#include "ShaderProgram.hpp"
+#include "GlWrappers/ShaderProgram.hpp"
 
 class DrawImage{
 private:    
