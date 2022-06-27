@@ -2,8 +2,8 @@
 #include "MouseHighlight.hpp"
 #include <math.h>
 
-MouseHighlightTool::MouseHighlightTool(int cx, int cy) noexcept
-    :DrawingTool(cx, cy){
+MouseHighlightTool::MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler) noexcept
+    :DrawingTool(cx, cy, commitHandler){
 
 }
 
@@ -15,6 +15,9 @@ void MouseHighlightTool::OnDraw() const noexcept{
     else{
         MouseHighlight::GetRenderer().Draw(mX * 2.0 / GetViewportWidth() - 1.0 ,1.0 - mY * 2.0 / GetViewportHeight(), 0, 0, 0,1.0 - radius  / 2, 1.0 / radius, radius);
     }
+}
+
+void MouseHighlightTool::OnDrawCommit() noexcept{
 }
 
 void MouseHighlightTool::OnResize(int cx, int cy) noexcept{}

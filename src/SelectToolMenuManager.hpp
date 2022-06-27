@@ -7,6 +7,8 @@
 
 class SelectToolMenuManager{
 private:
+    CommitHandler &commitHandler;
+
     Texture emptyTexture;
     Texture MouseHighlightTexture;
     Texture BrushTexture;
@@ -23,7 +25,7 @@ private:
 
     void SetCurrTool(DrawingTool *tool) noexcept;
 public:
-    SelectToolMenuManager();
+    SelectToolMenuManager(CommitHandler &commitHandler);
     void OpenToolMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenMouseHighlightTool() noexcept;

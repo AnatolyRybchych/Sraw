@@ -13,8 +13,6 @@ static int distancei(int x1, int y1, int x2, int y2){
 void BrushTool::ClearBuffer() const noexcept{
     frameBuffer->Bind();
     frameBuffer->AttachTexture2D(buffer->GetGLID());
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     frameBuffer->Unbind();
@@ -24,8 +22,6 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
-
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     
     glUniform3f(colorPos, colorR, colorG, colorB);
     glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
@@ -42,8 +38,13 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
 }
 
 void BrushTool::OnDraw() const noexcept{
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     DrawImage::GetRenderer().Draw(buffer->GetGLID());
     DrawCircle(prevX, prevY);
+}
+
+void BrushTool::OnDrawCommit() noexcept{
+    DrawImage::GetRenderer().Draw(buffer->GetGLID());
 }
 
 void BrushTool::BrushTool::OnResize(int cx, int cy) noexcept{
@@ -85,7 +86,7 @@ bool BrushTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     prevX = x;
     prevY = y;
-    OnMouseMove(x, y);
+    OnMouseMove(x + 1, y);
     return true;
 }
 
@@ -150,8 +151,8 @@ bool BrushTool::OnScrollDown() noexcept{
     return true;
 }
 
-BrushTool::BrushTool(int cx, int cy) noexcept: 
-    DrawingTool(cx, cy),
+BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler) noexcept: 
+    DrawingTool(cx, cy, commitHandler),
     buffer(new Texture(cx, cy)),
     frameBuffer(new Framebuffer()){
 

@@ -10,7 +10,7 @@
 #include "SelectToolMenuManager.hpp"
 #include <glad/glad.h>
 
-class DrawingCanvas
+class DrawingCanvas: public CommitHandler
 {
 private:
     Texture &bg;
@@ -33,4 +33,5 @@ public:
     bool OnScrollDown() noexcept;
     bool OnTextInput(std::wstring str);
     void Draw();
+    virtual void HandleCommit(std::function<void()> drawCommit) noexcept override;
 };

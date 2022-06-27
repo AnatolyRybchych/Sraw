@@ -10,7 +10,10 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
 }
 
 DrawingCanvas::DrawingCanvas(Texture &bg)
-    :bg(bg){
+    :bg(bg),
+    toolMenuManager(*this){
+    frameBuffer.Bind();
+    frameBuffer.Unbind();
 }
 
 void DrawingCanvas::Draw(){
@@ -18,6 +21,13 @@ void DrawingCanvas::Draw(){
     DrawImage::GetRenderer().Draw(currState->GetGLID());
     
     toolMenuManager.GetCurrTool().Draw();
+}
+
+void DrawingCanvas::HandleCommit(std::function<void()> drawCommit) noexcept{
+    frameBuffer.Bind();  
+    frameBuffer.AttachTexture2D(currState->GetGLID());
+    drawCommit();
+    frameBuffer.Unbind();
 }
 
 bool DrawingCanvas::OnMouseMove(int x, int y){

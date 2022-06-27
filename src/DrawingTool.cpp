@@ -1,16 +1,9 @@
 #include "DrawingTool.hpp"
 
-DrawingTool::DrawingTool(int cx, int cy) noexcept{
+DrawingTool::DrawingTool(int cx, int cy, CommitHandler &commitHandler) noexcept
+    :commitHandler(commitHandler){
     vpCx = cx;
     vpCy = cy;
-}
-
-void DrawingTool::SetOnCommitHandler(std::function<void()> handler) noexcept{
-    onCommit = handler;
-}
-
-void DrawingTool::SetCommitDestinationTexture(GLuint texture) const noexcept{
-    commitDst.AttachTexture2D(texture);
 }
 
 int DrawingTool::GetViewportWidth() const noexcept{
@@ -21,10 +14,8 @@ int DrawingTool::GetViewportHeight() const noexcept{
     return vpCy;
 }
 
-void DrawingTool::Commit() const noexcept{
-    commitDst.Bind();
-    Draw();
-    commitDst.Unbind();
+void DrawingTool::Commit() noexcept{
+    commitHandler.HandleCommit(std::bind(OnDrawCommit, this));
 }
 
 void DrawingTool::Draw() const noexcept{

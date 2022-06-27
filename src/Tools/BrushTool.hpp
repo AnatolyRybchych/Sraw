@@ -39,6 +39,7 @@ private:
     void DrawCircle(int x, int y) const noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
+    virtual void OnDrawCommit() noexcept override;
     virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
     virtual bool OnLMouseDown(int x, int y) noexcept override;
@@ -48,7 +49,8 @@ protected://handlers should return true if requires to redraw
     virtual bool OnTextInput(std::wstring str) noexcept override;
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
+    
 public:
-    BrushTool(int cx, int cy) noexcept;
+    BrushTool(int cx, int cy, CommitHandler &commitHandler) noexcept;
     ~BrushTool() noexcept;
 };

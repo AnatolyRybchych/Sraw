@@ -3,8 +3,9 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager()
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler)
     :emptyTexture((GLuint)0),
+    commitHandler(commitHandler),
     MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
     BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()){
 
@@ -37,9 +38,9 @@ SelectToolMenuManager::SelectToolMenuManager()
         emptyTexture)
     );
 
-    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100));
-    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100));
-    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, *(SelectToolNode*)rootMenuNode.get()));
+    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100, commitHandler));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100,commitHandler));
+    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, commitHandler, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
 }
