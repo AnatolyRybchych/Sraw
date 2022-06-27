@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 27 18:59:00 2022
+# Make data base, printed on Mon Jun 27 22:40:16 2022
 
 # Variables
 
@@ -52,7 +52,8 @@ MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# environment
+#  
+environment
 TMP = C:\Temp
 # environment
 VSCODE_VERBOSE_LOGGING = true
@@ -61,7 +62,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-6325966c-79df-4fa1-9852-443f6bdb29fe-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-3cbd0a81-c880-4935-9ee2-2f02f00f0c81-sock
 # environment
 VSCODE_CWD = C:\Users\Velichaisyi\Desktop
 # environment
@@ -89,7 +90,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8908_ABYELXEMKKGPTBCB
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7720_WFLWSWATWHYZLMQN
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -207,7 +208,7 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 8908
+VSCODE_PID = 7720
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
@@ -220,9 +221,9 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # Directories
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656280441ll): No files, no impossibilities so far.
-# src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1656280486ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656340310ll): 14 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656280486ll): No files, no impossibilities so far.
+# src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1656351690ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656351690ll): 14 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656351690ll): No files, no impossibilities so far.
 
 # 14 files, no impossibilities in 4 directories.
 
@@ -444,6 +445,6 @@ obj/BrushTool.o:
 # strcache performance: lookups = 63 / hit rate = 20%
 # hash-table stats:
 # Load=50/8192=1%, Rehash=0, Collisions=1/63=2%
-# Finished Make data base on Mon Jun 27 18:59:00 2022
+# Finished Make data base on Mon Jun 27 22:40:16 2022
 
  

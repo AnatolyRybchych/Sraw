@@ -15,7 +15,7 @@ void BrushTool::ClearBuffer() const noexcept{
     frameBuffer->AttachTexture2D(buffer->GetGLID());
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     frameBuffer->Unbind();
 }
@@ -43,6 +43,7 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
 
 void BrushTool::OnDraw() const noexcept{
     DrawImage::GetRenderer().Draw(buffer->GetGLID());
+    DrawCircle(prevX, prevY);
 }
 
 void BrushTool::BrushTool::OnResize(int cx, int cy) noexcept{
@@ -77,7 +78,7 @@ bool BrushTool::OnMouseMove(int x, int y) noexcept{
     }
     prevX = x;
     prevY = y;
-    return false;
+    return true;
 }
 
 bool BrushTool::OnLMouseDown(int x, int y) noexcept{
@@ -101,7 +102,7 @@ bool BrushTool::OnLMouseUp(int x, int y) noexcept{
     }
     prevX = x;
     prevY = y;
-    return false;
+    return true;
 }
 
 bool BrushTool::OnKeyDown(int vkCode, int repeat) noexcept{
@@ -110,19 +111,19 @@ bool BrushTool::OnKeyDown(int vkCode, int repeat) noexcept{
     case VK_OEM_6:{
         scale *= 1.0 + scaleIncrement;
         if(scale > scaleMax) scale = scaleMax;
-    } return false;
+    } return true;
     case VK_OEM_4:{
         scale *= 1.0 - scaleIncrement;
         if(scale < scaleMin) scale = scaleMin;  
-    } return false;
+    } return true;
     case VK_OEM_1:{
         power = pow(power, 1.1);
         if(power < powerMin) power = powerMin;  
-    } return false;
+    } return true;
     case VK_OEM_7:{
         power = pow(power, 0.9);
         if(power > powerMax) power = powerMax;  
-    } return false;
+    } return true;
     
     default: return false;
     }
@@ -138,11 +139,15 @@ bool BrushTool::OnTextInput(std::wstring str) noexcept{
 }
 
 bool BrushTool::OnScrollUp() noexcept{
-    return false;
+    scale *= 1.0 + scaleIncrement;
+        if(scale > scaleMax) scale = scaleMax;
+    return true;
 }
 
 bool BrushTool::OnScrollDown() noexcept{
-    return false;
+    scale *= 1.0 - scaleIncrement;
+        if(scale < scaleMin) scale = scaleMin;  
+    return true;
 }
 
 BrushTool::BrushTool(int cx, int cy) noexcept: 

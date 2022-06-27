@@ -3,43 +3,27 @@ make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
 gcc -Istbimage -Iglad/ -c -o obj/glad.o glad/glad.c
  
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/main.o src/main.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Window.o src/Window.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MainWindow.o src/MainWindow.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MainWindowState.o src/MainWindowState.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MonitorInfo.o src/MonitorInfo.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/GlobalWindowInput.o src/GlobalWindowInput.cpp
  
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/App.o src/App.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawingCanvas.o src/DrawingCanvas.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/ShaderProgram.o src/GlWrappers/ShaderProgram.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawImage.o src/DrawImage.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MouseHighlight.o src/Tools/MouseHighlight.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/DrawingTool.o src/DrawingTool.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolMenuManager.o src/SelectToolMenuManager.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/ResourceProvider.o src/ResourceProvider.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Texture.o src/GlWrappers/Texture.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/Framebuffer.o src/GlWrappers/Framebuffer.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolTool.o src/Tools/SelectToolTool.cpp
  
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolNode.o src/Tools/SelectToolNode.cpp
  
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/BrushTool.o src/Tools/BrushTool.cpp
- 
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/MouseHighlightTool.o src/Tools/MouseHighlightTool.cpp
  
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectMenuToolNode.o src/Tools/SelectMenuToolNode.cpp
