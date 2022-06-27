@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 27 01:04:16 2022
+# Make data base, printed on Mon Jun 27 18:59:00 2022
 
 # Variables
 
@@ -61,9 +61,9 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-aeb41c94-e0df-4fcd-92a7-f8845b8fddb9-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-6325966c-79df-4fa1-9852-443f6bdb29fe-sock
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -89,7 +89,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7836_SKQVJTULSFXKRZTP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8908_ABYELXEMKKGPTBCB
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
 # environment
@@ -207,7 +207,7 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 7836
+VSCODE_PID = 8908
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
@@ -221,10 +221,10 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656280441ll): No files, no impossibilities so far.
 # src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1656280486ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656281038ll): 13 files, no impossibilities.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1656340310ll): 14 files, no impossibilities.
 # src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656280486ll): No files, no impossibilities so far.
 
-# 13 files, no impossibilities in 4 directories.
+# 14 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -438,12 +438,12 @@ obj/BrushTool.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 49 / storage = 672 B / avg = 13 B
-# current buf: size = 8162 B / used = 672 B / count = 49 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 50 / storage = 681 B / avg = 13 B
+# current buf: size = 8162 B / used = 681 B / count = 50 / avg = 13 B
 
-# strcache performance: lookups = 62 / hit rate = 20%
+# strcache performance: lookups = 63 / hit rate = 20%
 # hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=1/62=2%
-# Finished Make data base on Mon Jun 27 01:04:16 2022
+# Load=50/8192=1%, Rehash=0, Collisions=1/63=2%
+# Finished Make data base on Mon Jun 27 18:59:00 2022
 
  

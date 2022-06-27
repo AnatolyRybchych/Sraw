@@ -53,6 +53,14 @@ std::string ResourceProvider::GetMenuItemVertex() const noexcept{
     return FReadAllText(FileMenuItemVertex);
 }
 
+std::string ResourceProvider::GetDrawCircleVertex() const noexcept{
+    return FReadAllText(FileDrawCircleVertex);
+}
+
+std::string ResourceProvider::GetDrawCircleFragment() const noexcept{
+    return FReadAllText(FileDrawCircleFragment);
+}
+
 static std::string FReadAllText(std::string path){
     std::ifstream file(path);
     if(file.is_open() == false) throw std::runtime_error(std::string("cannot open file \"") + path + "\"");

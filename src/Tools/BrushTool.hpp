@@ -1,7 +1,42 @@
 #pragma once
+#include <memory>
 #include "../DrawingTool.hpp"
+#include "../GlWrappers/Texture.hpp"
+#include "../GlWrappers/Framebuffer.hpp"
 
 class BrushTool:public DrawingTool{
+private:
+    static constexpr float scaleIncrement = 0.1; 
+    static constexpr float scaleMin = 0.004; 
+    static constexpr float scaleMax = 1.0; 
+    static constexpr float powerMin = 0.001; 
+    static constexpr float powerMax = 0.5; 
+    std::unique_ptr<Texture> buffer;
+    std::unique_ptr<Framebuffer> frameBuffer;
+
+    GLuint prog;
+    GLuint VBO;
+
+    GLint vertex_pPos;
+    GLint colorPos;
+    GLint posPos;
+    GLint viewportPos;
+    GLint powerPos;
+    GLint scalePos;
+
+    bool isMouseDown = false;
+
+    float power = 0.5;
+    float scale = 0.02;
+    float colorR = 1.0;
+    float colorG = 0.0;
+    float colorB = 0.0;
+
+    int prevX;
+    int prevY;
+
+    void ClearBuffer() const noexcept;
+    void DrawCircle(int x, int y) const noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual void OnResize(int cx, int cy) noexcept override;
@@ -15,4 +50,5 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept override;
 public:
     BrushTool(int cx, int cy) noexcept;
+    ~BrushTool() noexcept;
 };

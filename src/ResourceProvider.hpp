@@ -18,4 +18,6 @@ public:
     std::string GetDrawImageFragment() const noexcept;
     std::string GetMenuItemFragment() const noexcept;
     std::string GetMenuItemVertex() const noexcept;
+    std::string GetDrawCircleVertex() const noexcept;
+    std::string GetDrawCircleFragment() const noexcept;
 };
