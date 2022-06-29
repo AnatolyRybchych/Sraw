@@ -2,6 +2,7 @@
 
 constexpr const char *FileMouseHighlightIcon = "MouseHighlightIcon.png";
 constexpr const char *FileBrushIcon = "BrushIcon.png";
+constexpr const char *FileEraserIcon = "EraserIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";
@@ -12,3 +13,5 @@ constexpr const char *FileMenuItemFragment = SHADERS_DIR"MenuItemFragment.glsl";
 constexpr const char *FileMenuItemVertex = SHADERS_DIR"MenuItemVertex.glsl";
 constexpr const char *FileDrawCircleVertex = SHADERS_DIR"DrawCircleVertex.glsl";
 constexpr const char *FileDrawCircleFragment = SHADERS_DIR"DrawCircleFragment.glsl";
+constexpr const char *FileErseVertex = SHADERS_DIR"ErseVertex.glsl";
+constexpr const char *FileErseFragment = SHADERS_DIR"ErseFragment.glsl";

@@ -29,6 +29,10 @@ GLuint ResourceProvider::GetBrushIcon() const noexcept{
     return ReadTexture(FileBrushIcon);
 }
 
+GLuint ResourceProvider::GetEraserIcon() const noexcept{
+    return ReadTexture(FileEraserIcon);
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }
@@ -59,6 +63,14 @@ std::string ResourceProvider::GetDrawCircleVertex() const noexcept{
 
 std::string ResourceProvider::GetDrawCircleFragment() const noexcept{
     return FReadAllText(FileDrawCircleFragment);
+}
+
+std::string ResourceProvider::GetErseVertex() const noexcept{
+    return FReadAllText(FileErseVertex);
+}
+
+std::string ResourceProvider::GetErseFragment() const noexcept{
+    return FReadAllText(FileErseFragment);
 }
 
 static std::string FReadAllText(std::string path){

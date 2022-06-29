@@ -3,11 +3,13 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler)
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg)
     :emptyTexture((GLuint)0),
     commitHandler(commitHandler),
     MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
-    BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()){
+    BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
+    EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
+    bg(bg){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
@@ -25,12 +27,20 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler)
         )
     );
 
+    eraserToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            EraserTexture, 
+            L"Eraser", 
+            std::bind(SelectToolMenuManager::OpenEraser, this)
+        )
+    );
+
     rootMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
             mouseHighlightToolNode.get(),
             brushToolNode.get(),
-            mouseHighlightToolNode.get(),
+            eraserToolNode.get(),
             mouseHighlightToolNode.get(),
             mouseHighlightToolNode.get(),
         }, 
@@ -39,7 +49,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler)
     );
 
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100, commitHandler));
-    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100,commitHandler));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100, commitHandler));
+    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(100, 100, commitHandler, bg));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, commitHandler, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -62,6 +73,10 @@ void SelectToolMenuManager::OpenToolMenu() noexcept{
 
 void SelectToolMenuManager::OpenBrush() noexcept{
     SetCurrTool(brushTool.get());
+}
+
+void SelectToolMenuManager::OpenEraser() noexcept{
+    SetCurrTool(eraserTool.get());
 }
 
 void SelectToolMenuManager::OpenMouseHighlightTool() noexcept{

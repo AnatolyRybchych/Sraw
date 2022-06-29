@@ -11,7 +11,7 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
 
 DrawingCanvas::DrawingCanvas(Texture &bg)
     :bg(bg),
-    toolMenuManager(*this){
+    toolMenuManager(*this, bg.GetGLID()){
     frameBuffer.Bind();
     frameBuffer.Unbind();
 }

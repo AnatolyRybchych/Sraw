@@ -27,7 +27,7 @@ void main(){
 
     if(is_mouse_over != 0){
         vec3 color_body = vec3(0.6666, 0.6666, 1.0);
-        vec3 color_outline = vec3(0.6666, 0.6666, 1.0);
+        vec3 color_outline = vec3(0.3, 0.3, 0.6);
          
         vec3 color_glow = vec3(0.9, 0.8, 1.0);    
         

@@ -128,7 +128,6 @@ bool BrushTool::OnKeyDown(int vkCode, int repeat) noexcept{
     
     default: return false;
     }
-    
 }
 
 bool BrushTool::OnKeyUp(int vkCode) noexcept{

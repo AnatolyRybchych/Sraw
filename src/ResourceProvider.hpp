@@ -12,6 +12,7 @@ public:
 
     GLuint GetMouseHighlightIcon() const noexcept;
     GLuint GetBrushIcon() const noexcept;
+    GLuint GetEraserIcon() const noexcept;
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetDrawImageVertex() const noexcept;
@@ -20,4 +21,6 @@ public:
     std::string GetMenuItemVertex() const noexcept;
     std::string GetDrawCircleVertex() const noexcept;
     std::string GetDrawCircleFragment() const noexcept;
+    std::string GetErseVertex() const noexcept;
+    std::string GetErseFragment() const noexcept;
 };
