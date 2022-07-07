@@ -3,6 +3,7 @@
 constexpr const char *FileMouseHighlightIcon = "MouseHighlightIcon.png";
 constexpr const char *FileBrushIcon = "BrushIcon.png";
 constexpr const char *FileEraserIcon = "EraserIcon.png";
+constexpr const char *FileColorPaletteIcon = "ColorPaleteIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";

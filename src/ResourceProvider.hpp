@@ -13,6 +13,7 @@ public:
     GLuint GetMouseHighlightIcon() const noexcept;
     GLuint GetBrushIcon() const noexcept;
     GLuint GetEraserIcon() const noexcept;
+    GLuint GetColorPaletteIcon() const noexcept;
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetDrawImageVertex() const noexcept;

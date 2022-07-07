@@ -9,6 +9,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
     BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
     EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
+    ColorPaletteTexture(ResourceProvider::GetProvider().GetColorPaletteIcon()),
     bg(bg){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
@@ -35,13 +36,21 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         )
     );
 
+    colorPaletToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ColorPaletteTexture, 
+            L"Color palette", 
+            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+        )
+    );
+
     rootMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
             mouseHighlightToolNode.get(),
             brushToolNode.get(),
             eraserToolNode.get(),
-            mouseHighlightToolNode.get(),
+            colorPaletToolNode.get(),
             mouseHighlightToolNode.get(),
         }, 
         L"root", 
@@ -49,7 +58,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     );
 
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100, commitHandler));
-    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100, commitHandler));
+    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(100, 100, commitHandler));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100, commitHandler, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(100, 100, commitHandler, bg));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, commitHandler, *(SelectToolNode*)rootMenuNode.get()));
 
@@ -77,6 +87,10 @@ void SelectToolMenuManager::OpenBrush() noexcept{
 
 void SelectToolMenuManager::OpenEraser() noexcept{
     SetCurrTool(eraserTool.get());
+}
+
+void SelectToolMenuManager::OpenColorPalette() noexcept{
+    SetCurrTool(colorPaletTool.get());
 }
 
 void SelectToolMenuManager::OpenMouseHighlightTool() noexcept{

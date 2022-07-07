@@ -23,7 +23,7 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
     
-    glUniform3f(colorPos, colorR, colorG, colorB);
+    glUniform3f(colorPos, colorPalet.GetRed(), colorPalet.GetGreen(), colorPalet.GetBlue());
     glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
     glUniform2f(viewportPos, (float)GetViewportWidth(),(float)GetViewportHeight());
     glUniform1f(powerPos, power);
@@ -150,8 +150,9 @@ bool BrushTool::OnScrollDown() noexcept{
     return true;
 }
 
-BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler) noexcept: 
+BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletTool &colorPalet) noexcept: 
     DrawingTool(cx, cy, commitHandler),
+    colorPalet(colorPalet),
     buffer(new Texture(cx, cy)),
     frameBuffer(new Framebuffer()){
 

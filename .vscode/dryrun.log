@@ -2,8 +2,7 @@ make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
 g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/SelectToolMenuManager.o src/SelectToolMenuManager.cpp
  
-g++ -g -ggdb -Istbimage -Iglad/ -c -o obj/EraserTool.o src/Tools/EraserTool.cpp
- 
-g++ -g -ggdb -Istbimage -Iglad/ -o Sraw.exe obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o -lgdi32 -lopengl32
+make.exe: *** No rule to make target 'obj/ColorPaletTool.o', needed by 'build'.
+
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  

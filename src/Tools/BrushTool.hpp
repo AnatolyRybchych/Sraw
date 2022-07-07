@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "../DrawingTool.hpp"
+#include "ColorPaletTool.hpp"
 #include "../GlWrappers/Texture.hpp"
 #include "../GlWrappers/Framebuffer.hpp"
 
@@ -37,6 +38,7 @@ private:
 
     void ClearBuffer() const noexcept;
     void DrawCircle(int x, int y) const noexcept;
+    ColorPaletTool &colorPalet;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual void OnDrawCommit() noexcept override;
@@ -51,6 +53,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept override;
     
 public:
-    BrushTool(int cx, int cy, CommitHandler &commitHandler) noexcept;
+    BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletTool &colorPalet) noexcept;
     ~BrushTool() noexcept;
 };

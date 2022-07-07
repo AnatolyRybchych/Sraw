@@ -33,6 +33,10 @@ GLuint ResourceProvider::GetEraserIcon() const noexcept{
     return ReadTexture(FileEraserIcon);
 }
 
+GLuint ResourceProvider::GetColorPaletteIcon() const noexcept{
+    return ReadTexture(FileColorPaletteIcon); 
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }

@@ -5,6 +5,7 @@
 #include "Tools/MouseHighlightTool.hpp"
 #include "Tools/BrushTool.hpp"
 #include "Tools/EraserTool.hpp"
+#include "Tools/ColorPaletTool.hpp"
 
 class SelectToolMenuManager{
 private:
@@ -15,16 +16,19 @@ private:
     Texture MouseHighlightTexture;
     Texture BrushTexture;
     Texture EraserTexture;
+    Texture ColorPaletteTexture;
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
         std::unique_ptr<SelectActionToolNode> brushToolNode; 
         std::unique_ptr<SelectActionToolNode> eraserToolNode; 
+        std::unique_ptr<SelectActionToolNode> colorPaletToolNode; 
 
 
     std::unique_ptr<SelectToolTool> selectToolmenu;
     std::unique_ptr<MouseHighlightTool> mouseHighlightTool;
     std::unique_ptr<BrushTool> brushTool;
     std::unique_ptr<EraserTool> eraserTool;
+    std::unique_ptr<ColorPaletTool> colorPaletTool;
 
     DrawingTool * currTool;
 
@@ -34,6 +38,7 @@ public:
     void OpenToolMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;
+    void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;
 };

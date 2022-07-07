@@ -24,6 +24,7 @@ objects	+= obj/SelectToolTool.o
 objects	+= obj/SelectToolNode.o
 objects	+= obj/BrushTool.o
 objects	+= obj/EraserTool.o
+objects	+= obj/ColorPaletTool.o
 objects	+= obj/MouseHighlightTool.o
 objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
