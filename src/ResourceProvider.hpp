@@ -14,6 +14,7 @@ public:
     GLuint GetBrushIcon() const noexcept;
     GLuint GetEraserIcon() const noexcept;
     GLuint GetColorPaletteIcon() const noexcept;
+    GLuint GetPalette() const noexcept;
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetDrawImageVertex() const noexcept;
@@ -24,4 +25,6 @@ public:
     std::string GetDrawCircleFragment() const noexcept;
     std::string GetErseVertex() const noexcept;
     std::string GetErseFragment() const noexcept;
+    std::string GetPaletteVertex() const noexcept;
+    std::string GetPaletteFragment() const noexcept;
 };

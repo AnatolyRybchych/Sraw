@@ -37,6 +37,10 @@ GLuint ResourceProvider::GetColorPaletteIcon() const noexcept{
     return ReadTexture(FileColorPaletteIcon); 
 }
 
+GLuint ResourceProvider::GetPalette() const noexcept{
+    return ReadTexture(FilePalette); 
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }
@@ -77,6 +81,14 @@ std::string ResourceProvider::GetErseFragment() const noexcept{
     return FReadAllText(FileErseFragment);
 }
 
+std::string ResourceProvider::GetPaletteVertex() const noexcept{
+    return FReadAllText(FilePaletteVertex);
+}
+
+std::string ResourceProvider::GetPaletteFragment() const noexcept{
+    return FReadAllText(FilePaletteFragment);
+}
+
 static std::string FReadAllText(std::string path){
     std::ifstream file(path);
     if(file.is_open() == false) throw std::runtime_error(std::string("cannot open file \"") + path + "\"");
@@ -94,11 +106,11 @@ static GLuint ReadTexture(std::string path){
     glGenTextures(1, &result);
     glBindTexture(GL_TEXTURE_2D, result);
 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, cnt == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, cnt == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
 
     glBindTexture(GL_TEXTURE_2D, 0);
     stbi_image_free(data);

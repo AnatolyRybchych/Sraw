@@ -1,11 +1,33 @@
 #pragma once
 #include "../DrawingTool.hpp"
+#include "../GlWrappers/Texture.hpp"
+#include <vector>
 
 class ColorPaletTool:public DrawingTool{
 private:
+    static constexpr float paleteScale = 0.5;
+
     float r;
     float g;
     float b;
+
+    GLuint prog;
+    GLuint VBO;
+
+    GLint vertex_pPos;
+    GLint colorPos;
+    GLint palettePos;
+    GLint viewportPos;
+
+    GLuint palette;
+
+    std::vector<unsigned char> paletteData;
+    int paletteCx;
+    int paletteCy;
+
+    bool isMouseDown;
+
+    void ChangeColor(float relX, float relY) noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual void OnDrawCommit() noexcept override;
@@ -25,5 +47,6 @@ public:
     void SetRed(float value) noexcept;
     void SetGreen(float value) noexcept;
     void SetBlue(float value) noexcept;
-    ColorPaletTool(int cx, int cy, CommitHandler &commitHandler) noexcept;
+    ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, GLuint palette) noexcept;
+    ~ColorPaletTool() noexcept;
 };

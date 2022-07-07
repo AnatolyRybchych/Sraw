@@ -5,6 +5,7 @@
 #include "../GlWrappers/Texture.hpp"
 #include "../GlWrappers/Framebuffer.hpp"
 
+
 class BrushTool:public DrawingTool{
 private:
     static constexpr float scaleIncrement = 0.1; 

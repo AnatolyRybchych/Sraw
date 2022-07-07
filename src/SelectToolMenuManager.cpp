@@ -10,6 +10,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
     EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
     ColorPaletteTexture(ResourceProvider::GetProvider().GetColorPaletteIcon()),
+    PaletteTexture(ResourceProvider::GetProvider().GetPalette()),
     bg(bg){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
@@ -58,7 +59,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     );
 
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100, commitHandler));
-    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(100, 100, commitHandler));
+    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(100, 100, commitHandler, PaletteTexture.GetGLID()));
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100, commitHandler, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(100, 100, commitHandler, bg));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, commitHandler, *(SelectToolNode*)rootMenuNode.get()));

@@ -17,6 +17,8 @@ private:
     Texture BrushTexture;
     Texture EraserTexture;
     Texture ColorPaletteTexture;
+    Texture PaletteTexture;
+
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
         std::unique_ptr<SelectActionToolNode> brushToolNode; 
