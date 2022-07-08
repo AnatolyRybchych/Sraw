@@ -58,5 +58,8 @@ bool SelectToolTool::OnScrollDown() noexcept{
 }
 
 void SelectToolTool::SetCurrNode(SelectToolNode *node) noexcept{
-    currNode = node;
+    if(node)
+        currNode = node;
+    else
+        currNode = &rootNode;
 }

@@ -15,6 +15,7 @@ public:
     GLuint GetEraserIcon() const noexcept;
     GLuint GetColorPaletteIcon() const noexcept;
     GLuint GetPalette() const noexcept;
+    GLuint GetQuitIcon() const noexcept;
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetDrawImageVertex() const noexcept;

@@ -11,6 +11,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
     ColorPaletteTexture(ResourceProvider::GetProvider().GetColorPaletteIcon()),
     PaletteTexture(ResourceProvider::GetProvider().GetPalette()),
+    QuitTexture(ResourceProvider::GetProvider().GetQuitIcon()),
     bg(bg){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
@@ -45,6 +46,16 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         )
     );
 
+    quitMenuNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+        std::vector<SelectToolNode*>{
+        }, 
+        L"Quit", 
+        QuitTexture,
+        std::bind(SelectToolMenuManager::OpenQuitMenu, this)
+        )
+    );
+
     rootMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
@@ -52,7 +63,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
             brushToolNode.get(),
             eraserToolNode.get(),
             colorPaletToolNode.get(),
-            mouseHighlightToolNode.get(),
+            quitMenuNode.get(),
         }, 
         L"root", 
         emptyTexture)
@@ -79,7 +90,12 @@ void SelectToolMenuManager::SetCurrTool(DrawingTool *tool) noexcept{
 }
 
 void SelectToolMenuManager::OpenToolMenu() noexcept{
+    selectToolmenu->SetCurrNode(nullptr);
     SetCurrTool(selectToolmenu.get());
+}
+
+void SelectToolMenuManager::OpenQuitMenu() noexcept{
+    selectToolmenu->SetCurrNode(quitMenuNode.get());
 }
 
 void SelectToolMenuManager::OpenBrush() noexcept{

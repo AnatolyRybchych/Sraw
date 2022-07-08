@@ -18,12 +18,14 @@ private:
     Texture EraserTexture;
     Texture ColorPaletteTexture;
     Texture PaletteTexture;
+    Texture QuitTexture;
 
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
         std::unique_ptr<SelectActionToolNode> brushToolNode; 
         std::unique_ptr<SelectActionToolNode> eraserToolNode; 
         std::unique_ptr<SelectActionToolNode> colorPaletToolNode; 
+        std::unique_ptr<SelectMenuToolNode> quitMenuNode;
 
 
     std::unique_ptr<SelectToolTool> selectToolmenu;
@@ -38,6 +40,7 @@ private:
 public:
     SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg);
     void OpenToolMenu() noexcept;
+    void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;
     void OpenColorPalette() noexcept;

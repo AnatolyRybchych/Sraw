@@ -41,6 +41,10 @@ GLuint ResourceProvider::GetPalette() const noexcept{
     return ReadTexture(FilePalette); 
 }
 
+GLuint ResourceProvider::GetQuitIcon() const noexcept{
+    return ReadTexture(FileQuiticon); 
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }
