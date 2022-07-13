@@ -24,7 +24,6 @@ private:
     Texture SaveToFileTexture;
 
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
-        std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
         std::unique_ptr<SelectActionToolNode> brushToolNode; 
         std::unique_ptr<SelectActionToolNode> eraserToolNode; 
         std::unique_ptr<SelectActionToolNode> colorPaletToolNode; 
@@ -32,6 +31,25 @@ private:
             std::unique_ptr<SelectActionToolNode> clearNode; 
             std::unique_ptr<SelectActionToolNode> hideNode; 
             std::unique_ptr<SelectActionToolNode> saveToFileNode; 
+            //save to clipboard
+            //exit application
+        //tools menu
+            std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
+            //shapes tools menu
+                //fill rectangle tool
+                //rectangle tool
+                //elipse tool
+                //fill elipse tool
+                //line tool
+            //text stamp tool
+            //block diagram shapes menu
+                //action
+                //condition
+                //arrow
+                //input
+                //output
+            //simple math diagram
+            
 
 
     std::unique_ptr<SelectToolTool> selectToolmenu;
