@@ -45,6 +45,18 @@ GLuint ResourceProvider::GetQuitIcon() const noexcept{
     return ReadTexture(FileQuiticon); 
 }
 
+GLuint ResourceProvider::GetClearIcon() const noexcept{
+    return ReadTexture(FileClearicon); 
+}
+
+GLuint ResourceProvider::GetHideIcon() const noexcept{
+    return ReadTexture(FileHideicon); 
+}
+
+GLuint ResourceProvider::GetSaveToFileIcon() const noexcept{
+    return ReadTexture(FileSaveToFileicon); 
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }

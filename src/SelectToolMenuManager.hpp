@@ -19,6 +19,9 @@ private:
     Texture ColorPaletteTexture;
     Texture PaletteTexture;
     Texture QuitTexture;
+    Texture ClearTexture;
+    Texture HideTexture;
+    Texture SaveToFileTexture;
 
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
@@ -26,6 +29,9 @@ private:
         std::unique_ptr<SelectActionToolNode> eraserToolNode; 
         std::unique_ptr<SelectActionToolNode> colorPaletToolNode; 
         std::unique_ptr<SelectMenuToolNode> quitMenuNode;
+            std::unique_ptr<SelectActionToolNode> clearNode; 
+            std::unique_ptr<SelectActionToolNode> hideNode; 
+            std::unique_ptr<SelectActionToolNode> saveToFileNode; 
 
 
     std::unique_ptr<SelectToolTool> selectToolmenu;

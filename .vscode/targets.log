@@ -7,8 +7,9 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Thu Jul 07 06:46:09 2022
+# Make data base, printed on Wed Jul 13 11:10:25 2022
 
 # Variables
 
@@ -22,8 +23,6 @@ GNUMAKEFLAGS :=
 .SHELLFLAGS := -c
 # makefile
 MAKEFLAGS = pqrR
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -35,7 +34,8 @@ HOMEDRIVE = C:
 # automatic
 ^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # makefile
-CURDIR := c:/Users/Velichaisyi/Desktop/Sraw
+CUR 
+DIR := c:/Users/Velichaisyi/Desktop/Sraw
 # default
 SHELL := C:/Program Files/Git/usr/bin/sh.exe
 # environment
@@ -55,13 +55,9 @@ MAKEFILE_LIST :=  Makefile
 # environment
 TMP = C:\Temp
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
 PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
-# environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-53d77106-22fa-414a-8d56-68b3e4010a5c-sock
 # environment
 VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
 # environment
@@ -79,8 +75,6 @@ USERPROFILE = C:\Users\Velichaisyi
 # environment
 ALLUSERSPROFILE = C:\ProgramData
 # environment
-VSCODE_LOG_STACK = false
-# environment
 NUMBER_OF_PROCESSORS = 4
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -89,11 +83,9 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_680_YLWACONGHHEBNMJT
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_5452_MORCRIYBRTAXATTY
 # makefile (from 'makefile', line 2)
 out := Sraw.exe
-# environment
-VSCODE_PIPE_LOGGING = true
 # environment
 COMPUTERNAME = HOME-PC
 # environment
@@ -111,7 +103,7 @@ PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\30d9c6cd9483b2cc586687151bcbcd635f373630
+VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -157,7 +149,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.68.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.69.0-main-sock
 # environment
 HOMEPATH = \Users\Velichaisyi
 # environment
@@ -207,11 +199,11 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 680
+VSCODE_PID = 5452
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=15/168=9%
+# Load=94/1024=9%, Rehash=0, Collisions=15/163=9%
 
 # Pattern-specific Variable Values
 
@@ -220,11 +212,11 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # Directories
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656724082ll): No files, no impossibilities so far.
-# src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1657165569ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1657165416ll): 18 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1656726132ll): No files, no impossibilities so far.
+# src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1657244439ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1657699756ll): 23 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1657244439ll): No files, no impossibilities so far.
 
-# 18 files, no impossibilities in 4 directories.
+# 23 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -277,8 +269,7 @@ all:
 #  File has not been updated.
 
 # Not a target:
-obj 
-/DrawingCanvas.o:
+obj/DrawingCanvas.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -333,8 +324,7 @@ Makefile:
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgra 
-m.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
+build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -452,12 +442,12 @@ obj/BrushTool.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 56 / storage = 764 B / avg = 13 B
-# current buf: size = 8162 B / used = 764 B / count = 56 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 61 / storage = 835 B / avg = 13 B
+# current buf: size = 8162 B / used = 835 B / count = 61 / avg = 13 B
 
-# strcache performance: lookups = 69 / hit rate = 18%
+# strcache performance: lookups = 74 / hit rate = 17%
 # hash-table stats:
-# Load=56/8192=1%, Rehash=0, Collisions=1/69=1%
-# Finished Make data base on Thu Jul 07 06:46:09 2022
+# Load=61/8192=1%, Rehash=0, Collisions=1/74=1%
+# Finished Make data base on Wed Jul 13 11:10:25 2022
 
  

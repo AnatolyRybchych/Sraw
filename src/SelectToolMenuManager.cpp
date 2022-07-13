@@ -12,6 +12,9 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     ColorPaletteTexture(ResourceProvider::GetProvider().GetColorPaletteIcon()),
     PaletteTexture(ResourceProvider::GetProvider().GetPalette()),
     QuitTexture(ResourceProvider::GetProvider().GetQuitIcon()),
+    ClearTexture(ResourceProvider::GetProvider().GetClearIcon()),
+    HideTexture(ResourceProvider::GetProvider().GetHideIcon()),
+    SaveToFileTexture(ResourceProvider::GetProvider().GetSaveToFileIcon()),
     bg(bg){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
@@ -46,9 +49,36 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         )
     );
 
+    clearNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ClearTexture, 
+            L"Clear canvas", 
+            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+        )
+    );
+
+    hideNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            HideTexture, 
+            L"Hide canvas", 
+            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+        )
+    );
+
+    saveToFileNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            SaveToFileTexture, 
+            L"Save to file", 
+            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+        )
+    );
+
     quitMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
+            clearNode.get(),
+            hideNode.get(),
+            saveToFileNode.get(),
         }, 
         L"Quit", 
         QuitTexture,

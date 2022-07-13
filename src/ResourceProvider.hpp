@@ -16,6 +16,10 @@ public:
     GLuint GetColorPaletteIcon() const noexcept;
     GLuint GetPalette() const noexcept;
     GLuint GetQuitIcon() const noexcept;
+    GLuint GetClearIcon() const noexcept;
+    GLuint GetHideIcon() const noexcept;
+    GLuint GetSaveToFileIcon() const noexcept;
+    
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;
     std::string GetDrawImageVertex() const noexcept;
