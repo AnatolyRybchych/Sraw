@@ -21,6 +21,7 @@ private:
     int cx, cy;
 public:
     const Texture &GetBackground() const noexcept;
+    const Texture &GetCurrentState() const noexcept;
     DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy);
     bool OnMouseMove(int x, int y);
     bool OnLMouseDown(int x, int y);

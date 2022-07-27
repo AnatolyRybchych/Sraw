@@ -50,6 +50,31 @@ MainWindow::MainWindow(HINSTANCE hInstance, App &app)
     if(glewInit()) throw std::runtime_error("cannot load glew");
 }
 
+const Texture &MainWindow::GetCurrentStateTexture() const{
+    return currState->GetStateTexture();
+}
+
+HBITMAP MainWindow::CreateCurrentStateBitmap() const{
+    GLuint texture = GetCurrentStateTexture().GetGLID();
+    glBindTexture(GL_TEXTURE_2D, texture);
+    int w, h;
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
+    char *data = new char[w*h * 4];
+    glGetTexImage(GL_TEXTURE_2D, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    HBITMAP result =  CreateBitmap(w, h, 1, 32, data);
+
+    HDC screenDc = GetDC(NULL);
+    HDC dc = CreateCompatibleDC(screenDc);
+    DeleteDC(screenDc);
+    SelectObject(dc, result);
+    StretchBlt(dc, 0, h, w, -h, dc, 0, 0, w, h, SRCCOPY);
+    DeleteDC(dc);
+    return result;
+}
+
 void MainWindow::ClearCurrentState() noexcept{
     windowStates.erase(std::find(windowStates.begin(), windowStates.end(), currState));
     currState = nullptr;

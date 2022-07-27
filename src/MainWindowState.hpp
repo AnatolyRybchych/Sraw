@@ -20,6 +20,7 @@ private:
 
     void GetScreenshot() noexcept;
 public:
+    const Texture &GetStateTexture() const noexcept;
     MainWindowState(MainWindow &window, HMONITOR monitor, Quitable &quitable);
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
     HMONITOR GetMonitor() const noexcept;

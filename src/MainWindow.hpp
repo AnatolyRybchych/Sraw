@@ -21,6 +21,8 @@ protected:
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept override;
 public:
     MainWindow(HINSTANCE hInstance, App &app);
+    const Texture &GetCurrentStateTexture() const;
+    HBITMAP CreateCurrentStateBitmap() const;
     void ClearCurrentState() noexcept;
     void MakeCurrent() const noexcept;
     void SwapBuffers() const noexcept;

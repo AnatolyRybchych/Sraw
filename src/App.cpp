@@ -54,6 +54,12 @@ void App::HideWindowSaveStateToFile() noexcept{
 
 void App::HideWindowCopyStateToClipboard() noexcept{
     HideWindow();
+    OpenClipboard(window->GetHWnd());
+    EmptyClipboard();
+    HBITMAP stateBmp = window->CreateCurrentStateBitmap();
+    SetClipboardData(CF_BITMAP, stateBmp);
+    CloseClipboard();
+    DeleteObject(stateBmp);
 }
 
 bool App::OnKeyboardHookLL(KeyboardMessages message, KBDLLHOOKSTRUCT *args) noexcept{

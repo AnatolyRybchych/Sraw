@@ -9,6 +9,10 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
     return bg;
 }
 
+const Texture &DrawingCanvas::GetCurrentState() const noexcept{
+    return currState;
+}
+
 DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy)
     :bg(bg),
     toolMenuManager(*this, cx, cy, bg, quitable),
