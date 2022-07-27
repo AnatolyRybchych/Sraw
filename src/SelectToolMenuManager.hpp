@@ -26,6 +26,8 @@ private:
     Texture ClearTexture;
     Texture HideTexture;
     Texture SaveToFileTexture;
+    Texture CopyToClipboardTexture;
+    Texture ToolsTexture;
 
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> brushToolNode; 
@@ -35,9 +37,9 @@ private:
             std::unique_ptr<SelectActionToolNode> clearNode; 
             std::unique_ptr<SelectActionToolNode> hideNode; 
             std::unique_ptr<SelectActionToolNode> saveToFileNode; 
-            std::unique_ptr<SelectActionToolNode> saveToClipboard; 
-            std::unique_ptr<SelectActionToolNode> quitApp; 
-        //tools menu
+            std::unique_ptr<SelectActionToolNode> saveToClipboardNode; 
+            std::unique_ptr<SelectActionToolNode> quitAppNode; 
+        std::unique_ptr<SelectMenuToolNode> toolsMenuNode;
             std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
             //shapes tools menu
                 //fill rectangle tool
@@ -53,8 +55,6 @@ private:
                 //input
                 //output
             //simple math diagram
-            
-
 
     std::unique_ptr<SelectToolTool> selectToolmenu;
     std::unique_ptr<MouseHighlightTool> mouseHighlightTool;
@@ -68,6 +68,7 @@ private:
 public:
     SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable);
     void OpenToolMenu() noexcept;
+    void OpenTool_ToolsMenu() noexcept;
     void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;

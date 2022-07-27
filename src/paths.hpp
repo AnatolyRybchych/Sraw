@@ -9,6 +9,8 @@ constexpr const char *FileQuiticon = "QuitIcon.png";
 constexpr const char *FileClearicon = "ClearIcon.png";
 constexpr const char *FileHideicon = "HideIcon.png";
 constexpr const char *FileSaveToFileicon = "SaveToFileIcon.png";
+constexpr const char *FileCopyToClipboardicon = "CopyToClipboardIcon.png";
+constexpr const char *FileToolsicon = "ToolsIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";

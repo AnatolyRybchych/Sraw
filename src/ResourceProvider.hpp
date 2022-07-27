@@ -19,6 +19,8 @@ public:
     GLuint GetClearIcon() const noexcept;
     GLuint GetHideIcon() const noexcept;
     GLuint GetSaveToFileIcon() const noexcept;
+    GLuint GetCopyToClipboardIcon() const noexcept;
+    GLuint GetToolsIcon() const noexcept;
     
     std::string GetMenuBgFragment() const noexcept;
     std::string GetMenuBgVertex() const noexcept;

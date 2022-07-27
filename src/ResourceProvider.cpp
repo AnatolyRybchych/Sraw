@@ -57,6 +57,14 @@ GLuint ResourceProvider::GetSaveToFileIcon() const noexcept{
     return ReadTexture(FileSaveToFileicon); 
 }
 
+GLuint ResourceProvider::GetCopyToClipboardIcon() const noexcept{
+    return ReadTexture(FileCopyToClipboardicon); 
+}
+
+GLuint ResourceProvider::GetToolsIcon() const noexcept{
+    return ReadTexture(FileToolsicon); 
+}
+
 std::string ResourceProvider::GetMenuBgFragment() const noexcept{
     return FReadAllText(FileMenuBgFragment);
 }

@@ -14,6 +14,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     ClearTexture(ResourceProvider::GetProvider().GetClearIcon()),
     HideTexture(ResourceProvider::GetProvider().GetHideIcon()),
     SaveToFileTexture(ResourceProvider::GetProvider().GetSaveToFileIcon()),
+    CopyToClipboardTexture(ResourceProvider::GetProvider().GetCopyToClipboardIcon()),
+    ToolsTexture(ResourceProvider::GetProvider().GetToolsIcon()),
     commitHandler(commitHandler),
     quitable(quitable),
     bg(bg){
@@ -77,15 +79,15 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );
 
-    saveToClipboard = std::unique_ptr<SelectActionToolNode>(
+    saveToClipboardNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            SaveToFileTexture, 
+            CopyToClipboardTexture, 
             L"Copy to clipboard", 
             std::bind(Quitable::HideWindowCopyStateToClipboard, &quitable)
         )
     );
 
-    quitApp = std::unique_ptr<SelectActionToolNode>(
+    quitAppNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
             QuitTexture, 
             L"Quit application", 
@@ -93,7 +95,16 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );
 
-    
+    toolsMenuNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+        std::vector<SelectToolNode*>{
+            mouseHighlightToolNode.get(),
+        }, 
+        L"Tools", 
+        ToolsTexture,
+        std::bind(SelectToolMenuManager::OpenTool_ToolsMenu, this)
+        )
+    );    
 
     quitMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
@@ -101,8 +112,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             clearNode.get(),
             hideNode.get(),
             saveToFileNode.get(),
-            saveToClipboard.get(),
-            quitApp.get(),
+            saveToClipboardNode.get(),
+            quitAppNode.get(),
         }, 
         L"Quit", 
         QuitTexture,
@@ -113,13 +124,13 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     rootMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
-            mouseHighlightToolNode.get(),
+            toolsMenuNode.get(),
             brushToolNode.get(),
             eraserToolNode.get(),
             colorPaletToolNode.get(),
             quitMenuNode.get(),
         }, 
-        L"root", 
+        L"Menu", 
         emptyTexture)
     );
 
@@ -137,14 +148,16 @@ DrawingTool &SelectToolMenuManager::GetCurrTool() noexcept{
 }
 
 void SelectToolMenuManager::SetCurrTool(DrawingTool *tool) noexcept{
-    int cx = currTool->GetViewportWidth();
-    int cy = currTool->GetViewportHeight();
     currTool = tool;
 }
 
 void SelectToolMenuManager::OpenToolMenu() noexcept{
     selectToolmenu->SetCurrNode(nullptr);
     SetCurrTool(selectToolmenu.get());
+}
+
+void SelectToolMenuManager::OpenTool_ToolsMenu() noexcept{
+    selectToolmenu->SetCurrNode(toolsMenuNode.get());
 }
 
 void SelectToolMenuManager::OpenQuitMenu() noexcept{
