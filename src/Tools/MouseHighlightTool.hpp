@@ -9,8 +9,6 @@ private:
     int mdX, mdY;
 protected:
     virtual void OnDraw() const noexcept override;
-    virtual void OnDrawCommit() noexcept override;
-    virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
     virtual bool OnLMouseDown(int x, int y) noexcept override;
     virtual bool OnLMouseUp(int x, int y) noexcept override;
@@ -21,6 +19,6 @@ protected:
     virtual bool OnScrollDown() noexcept override;
     
 public:
-    MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler) noexcept;
+    MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept;
 };
 

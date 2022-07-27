@@ -13,8 +13,6 @@ private:
     static constexpr float scaleMax = 1.0; 
     static constexpr float powerMin = 0.001; 
     static constexpr float powerMax = 0.5; 
-    std::unique_ptr<Texture> buffer;
-    std::unique_ptr<Framebuffer> frameBuffer;
 
     GLuint prog;
     GLuint VBO;
@@ -37,13 +35,10 @@ private:
     int prevX;
     int prevY;
 
-    void ClearBuffer() const noexcept;
     void DrawCircle(int x, int y) const noexcept;
     ColorPaletTool &colorPalet;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
-    virtual void OnDrawCommit() noexcept override;
-    virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
     virtual bool OnLMouseDown(int x, int y) noexcept override;
     virtual bool OnLMouseUp(int x, int y) noexcept override;
@@ -54,6 +49,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept override;
     
 public:
-    BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletTool &colorPalet) noexcept;
+    BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalet) noexcept;
     ~BrushTool() noexcept;
 };

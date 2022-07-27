@@ -14,7 +14,7 @@ void EraserTool::Erse(int x, int y) const noexcept{
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
-    glBindTexture(GL_TEXTURE_2D, bg);
+    glBindTexture(GL_TEXTURE_2D, GetBg().GetGLID());
     glActiveTexture(GL_TEXTURE0);
     
     glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
@@ -31,37 +31,14 @@ void EraserTool::Erse(int x, int y) const noexcept{
     glUseProgram(0);
 }
 
-void EraserTool::ClearBuffer() const noexcept{
-    frameBuffer->Bind();
-    frameBuffer->AttachTexture2D(buffer->GetGLID());
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    frameBuffer->Unbind();
-}
-
 void EraserTool::OnDraw() const noexcept{
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
+    DrawImage::GetRenderer().Draw(GetCommitBuffer().GetGLID());
     Erse(prevX, prevY);
-}
-
-void EraserTool::OnDrawCommit() noexcept{
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
-}
-
-void EraserTool::OnResize(int cx, int cy) noexcept{
-    Texture *newBuffer = new Texture(cx, cy);
-    frameBuffer->AttachTexture2D(newBuffer->GetGLID());
-    frameBuffer->Bind();
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
-    frameBuffer->Unbind();
-
-    buffer = std::unique_ptr<Texture>(newBuffer);
 }
 
 bool EraserTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
-        frameBuffer->Bind();
-        frameBuffer->AttachTexture2D(buffer->GetGLID());
+        BindFramebuffer(GetCommitBuffer().GetGLID());
 
         int points = distancei(prevX, prevY, x, y);
         int distanceX = x - prevX;
@@ -73,7 +50,7 @@ bool EraserTool::OnMouseMove(int x, int y) noexcept{
             );
         }
 
-        frameBuffer->Unbind();
+        UnbindFramebuffer();
         prevX = x;
         prevY = y;
         return true;
@@ -97,7 +74,7 @@ bool EraserTool::OnLMouseUp(int x, int y) noexcept{
         isMouseDown = false;
 
         Commit();
-        ClearBuffer();
+        ClearCommitBuffer();
         prevX = x;
         prevY = y;
         return true;
@@ -143,13 +120,8 @@ bool EraserTool::OnScrollDown() noexcept{
 }
 
 
-EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, GLuint bg) noexcept
-    :DrawingTool(cx, cy, commitHandler),
-    buffer(new Texture(cx, cy)),
-    frameBuffer(new Framebuffer()),
-    bg(bg){
-
-    ClearBuffer();
+EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept
+    :DrawingTool(cx, cy, commitHandler, bg){
 
     prog = BuildShaderProgram(
         ResourceProvider::GetProvider().GetErseVertex().c_str(),

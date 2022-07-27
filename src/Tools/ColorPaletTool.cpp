@@ -37,12 +37,6 @@ void ColorPaletTool::OnDraw() const noexcept{
     glUseProgram(0);
 }
 
-void ColorPaletTool::OnDrawCommit() noexcept{
-}
-
-void ColorPaletTool::OnResize(int cx, int cy) noexcept{
-}
-
 bool ColorPaletTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
         float rel_x = (x / (float)GetViewportWidth() - 0.5) * 2.0 * (float)GetViewportWidth() / (float)GetViewportHeight(); 
@@ -86,8 +80,8 @@ bool ColorPaletTool::OnScrollDown() noexcept{
 }
 
 
-ColorPaletTool::ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, GLuint palette) noexcept
-    :DrawingTool(cx, cy, commitHandler),
+ColorPaletTool::ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, GLuint palette) noexcept
+    :DrawingTool(cx, cy, commitHandler, bg),
     palette(palette){
     
     glBindTexture(GL_TEXTURE_2D, palette);

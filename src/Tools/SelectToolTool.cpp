@@ -1,21 +1,13 @@
 #include "SelectToolTool.hpp"
 #include <iostream>
 
-SelectToolTool::SelectToolTool(int cx, int cy, CommitHandler &commitHandler, SelectToolNode &rootToolNode) noexcept
-    :DrawingTool(cx, cy, commitHandler), rootNode(rootToolNode){
+SelectToolTool::SelectToolTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, SelectToolNode &rootToolNode) noexcept
+    :DrawingTool(cx, cy, commitHandler, bg), rootNode(rootToolNode){
     currNode = &rootNode;
 }
 
 void SelectToolTool::OnDraw() const noexcept{
     currNode->DrawSelectToolMenu(GetViewportWidth(), GetViewportHeight(), nodeOver);
-}
-
-void SelectToolTool::OnDrawCommit() noexcept{
-
-}
-
-void SelectToolTool::OnResize(int cx, int cy) noexcept{
-
 }
 
 bool SelectToolTool::OnMouseMove(int x, int y) noexcept{

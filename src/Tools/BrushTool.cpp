@@ -10,14 +10,6 @@ static int distancei(int x1, int y1, int x2, int y2){
     return (int)(sqrt(x*x + y*y) + 0.5);
 }
 
-void BrushTool::ClearBuffer() const noexcept{
-    frameBuffer->Bind();
-    frameBuffer->AttachTexture2D(buffer->GetGLID());
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    frameBuffer->Unbind();
-}
-
 void BrushTool::DrawCircle(int x, int y) const noexcept{
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -39,30 +31,13 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
 
 void BrushTool::OnDraw() const noexcept{
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
+    DrawImage::GetRenderer().Draw(GetCommitBuffer().GetGLID());
     DrawCircle(prevX, prevY);
-}
-
-void BrushTool::OnDrawCommit() noexcept{
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
-}
-
-void BrushTool::BrushTool::OnResize(int cx, int cy) noexcept{
-    Texture *newBuffer = new Texture(cx, cy);
-
-    frameBuffer->AttachTexture2D(newBuffer->GetGLID());
-    frameBuffer->Bind();
-    DrawImage::GetRenderer().Draw(buffer->GetGLID());
-    frameBuffer->Unbind();
-
-    buffer = std::unique_ptr<Texture>(newBuffer);
 }
 
 bool BrushTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
-        frameBuffer->Bind();
-        frameBuffer->AttachTexture2D(buffer->GetGLID());
-
+        BindFramebuffer(GetCommitBuffer().GetGLID());
         int points = distancei(prevX, prevY, x, y);
         int distanceX = x - prevX;
         int distanceY = y - prevY;
@@ -73,7 +48,7 @@ bool BrushTool::OnMouseMove(int x, int y) noexcept{
             );
         }
 
-        frameBuffer->Unbind();
+        UnbindFramebuffer();
         prevX = x;
         prevY = y;
         return true;
@@ -97,7 +72,7 @@ bool BrushTool::OnLMouseUp(int x, int y) noexcept{
         isMouseDown = false;
 
         Commit();
-        ClearBuffer();
+        ClearCommitBuffer();
         prevX = x;
         prevY = y;
         return true;
@@ -151,11 +126,9 @@ bool BrushTool::OnScrollDown() noexcept{
     return true;
 }
 
-BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletTool &colorPalet) noexcept: 
-    DrawingTool(cx, cy, commitHandler),
-    colorPalet(colorPalet),
-    buffer(new Texture(cx, cy)),
-    frameBuffer(new Framebuffer()){
+BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalet) noexcept: 
+    DrawingTool(cx, cy, commitHandler, bg),
+    colorPalet(colorPalet){
 
     prog = BuildShaderProgram(
         ResourceProvider::GetProvider().GetDrawCircleVertex().c_str(),
@@ -178,8 +151,6 @@ BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletToo
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    ClearBuffer();
 }
 
 BrushTool::~BrushTool() noexcept{

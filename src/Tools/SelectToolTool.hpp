@@ -9,8 +9,6 @@ private:
     int nodeOver = -1;
 protected:
     virtual void OnDraw() const noexcept override;
-    virtual void OnDrawCommit() noexcept override;
-    virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
     virtual bool OnLMouseDown(int x, int y) noexcept override;
     virtual bool OnLMouseUp(int x, int y) noexcept override;
@@ -21,5 +19,5 @@ protected:
     virtual bool OnScrollDown() noexcept override;
 public:
     void SetCurrNode(SelectToolNode *node) noexcept;
-    SelectToolTool(int cx, int cy, CommitHandler &commitHandler, SelectToolNode &rootToolNode) noexcept;
+    SelectToolTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, SelectToolNode &rootToolNode) noexcept;
 };

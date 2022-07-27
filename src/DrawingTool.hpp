@@ -2,6 +2,7 @@
 #include <functional>
 #include <string>
 #include "GlWrappers/Framebuffer.hpp"
+#include "GlWrappers/Texture.hpp"
 
 class CommitHandler{
 public:
@@ -11,11 +12,18 @@ public:
 class DrawingTool{
 private:
     CommitHandler &commitHandler;
+    Texture buffer;
+    const Texture &bg;
+    Framebuffer framebuffer;
     int vpCx, vpCy;
 protected://handlers should return true if requires to redraw
+    const Texture &GetCommitBuffer() const noexcept; 
+    const Texture &GetBg() const noexcept; 
+    void BindFramebuffer(GLuint texture) noexcept;
+    void UnbindFramebuffer() noexcept;
+    void ClearCommitBuffer() noexcept;
     virtual void OnDraw() const noexcept = 0;
-    virtual void OnDrawCommit() noexcept = 0;
-    virtual void OnResize(int cx, int cy) noexcept = 0;
+    void OnDrawCommit() noexcept;
     virtual bool OnMouseMove(int x, int y) noexcept = 0; 
     virtual bool OnLMouseDown(int x, int y) noexcept = 0;
     virtual bool OnLMouseUp(int x, int y) noexcept = 0;
@@ -26,7 +34,7 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept = 0;
 public:
     
-    DrawingTool(int cx, int cy, CommitHandler &commitHandler) noexcept;
+    DrawingTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept;
     void SetOnCommitHandler(std::function<void()> handler) noexcept;
     void SetCommitDestinationTexture(GLuint texture) const noexcept;
 

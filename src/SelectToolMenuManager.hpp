@@ -12,7 +12,9 @@ class SelectToolMenuManager{
 private:
     Quitable &quitable;
     CommitHandler &commitHandler;
-    GLuint bg;
+    const Texture &bg;
+
+    int cx, cy;
 
     Texture emptyTexture;
     Texture MouseHighlightTexture;
@@ -35,8 +37,6 @@ private:
             std::unique_ptr<SelectActionToolNode> saveToFileNode; 
             std::unique_ptr<SelectActionToolNode> saveToClipboard; 
             std::unique_ptr<SelectActionToolNode> quitApp; 
-            //save to clipboard
-            //exit application
         //tools menu
             std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
             //shapes tools menu
@@ -66,7 +66,7 @@ private:
 
     void SetCurrTool(DrawingTool *tool) noexcept;
 public:
-    SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg, Quitable &quitable);
+    SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable);
     void OpenToolMenu() noexcept;
     void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;

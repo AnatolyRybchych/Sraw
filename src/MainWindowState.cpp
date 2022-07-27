@@ -46,8 +46,6 @@ LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPar
             cyMonitor, 
             0
         );
-
-        canvas->OnShow(cxMonitor, cyMonitor);
     } return 0;
     case WM_MOUSEMOVE:{
         if(canvas){

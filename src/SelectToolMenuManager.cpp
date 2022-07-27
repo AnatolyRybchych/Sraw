@@ -3,7 +3,7 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg, Quitable &quitable)
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable)
     :emptyTexture((GLuint)0),
     MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
     BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
@@ -15,8 +15,11 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     HideTexture(ResourceProvider::GetProvider().GetHideIcon()),
     SaveToFileTexture(ResourceProvider::GetProvider().GetSaveToFileIcon()),
     commitHandler(commitHandler),
-    bg(bg),
-    quitable(quitable){
+    quitable(quitable),
+    bg(bg){
+
+    this->cx = cx;
+    this->cy = cy;
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
@@ -120,11 +123,11 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         emptyTexture)
     );
 
-    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(100, 100, commitHandler));
-    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(100, 100, commitHandler, PaletteTexture.GetGLID()));
-    brushTool = std::unique_ptr<BrushTool>(new BrushTool(100, 100, commitHandler, *colorPaletTool.get()));
-    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(100, 100, commitHandler, bg));
-    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(100, 100, commitHandler, *(SelectToolNode*)rootMenuNode.get()));
+    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, commitHandler, bg));
+    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, PaletteTexture.GetGLID()));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
+    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
+    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
 }
@@ -137,7 +140,6 @@ void SelectToolMenuManager::SetCurrTool(DrawingTool *tool) noexcept{
     int cx = currTool->GetViewportWidth();
     int cy = currTool->GetViewportHeight();
     currTool = tool;
-    currTool->Resize(cx, cy);
 }
 
 void SelectToolMenuManager::OpenToolMenu() noexcept{

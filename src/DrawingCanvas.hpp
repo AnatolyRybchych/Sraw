@@ -27,7 +27,6 @@ public:
     bool OnLMouseUp(int x, int y);
     bool OnRMouseDown(int x, int y);
     bool OnRMouseUp(int x, int y);
-    void OnShow(int cx, int cy);
     bool OnkeyDown(int vkCode, int repeat);
     bool Onkeyup(int vkCode);
     bool OnScrollUp() noexcept;

@@ -9,10 +9,6 @@ private:
     static constexpr float scaleIncrement = 0.1; 
     static constexpr float scaleMin = 0.004; 
     static constexpr float scaleMax = 1.0; 
-
-    GLuint bg;
-    std::unique_ptr<Texture> buffer;
-    std::unique_ptr<Framebuffer> frameBuffer;
     
     GLuint prog;
     GLuint VBO;
@@ -31,11 +27,8 @@ private:
     int prevY;
 
     void Erse(int x, int y) const noexcept;
-    void ClearBuffer() const noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
-    virtual void OnDrawCommit() noexcept override;
-    virtual void OnResize(int cx, int cy) noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
     virtual bool OnLMouseDown(int x, int y) noexcept override;
     virtual bool OnLMouseUp(int x, int y) noexcept override;
@@ -45,7 +38,7 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    EraserTool(int cx, int cy, CommitHandler &commitHandler, GLuint bg) noexcept;
+    EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept;
 
     ~EraserTool() noexcept;
 };

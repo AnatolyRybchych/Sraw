@@ -11,7 +11,7 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
 
 DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy)
     :bg(bg),
-    toolMenuManager(*this, bg.GetGLID(), quitable),
+    toolMenuManager(*this, cx, cy, bg, quitable),
     currState(cx, cy){
 
     frameBuffer.Bind();
@@ -19,6 +19,8 @@ DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy)
     frameBuffer.AttachTexture2D(currState.GetGLID());
     DrawImage::GetRenderer().Draw(bg.GetGLID());
     frameBuffer.Unbind(); 
+    this->cx = cx;
+    this->cy = cy;
 }
 
 void DrawingCanvas::Draw(){
@@ -54,12 +56,6 @@ bool DrawingCanvas::OnRMouseDown(int x, int y){
 
 bool DrawingCanvas::OnRMouseUp(int x, int y){
     return true;
-}
-
-void DrawingCanvas::OnShow(int cx, int cy){
-    this->cx = cx;
-    this->cy = cy;
-    toolMenuManager.GetCurrTool().Resize(cx, cy);
 }
 
 bool DrawingCanvas::OnkeyDown(int vkCode, int repeat){
