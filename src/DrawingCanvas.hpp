@@ -8,7 +8,7 @@
 #include "DrawingTool.hpp"
 #include "Tools/SelectMenuToolNode.hpp"
 #include "SelectToolMenuManager.hpp"
-#include <glad/glad.h>
+#include <GL/glew.h>
 
 class DrawingCanvas: public CommitHandler
 {

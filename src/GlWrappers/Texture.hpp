@@ -1,6 +1,6 @@
 #pragma once
 #include"..\UnicodeWindows.hpp"
-#include<glad/glad.h>
+#include <GL/glew.h>
 
 
 class Texture{

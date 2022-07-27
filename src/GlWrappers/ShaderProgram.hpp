@@ -1,5 +1,5 @@
 #pragma once
-#include <glad/glad.h>
+#include <GL/glew.h>
 
 
 GLuint BuildShaderProgram(const char *vertexSrc, const char *fragmentSrc);

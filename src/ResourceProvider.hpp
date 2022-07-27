@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
-#include <glad/glad.h>
+#include <GL/glew.h>
 
 class ResourceProvider{
 private:

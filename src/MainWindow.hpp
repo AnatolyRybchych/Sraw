@@ -2,7 +2,7 @@
 #include <vector>
 #include <memory>
 #include <stdexcept>
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include "Window.hpp"
 #include "MainWindowState.hpp"
 

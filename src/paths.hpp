@@ -23,3 +23,6 @@ constexpr const char *FileErseVertex = SHADERS_DIR"ErseVertex.glsl";
 constexpr const char *FileErseFragment = SHADERS_DIR"ErseFragment.glsl";
 constexpr const char *FilePaletteVertex = SHADERS_DIR"PaletteVertex.glsl";
 constexpr const char *FilePaletteFragment = SHADERS_DIR"PaletteFragment.glsl";
+
+#define FONTSS_DIR "fonts/"
+constexpr const char *FileArial = FONTSS_DIR"arial.ttf";

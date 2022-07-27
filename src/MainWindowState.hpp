@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <glad/glad.h>
+#include <GL/glew.h>
 #include "UnicodeWindows.hpp"
 #include "MonitorInfo.hpp"
 #include "MainWindowStateStage.hpp"

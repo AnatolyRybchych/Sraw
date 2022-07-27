@@ -1,6 +1,8 @@
 #pragma once
-#include "render_text.h"
+#define RENDER_WCHAR
 #include "FreeType.hpp"
+#define GL_H <GL/glew.h>
+#include "render_text.h"
 #include <stdexcept>
 
 constexpr const char *RenderTextDefaultVertex = 
@@ -23,7 +25,7 @@ constexpr const char *RenderTextDefaultFragment =
 "\n"
 "void main(){\n"
 "   float text_mask = texture2D(tex, tex_coord).r;\n"
-"   gl_FragColor = vec4(1.0, 1.0, 1.0, text_mask);\n"
+"   gl_FragColor = vec4(0.6666, 0.6666, 1.0, text_mask);\n"
 "}\n"
 ;
 
@@ -35,8 +37,15 @@ private:
 
     GLint vertexPos;
     GLint texPos;
+
+    static RenderText* defaul_instance;
+    static FT_Face *default_face;
+    
 public:
+    static RenderText* GetDefaultRenderer();
+    static void InitDefaultRenderer(const char *font_path);
     RenderText(FT_Face face, const char *attribVertexName = "vertex_p", const char *uniformTextureName = "tex", const char *vertex = RenderTextDefaultVertex, const char *fragment = RenderTextDefaultFragment);
     GLuint GetProgram() const noexcept;
-    void Render(const char *text, int space, int fontSize, point pos, viewport viewport) const noexcept;
+    void Render(const __CH_TYPE_ *text, int space, int fontSize, int x, int y) const noexcept;
+    int GetTextWidth(const __CH_TYPE_ *text, int space, int fontSize) const noexcept;
 };

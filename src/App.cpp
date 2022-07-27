@@ -1,9 +1,10 @@
-#include <stb_image.h>
 #include "App.hpp"
 #include "DrawImage.hpp"
 #include "Tools/MouseHighlight.hpp"
 #include <iostream>
 #include "UnicodeWindows.hpp"
+#include "paths.hpp"
+#include "GlWrappers/RenderText.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -17,10 +18,12 @@ int App::Run(){
     GlobalWindowInput::Init(*this);
 
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);   
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     DrawImage::Init();
     MouseHighlight::Init();
+    RenderText::InitDefaultRenderer(FileArial);
 
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0)){

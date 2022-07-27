@@ -46,7 +46,7 @@ MainWindow::MainWindow(HINSTANCE hInstance)
     glRc = wglCreateContext(dc);
 	wglMakeCurrent(dc, glRc);
 
-    if(!gladLoadGL()) throw std::runtime_error("cannot load glad");
+    if(glewInit()) throw std::runtime_error("cannot load glew");
 }
 
 MainWindow::~MainWindow(){

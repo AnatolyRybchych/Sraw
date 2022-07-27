@@ -7,9 +7,8 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Wed Jul 13 11:10:25 2022
+# Make data base, printed on Wed Jul 27 14:46:11 2022
 
 # Variables
 
@@ -34,8 +33,7 @@ HOMEDRIVE = C:
 # automatic
 ^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # makefile
-CUR 
-DIR := c:/Users/Velichaisyi/Desktop/Sraw
+CURDIR := c:/Users/Velichaisyi/Desktop/Sraw
 # default
 SHELL := C:/Program Files/Git/usr/bin/sh.exe
 # environment
@@ -44,8 +42,8 @@ WINDIR = C:\Windows
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
-# makefile (from 'makefile', line 30)
-objects := obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
+# makefile (from 'makefile', line 36)
+objects = obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -59,7 +57,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -83,8 +81,8 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_5452_MORCRIYBRTAXATTY
-# makefile (from 'makefile', line 2)
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_3048_GIGQDOYGBDRLOAFR
+# makefile (from 'makefile', line 7)
 out := Sraw.exe
 # environment
 COMPUTERNAME = HOME-PC
@@ -103,7 +101,7 @@ PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CODE_CACHE_PATH = C:\Users\Velichaisyi\AppData\Roaming\Code\CachedData\3b889b090b5ad5793f524b5d1d39fda662b96a2a
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -120,6 +118,8 @@ MSMPI_BENCHMARKS = C:\Program Files\Microsoft MPI\Benchmarks\
 MIC_LD_LIBRARY_PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\compiler\lib\mic
 # environment
 MAKELEVEL := 0
+# makefile (from 'makefile', line 3)
+LIB_INCLUDE_PATH := -IC:\include -IC:\include\freetype2
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -149,7 +149,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.69.0-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\178f7c6bd2a928e0d349079b060a6a48-1.69.2-main-sock
 # environment
 HOMEPATH = \Users\Velichaisyi
 # environment
@@ -182,6 +182,8 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
+# makefile (from 'makefile', line 5)
+LIBS := -lgdi32 -lopengl32 -lglew32 -lfreetype
 # automatic
 ^F = $(notdir $^)
 # default
@@ -199,11 +201,13 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 5452
+VSCODE_PID = 3048
+# makefile (from 'makefile', line 4)
+LIB_BIN_PATH := -LC:\bin
 # environment
 USERDOMAIN_ROAMINGPROFILE = HOME-PC
 # variable set hash-table stats:
-# Load=94/1024=9%, Rehash=0, Collisions=15/163=9%
+# Load=97/1024=9%, Rehash=0, Collisions=15/169=9%
 
 # Pattern-specific Variable Values
 
@@ -213,24 +217,24 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656724082ll): No files, no impossibilities so far.
 # src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1657244439ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1657699756ll): 23 files, no impossibilities.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1658921965ll): 22 files, no impossibilities.
 # src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1657244439ll): No files, no impossibilities so far.
 
-# 23 files, no impossibilities in 4 directories.
+# 22 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 36):
-	g++ -g -ggdb -Istbimage -Iglad/ -c -o $@ $<
+#  recipe to execute (from 'makefile', line 42):
+	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 obj/%.o: src/GlWrappers/%.cpp
-#  recipe to execute (from 'makefile', line 39):
-	g++ -g -ggdb -Istbimage -Iglad/ -c -o $@ $<
+#  recipe to execute (from 'makefile', line 45):
+	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 obj/%.o: src/Tools/%.cpp
-#  recipe to execute (from 'makefile', line 42):
-	g++ -g -ggdb -Istbimage -Iglad/ -c -o $@ $<
+#  recipe to execute (from 'makefile', line 48):
+	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 # 3 implicit rules, 0 (0.0%) terminal.
 
@@ -238,6 +242,12 @@ obj/%.o: src/Tools/%.cpp
 
 # Not a target:
 obj/SelectToolMenuManager.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/RenderText.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -252,7 +262,7 @@ gdb: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 51):
+#  recipe to execute (from 'makefile', line 57):
 	gdb ./$(out)
 
 # Not a target:
@@ -274,12 +284,11 @@ obj/DrawingCanvas.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/glad.o: glad/glad.c
+# Not a target:
+obj/MouseHighlight.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 45):
-	gcc -Istbimage -Iglad/ -c -o $@ $<
 
 # Not a target:
 obj/EraserTool.o:
@@ -307,7 +316,8 @@ obj/Framebuffer.o:
 
 # Not a target:
 obj/main.o:
-#  Implicit rule search has not been done.
+#  Implici 
+t rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -320,16 +330,16 @@ obj/SelectActionToolNode.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-07 06:45:53
+#  Last modified 2022-07-27 14:10:50
 #  File has been updated.
 #  Successfully updated.
 
-build: obj/glad.o obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
+build: obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 33):
-	g++ -g -ggdb -Istbimage -Iglad/ -o $(out) $^ -lgdi32 -lopengl32
+#  recipe to execute (from 'makefile', line 39):
+	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o $(out) $^ $(LIB_BIN_PATH) $(LIBS)
 
 # Not a target:
 obj/ColorPaletTool.o:
@@ -349,14 +359,15 @@ obj/Window.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/GlobalWindowInput.o:
+obj/glad.o: glad/glad.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'makefile', line 51):
+	gcc $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 # Not a target:
-obj/MouseHighlight.o:
+obj/GlobalWindowInput.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -371,7 +382,7 @@ run: build
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 48):
+#  recipe to execute (from 'makefile', line 54):
 	./$(out)
 
 # Not a target:
@@ -394,6 +405,12 @@ obj/SelectMenuToolNode.o:
 
 # Not a target:
 glad/glad.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/FreeType.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -435,19 +452,19 @@ obj/BrushTool.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=33/1024=3%, Rehash=0, Collisions=2/72=3%
+# Load=35/1024=3%, Rehash=0, Collisions=1/74=1%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 61 / storage = 835 B / avg = 13 B
-# current buf: size = 8162 B / used = 835 B / count = 61 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 62 / storage = 873 B / avg = 14 B
+# current buf: size = 8162 B / used = 873 B / count = 62 / avg = 14 B
 
-# strcache performance: lookups = 74 / hit rate = 17%
+# strcache performance: lookups = 74 / hit rate = 16%
 # hash-table stats:
-# Load=61/8192=1%, Rehash=0, Collisions=1/74=1%
-# Finished Make data base on Wed Jul 13 11:10:25 2022
+# Load=62/8192=1%, Rehash=0, Collisions=1/74=1%
+# Finished Make data base on Wed Jul 27 14:46:11 2022
 
  

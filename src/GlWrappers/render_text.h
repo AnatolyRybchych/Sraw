@@ -1,28 +1,36 @@
-#ifndef __REDNER_TEXT_H_
-#define __REDNER_TEXT_H_
+#ifndef __RENDER_TEXT_H_
+#define __RENDER_TEXT_H_
 /*
 write
 #define RENDER_TEXT_IMPLEMENTATION
 before including header file
 */
 
-#include <glad/glad.h>
-#include <ft2build.h>
+/*
+write 
+#define RENDER_WCHAR
+to use wchar_t instead of char
+*/
+
+#ifdef RENDER_WCHAR
+    #define __CH_TYPE_ wchar_t
+#else
+    #define __CH_TYPE_ char
+#endif
+
+#include <string.h>
+#include GL_H
 #include FT_FREETYPE_H
 
 typedef struct point{
     int x, y;
 } point;
 
-typedef struct viewport{
-    int x, y, width, heigth;
-} viewport;
-
-
 //renders text using current shader program
 //without buffering previous characters
-void render_text(FT_Face face, const char *text, int space, point pos, const viewport *viewport, GLint attrib_vertex_pos, GLint uniform_texture);
+void render_text(FT_Face face, const __CH_TYPE_ *text, int space, point pos, GLint attrib_vertex_pos, GLint uniform_texture);
 
+int get_text_width(FT_Face face, const __CH_TYPE_ *text, int space);
 
 #ifdef RENDER_TEXT_IMPLEMENTATION
 
@@ -44,13 +52,16 @@ static GLuint (*get_char_texture)() = _init_char_texture;
 
 
 
-void render_text(FT_Face face, const char *text, int space, point pos, const viewport *viewport, GLint attrib_vertex_pos, GLint uniform_texture){
+void render_text(FT_Face face, const __CH_TYPE_ *text, int space, point pos, GLint attrib_vertex_pos, GLint uniform_texture){
+
+    GLint vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
 
     int cur_x = pos.x;
 
-    const char *text_ptr = text;
-    char curr;
-    char prev = 0;
+    const __CH_TYPE_ *text_ptr = text;
+    __CH_TYPE_ curr;
+    __CH_TYPE_ prev = 0;
     while(curr = *(text_ptr++)){
         
         FT_Load_Char(face, curr, FT_LOAD_RENDER);
@@ -66,9 +77,9 @@ void render_text(FT_Face face, const char *text, int space, point pos, const vie
         }
 
         glViewport(
-            viewport->x + cur_x + glyph->metrics.horiBearingX / 64, 
-            viewport->heigth - viewport->y - pos.y - glyph->metrics.vertAdvance / 64, 
-            glyph->metrics.horiAdvance / 64,
+            vp[0] + cur_x + glyph->metrics.horiBearingX / 64, 
+            vp[3] - vp[1] - pos.y - glyph->metrics.vertAdvance / 64 - (glyph->metrics.height / 64 - glyph->metrics.horiBearingY / 64), 
+            glyph->metrics.width / 64,
             glyph->metrics.height / 64
         );
 
@@ -76,17 +87,37 @@ void render_text(FT_Face face, const char *text, int space, point pos, const vie
 
         cur_x += glyph->metrics.horiAdvance / 64 + space;
 
-        if(cur_x > viewport->width + viewport->x) break;
+        if(cur_x > vp[2] + vp[0]) break;
 
         prev = curr;
     }
 
     glViewport(
-        viewport->x,
-        viewport->y,
-        viewport->width,
-        viewport->heigth
+        vp[0],
+        vp[1],
+        vp[2],
+        vp[3]
     );
+}
+
+int get_text_width(FT_Face face, const __CH_TYPE_ *text, int space){
+    GLint vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
+
+    int cur_x = 0;
+
+    const __CH_TYPE_ *text_ptr = text;
+    __CH_TYPE_ curr;
+    while(curr = *(text_ptr++)){
+        
+        FT_Load_Char(face, curr, FT_LOAD_RENDER);
+        FT_GlyphSlot glyph = face->glyph;
+
+
+        cur_x += glyph->metrics.horiAdvance / 64 + space;
+    }
+
+    return cur_x;
 }
 
 void draw_quad_VBO(GLint attrib_VBO){
@@ -140,4 +171,6 @@ static GLuint _get_char_texture(){
 }
 //Texture
 #endif
+
+//__RENDER_TEXT_H_
 #endif

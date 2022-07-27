@@ -3,7 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\include",
+                "C:\\include\\freetype2"
             ],
             "defines": [
                 "_DEBUG",

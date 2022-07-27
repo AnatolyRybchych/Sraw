@@ -1,5 +1,6 @@
 #include "SelectToolNode.hpp"
 #include "../ResourceProvider.hpp"
+#include "../GlWrappers/RenderText.hpp"
 #define PI 3.14159
 
 const int SelectToolNode::MaxToolNodes = 5;
@@ -44,6 +45,11 @@ void SelectToolNode::Draw(int cx, int cy, int pos, bool mouseOver) noexcept{
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(vertex_pPosMenuItem);
     glUseProgram(0);
+
+    if(mouseOver){
+        int text_width = RenderText::GetDefaultRenderer()->GetTextWidth(GetText().c_str(), 0, 48);
+        RenderText::GetDefaultRenderer()->Render(GetText().c_str(), 0, 48, (cx - text_width) / 2, (cy - cy * CircleScale) * 0.5 - 48);
+    }
 }
 
 bool SelectToolNode::SelectNode(int id) const noexcept{
@@ -76,6 +82,8 @@ int SelectToolNode::GetNodeIdByPoint(int cx, int cy, int x, int y) const noexcep
 
 void SelectToolNode::DrawSelectToolMenu(int cx, int cy, int mouseOverTool) noexcept{
     DrawSelectToolMenuBG(cx, cy);
+    int text_width = RenderText::GetDefaultRenderer()->GetTextWidth(GetText().c_str(), 0, 48);
+    RenderText::GetDefaultRenderer()->Render(GetText().c_str(), 0, 48, (cx - text_width) / 2, 0);
     for(int i = 0 ; i < GetToolNodes().size(); i++)
         GetToolNodes()[i]->Draw(cx, cy, i, i == mouseOverTool);
 }
