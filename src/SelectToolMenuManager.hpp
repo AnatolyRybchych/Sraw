@@ -6,9 +6,11 @@
 #include "Tools/BrushTool.hpp"
 #include "Tools/EraserTool.hpp"
 #include "Tools/ColorPaletTool.hpp"
+#include "Quitable.hpp"
 
 class SelectToolMenuManager{
 private:
+    Quitable &quitable;
     CommitHandler &commitHandler;
     GLuint bg;
 
@@ -31,6 +33,8 @@ private:
             std::unique_ptr<SelectActionToolNode> clearNode; 
             std::unique_ptr<SelectActionToolNode> hideNode; 
             std::unique_ptr<SelectActionToolNode> saveToFileNode; 
+            std::unique_ptr<SelectActionToolNode> saveToClipboard; 
+            std::unique_ptr<SelectActionToolNode> quitApp; 
             //save to clipboard
             //exit application
         //tools menu
@@ -62,7 +66,7 @@ private:
 
     void SetCurrTool(DrawingTool *tool) noexcept;
 public:
-    SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg);
+    SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg, Quitable &quitable);
     void OpenToolMenu() noexcept;
     void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;

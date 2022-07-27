@@ -14,7 +14,7 @@ App::App(HINSTANCE hInstance){
 }
 
 int App::Run(){
-    window = new MainWindow(hInstance);
+    window = new MainWindow(hInstance, *this);
     GlobalWindowInput::Init(*this);
 
     glEnable(GL_BLEND);
@@ -31,6 +31,29 @@ int App::Run(){
         DispatchMessageW(&msg);
     }
     return msg.wParam;
+}
+
+void App::QuitApp() noexcept{
+    if(MessageBoxW(window->GetHWnd(), L"Exit?", L"", MB_OKCANCEL) == IDOK)
+        PostQuitMessage(0);
+    else HideWindow();
+}
+
+void App::HideWindow() noexcept{
+    window->Hide();
+}
+
+void App::HideWindowAndResoreState() noexcept{
+    HideWindow();
+    window->ClearCurrentState();
+}
+
+void App::HideWindowSaveStateToFile() noexcept{
+    HideWindow();
+}
+
+void App::HideWindowCopyStateToClipboard() noexcept{
+    HideWindow();
 }
 
 bool App::OnKeyboardHookLL(KeyboardMessages message, KBDLLHOOKSTRUCT *args) noexcept{

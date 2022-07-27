@@ -3,9 +3,8 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg)
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuint bg, Quitable &quitable)
     :emptyTexture((GLuint)0),
-    commitHandler(commitHandler),
     MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
     BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
     EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
@@ -15,7 +14,9 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
     ClearTexture(ResourceProvider::GetProvider().GetClearIcon()),
     HideTexture(ResourceProvider::GetProvider().GetHideIcon()),
     SaveToFileTexture(ResourceProvider::GetProvider().GetSaveToFileIcon()),
-    bg(bg){
+    commitHandler(commitHandler),
+    bg(bg),
+    quitable(quitable){
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
@@ -53,7 +54,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         new SelectActionToolNode(
             ClearTexture, 
             L"Clear canvas", 
-            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+            std::bind(Quitable::HideWindowAndResoreState, &quitable)
         )
     );
 
@@ -61,7 +62,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         new SelectActionToolNode(
             HideTexture, 
             L"Hide canvas", 
-            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+            std::bind(Quitable::HideWindow, &quitable)
         )
     );
 
@@ -69,9 +70,27 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
         new SelectActionToolNode(
             SaveToFileTexture, 
             L"Save to file", 
-            std::bind(SelectToolMenuManager::OpenColorPalette, this)
+            std::bind(Quitable::HideWindowSaveStateToFile, &quitable)
         )
     );
+
+    saveToClipboard = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            SaveToFileTexture, 
+            L"Copy to clipboard", 
+            std::bind(Quitable::HideWindowCopyStateToClipboard, &quitable)
+        )
+    );
+
+    quitApp = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            QuitTexture, 
+            L"Quit application", 
+            std::bind(Quitable::QuitApp, &quitable)
+        )
+    );
+
+    
 
     quitMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
@@ -79,6 +98,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, GLuin
             clearNode.get(),
             hideNode.get(),
             saveToFileNode.get(),
+            saveToClipboard.get(),
+            quitApp.get(),
         }, 
         L"Quit", 
         QuitTexture,

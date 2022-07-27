@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 27 14:46:11 2022
+# Make data base, printed on Wed Jul 27 16:34:29 2022
 
 # Variables
 
@@ -217,8 +217,8 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656724082ll): No files, no impossibilities so far.
 # src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1657244439ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1658921965ll): 22 files, no impossibilities.
-# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1657244439ll): No files, no impossibilities so far.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1658928845ll): 22 files, no impossibilities.
+# src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1658927238ll): No files, no impossibilities so far.
 
 # 22 files, no impossibilities in 4 directories.
 
@@ -316,8 +316,7 @@ obj/Framebuffer.o:
 
 # Not a target:
 obj/main.o:
-#  Implici 
-t rule search has not been done.
+#  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -330,7 +329,7 @@ obj/SelectActionToolNode.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-27 14:10:50
+#  Last modified 2022-07-27 16:33:12
 #  File has been updated.
 #  Successfully updated.
 
@@ -465,6 +464,6 @@ obj/BrushTool.o:
 # strcache performance: lookups = 74 / hit rate = 16%
 # hash-table stats:
 # Load=62/8192=1%, Rehash=0, Collisions=1/74=1%
-# Finished Make data base on Wed Jul 27 14:46:11 2022
+# Finished Make data base on Wed Jul 27 16:34:29 2022
 
  

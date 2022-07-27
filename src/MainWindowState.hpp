@@ -16,10 +16,11 @@ private:
     MainWindowStateStage stage;
     std::unique_ptr<Texture> screenshot;
     std::unique_ptr<DrawingCanvas> canvas = nullptr;
+    Quitable &quitable;
 
     void GetScreenshot() noexcept;
 public:
-    MainWindowState(MainWindow &window, HMONITOR monitor);
+    MainWindowState(MainWindow &window, HMONITOR monitor, Quitable &quitable);
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
     HMONITOR GetMonitor() const noexcept;
     ~MainWindowState() noexcept;

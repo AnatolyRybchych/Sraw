@@ -49,6 +49,7 @@ void BrushTool::OnDrawCommit() noexcept{
 
 void BrushTool::BrushTool::OnResize(int cx, int cy) noexcept{
     Texture *newBuffer = new Texture(cx, cy);
+
     frameBuffer->AttachTexture2D(newBuffer->GetGLID());
     frameBuffer->Bind();
     DrawImage::GetRenderer().Draw(buffer->GetGLID());
@@ -156,8 +157,6 @@ BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletToo
     buffer(new Texture(cx, cy)),
     frameBuffer(new Framebuffer()){
 
-    ClearBuffer();
-
     prog = BuildShaderProgram(
         ResourceProvider::GetProvider().GetDrawCircleVertex().c_str(),
         ResourceProvider::GetProvider().GetDrawCircleFragment().c_str()
@@ -179,6 +178,8 @@ BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, ColorPaletToo
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    ClearBuffer();
 }
 
 BrushTool::~BrushTool() noexcept{

@@ -1,8 +1,8 @@
 #include "MainWindowState.hpp"
 #include "MainWindow.hpp"
 
-MainWindowState::MainWindowState(MainWindow &window, HMONITOR monitor)
-    :monitorInfo(monitor), window(window){
+MainWindowState::MainWindowState(MainWindow &window, HMONITOR monitor, Quitable &quitable)
+    :monitorInfo(monitor), window(window), quitable(quitable){
     stage = MainWindowStateStage::CopyScreenImage;
 }
 
@@ -23,10 +23,11 @@ void MainWindowState::GetScreenshot() noexcept{
     DeleteDC(screenDc);
 
     stage = MainWindowStateStage::KeepScreenSate;
-    canvas = std::unique_ptr<DrawingCanvas>(new DrawingCanvas(*screenshot.get()));
+    canvas = std::unique_ptr<DrawingCanvas>(new DrawingCanvas(*screenshot.get(), quitable, cxMonitor, cyMonitor));
 }
 
 LRESULT MainWindowState::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept{
+
     switch (msg)
     {
     case WM_SHOWWINDOW:{

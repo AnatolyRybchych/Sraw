@@ -9,23 +9,28 @@ const Texture &DrawingCanvas::GetBackground() const noexcept{
     return bg;
 }
 
-DrawingCanvas::DrawingCanvas(Texture &bg)
+DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy)
     :bg(bg),
-    toolMenuManager(*this, bg.GetGLID()){
+    toolMenuManager(*this, bg.GetGLID(), quitable),
+    currState(cx, cy){
+
     frameBuffer.Bind();
-    frameBuffer.Unbind();
+    glViewport(0, 0, cx, cy);
+    frameBuffer.AttachTexture2D(currState.GetGLID());
+    DrawImage::GetRenderer().Draw(bg.GetGLID());
+    frameBuffer.Unbind(); 
 }
 
 void DrawingCanvas::Draw(){
     glViewport(0, 0, cx, cy);
-    DrawImage::GetRenderer().Draw(currState->GetGLID());
+    DrawImage::GetRenderer().Draw(currState.GetGLID());
     
     toolMenuManager.GetCurrTool().Draw();
 }
 
 void DrawingCanvas::HandleCommit(std::function<void()> drawCommit) noexcept{
     frameBuffer.Bind();  
-    frameBuffer.AttachTexture2D(currState->GetGLID());
+    frameBuffer.AttachTexture2D(currState.GetGLID());
     drawCommit();
     frameBuffer.Unbind();
 }
@@ -54,16 +59,6 @@ bool DrawingCanvas::OnRMouseUp(int x, int y){
 void DrawingCanvas::OnShow(int cx, int cy){
     this->cx = cx;
     this->cy = cy;
-
-    if(currState == nullptr){
-        currState = std::unique_ptr<Texture>(new Texture(cx, cy));
-
-        frameBuffer.Bind();
-        glViewport(0, 0, cx, cy);
-        frameBuffer.AttachTexture2D(currState->GetGLID());
-        DrawImage::GetRenderer().Draw(bg.GetGLID());
-        frameBuffer.Unbind();  
-    }
     toolMenuManager.GetCurrTool().Resize(cx, cy);
 }
 

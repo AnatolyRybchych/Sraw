@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "App.hpp"
 
 LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept{
     switch (msg)
@@ -9,7 +10,7 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
     }
     case WM_ERASEBKGND:{
 
-    } return 0;
+    } return 1;
     case WM_KILLFOCUS:{
         Hide();
     }return 0;
@@ -23,8 +24,8 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
 }
 
 
-MainWindow::MainWindow(HINSTANCE hInstance)
-    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU, nullptr, WS_EX_TOOLWINDOW | WS_EX_TOPMOST){
+MainWindow::MainWindow(HINSTANCE hInstance, App &app)
+    :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU, nullptr, WS_EX_TOOLWINDOW | WS_EX_TOPMOST), app(app){
     dc = GetDC(GetHWnd());
 
     PIXELFORMATDESCRIPTOR pfd =
@@ -47,6 +48,11 @@ MainWindow::MainWindow(HINSTANCE hInstance)
 	wglMakeCurrent(dc, glRc);
 
     if(glewInit()) throw std::runtime_error("cannot load glew");
+}
+
+void MainWindow::ClearCurrentState() noexcept{
+    windowStates.erase(std::find(windowStates.begin(), windowStates.end(), currState));
+    currState = nullptr;
 }
 
 MainWindow::~MainWindow(){
@@ -72,7 +78,8 @@ void MainWindow::SetCurrState(HMONITOR monitor){
             return;
         }
     }
-    currState = std::shared_ptr<MainWindowState>(new MainWindowState(*this, monitor));
+
+    currState = std::shared_ptr<MainWindowState>(new MainWindowState(*this, monitor, app));
     windowStates.push_back(currState);
 }
 

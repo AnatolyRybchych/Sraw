@@ -9,18 +9,19 @@
 #include "Tools/SelectMenuToolNode.hpp"
 #include "SelectToolMenuManager.hpp"
 #include <GL/glew.h>
+#include "Quitable.hpp"
 
 class DrawingCanvas: public CommitHandler
 {
 private:
     Texture &bg;
-    std::unique_ptr<Texture> currState = nullptr;
+    Texture currState;
     SelectToolMenuManager toolMenuManager;
     Framebuffer frameBuffer;
     int cx, cy;
 public:
     const Texture &GetBackground() const noexcept;
-    DrawingCanvas(Texture &bg);
+    DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy);
     bool OnMouseMove(int x, int y);
     bool OnLMouseDown(int x, int y);
     bool OnLMouseUp(int x, int y);

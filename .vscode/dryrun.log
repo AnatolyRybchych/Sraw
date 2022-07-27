@@ -1,31 +1,6 @@
-make.exe --dry-run --always-make --keep-going --print-directory
+make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/main.o src/main.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/Window.o src/Window.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/MainWindow.o src/MainWindow.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/MainWindowState.o src/MainWindowState.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/MonitorInfo.o src/MonitorInfo.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/GlobalWindowInput.o src/GlobalWindowInput.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/App.o src/App.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/DrawingCanvas.o src/DrawingCanvas.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/ShaderProgram.o src/GlWrappers/ShaderProgram.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/DrawImage.o src/DrawImage.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/MouseHighlight.o src/Tools/MouseHighlight.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/DrawingTool.o src/DrawingTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/SelectToolMenuManager.o src/SelectToolMenuManager.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/ResourceProvider.o src/ResourceProvider.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/RenderText.o src/GlWrappers/RenderText.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/FreeType.o src/GlWrappers/FreeType.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/Texture.o src/GlWrappers/Texture.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/Framebuffer.o src/GlWrappers/Framebuffer.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/SelectToolTool.o src/Tools/SelectToolTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/SelectToolNode.o src/Tools/SelectToolNode.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/BrushTool.o src/Tools/BrushTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/EraserTool.o src/Tools/EraserTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/ColorPaletTool.o src/Tools/ColorPaletTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/MouseHighlightTool.o src/Tools/MouseHighlightTool.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/SelectMenuToolNode.o src/Tools/SelectMenuToolNode.cpp
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -c -o obj/SelectActionToolNode.o src/Tools/SelectActionToolNode.cpp
 g++ -g -ggdb -IC:\include -IC:\include\freetype2 -o Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o -LC:\bin -lgdi32 -lopengl32 -lglew32 -lfreetype
+ 
 make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
  
