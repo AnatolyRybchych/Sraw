@@ -1,2 +1,4 @@
 #vscode files
 .vscode/*
+#object files
+obj/*

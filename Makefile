@@ -1,7 +1,7 @@
 
 
-LIB_INCLUDE_PATH	:= -IC:\include -IC:\include\freetype2
-LIB_BIN_PATH		:= -LC:\bin
+LIB_INCLUDE_PATH	:= -I.\include -I.\include\freetype2
+LIB_BIN_PATH		:= -L.\dlls
 LIBS				:= -lgdi32 -lopengl32 -lglew32 -lfreetype
 
 
