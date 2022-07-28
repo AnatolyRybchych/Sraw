@@ -100,7 +100,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         std::vector<SelectToolNode*>{
             mouseHighlightToolNode.get(),
         }, 
-        L"Tools", 
+        L"Menu/Tools", 
         ToolsTexture,
         std::bind(SelectToolMenuManager::OpenTool_ToolsMenu, this)
         )
@@ -115,7 +115,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             saveToClipboardNode.get(),
             quitAppNode.get(),
         }, 
-        L"Quit", 
+        L"Menu/Quit", 
         QuitTexture,
         std::bind(SelectToolMenuManager::OpenQuitMenu, this)
         )

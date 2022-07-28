@@ -8,7 +8,7 @@ This program is built by Equation Solution <http://www.Equation.com>.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 28 01:24:12 2022
+# Make data base, printed on Thu Jul 28 15:05:37 2022
 
 # Variables
 
@@ -43,8 +43,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 ONEDRIVE = C:\Users\Velichaisyi\OneDrive
 # makefile (from 'makefile', line 36)
-objects = obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj 
-/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
+objects = obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o
 # environment
 MSMPI_BIN = C:\Program Files\Microsoft MPI\Bin\
 # environment
@@ -58,7 +57,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\Velichaisyi\Desktop
+VSCODE_CWD = C:\Users\Velichaisyi\Desktop\Sraw
 # environment
 OPENCV_DIR = C:\opencv\build\
 # default
@@ -82,7 +81,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6204_SETOKKOCAYZLKLIB
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_5284_OZFWHOPVWGIGSFMW
 # makefile (from 'makefile', line 7)
 out := Sraw.exe
 # environment
@@ -202,7 +201,7 @@ LANG = C
 # environment
 PROCESSOR_LEVEL = 6
 # environment
-VSCODE_PID = 6204
+VSCODE_PID = 5284
 # makefile (from 'makefile', line 4)
 LIB_BIN_PATH := -LC:\bin
 # environment
@@ -218,10 +217,10 @@ USERDOMAIN_ROAMINGPROFILE = HOME-PC
 
 # src/GlWrappers (key c:/Users/Velichaisyi/Desktop/Sraw/src/GlWrappers, mtime 1656724082ll): No files, no impossibilities so far.
 # src/Tools (key c:/Users/Velichaisyi/Desktop/Sraw/src/Tools, mtime 1658945542ll): No files, no impossibilities so far.
-# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1658960627ll): 24 files, no impossibilities.
+# . (key c:/Users/Velichaisyi/Desktop/Sraw, mtime 1659009839ll): 25 files, no impossibilities.
 # src (key c:/Users/Velichaisyi/Desktop/Sraw/src, mtime 1658945542ll): No files, no impossibilities so far.
 
-# 24 files, no impossibilities in 4 directories.
+# 25 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -459,12 +458,12 @@ obj/BrushTool.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 64 / storage = 911 B / avg = 14 B
-# current buf: size = 8162 B / used = 911 B / count = 64 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 65 / storage = 920 B / avg = 14 B
+# current buf: size = 8162 B / used = 920 B / count = 65 / avg = 14 B
 
-# strcache performance: lookups = 76 / hit rate = 15%
+# strcache performance: lookups = 77 / hit rate = 15%
 # hash-table stats:
-# Load=64/8192=1%, Rehash=0, Collisions=1/76=1%
-# Finished Make data base on Thu Jul 28 01:24:12 2022
+# Load=65/8192=1%, Rehash=0, Collisions=1/77=1%
+# Finished Make data base on Thu Jul 28 15:05:37 2022
 
  
