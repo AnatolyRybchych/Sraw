@@ -7,7 +7,7 @@
 class EraserTool: public DrawingTool{
 private:
     static constexpr float scaleIncrement = 0.1; 
-    static constexpr float scaleMin = 0.004; 
+    static constexpr float scaleMin = 0.02; 
     static constexpr float scaleMax = 1.0; 
     
     GLuint prog;
@@ -21,7 +21,7 @@ private:
 
     bool isMouseDown = false;
 
-    float scale = 0.02;
+    float scale = 0.1;
 
     int prevX;
     int prevY;

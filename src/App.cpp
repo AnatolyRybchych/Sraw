@@ -5,9 +5,74 @@
 #include "UnicodeWindows.hpp"
 #include "paths.hpp"
 #include "GlWrappers/RenderText.hpp"
+#include <shlobj.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image_write.h>
+
+static BOOL SaveFileName(wchar_t *fileName, int filenameSize, const wchar_t *initialDir, const wchar_t *title, const wchar_t *filter, DWORD dwFlags){
+    OPENFILENAMEW ofn;
+    ZeroMemory( &ofn , sizeof( ofn));
+	ofn.lStructSize = sizeof ( ofn );
+	ofn.hwndOwner = NULL  ;
+	ofn.lpstrFile = fileName ;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = filenameSize;
+	ofn.lpstrFilter = filter;
+	ofn.nFilterIndex =1;
+	ofn.lpstrFileTitle = NULL ;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = initialDir;
+    ofn.lpstrTitle = title;
+	ofn.Flags = dwFlags;
+
+	return GetSaveFileNameW( &ofn );
+}
+
+static const wchar_t *DesctopDirUnicode(){
+    static wchar_t path[MAX_PATH+1];
+    if (SHGetSpecialFolderPathW(HWND_DESKTOP, path, CSIDL_DESKTOP, FALSE))
+        return path;
+    else
+        return L"ERROR";
+}
+
+static void SaveHbitmapToFile(HBITMAP bmp, const wchar_t *file){
+    std::string tmpDir(1000, 0);
+    GetTempPathA(tmpDir.size(), tmpDir.data());
+    sprintf(tmpDir.data(), "%s%s", tmpDir.c_str(), "__img__.png");
+
+    BITMAP bmpHdr;
+    GetObjectW(bmp, sizeof(bmpHdr), &bmpHdr);
+    int bmpDataSize = bmpHdr.bmWidthBytes * bmpHdr.bmHeight;
+    char *bmpData = new char[bmpDataSize];
+    GetBitmapBits(bmp, bmpDataSize, bmpData);
+    for(int i = 0; i < bmpDataSize / 4; i++){
+        int pixel = i * 4;
+        char tmp = bmpData[pixel];
+        bmpData[pixel] = bmpData[pixel+2];
+        bmpData[pixel+2] = tmp;
+    }
+    stbi_write_png(tmpDir.c_str(), bmpHdr.bmWidth, bmpHdr.bmHeight, 4, bmpData, bmpHdr.bmWidth * 4);
+    delete[] bmpData;
+
+    FILE *tmpFile = fopen(tmpDir.c_str(), "rb");
+    FILE *newFile = _wfopen((std::wstring(file) + L".png").c_str(), L"wb");
+
+    char *buffer = new char[1024];
+    int readn = 0;
+    while ((readn = fread(buffer, 1, 1024, tmpFile)) == 1024){
+        fwrite(buffer, 1, readn, newFile);
+    }
+    fwrite(buffer, 1, readn, newFile);
+
+    fclose(tmpFile);
+    fclose(newFile);
+
+    delete[] buffer;
+}
 
 App::App(HINSTANCE hInstance){
     this->hInstance = hInstance;
@@ -50,6 +115,14 @@ void App::HideWindowAndResoreState() noexcept{
 
 void App::HideWindowSaveStateToFile() noexcept{
     HideWindow();
+
+    std::wstring fileName(1000, 0);
+
+    if(SaveFileName(fileName.data(), fileName.size(), DesctopDirUnicode(), L"save image", L"png file (*.png), *.png", OFN_PATHMUSTEXIST)){
+        HBITMAP state = window->CreateCurrentStateBitmap();
+        SaveHbitmapToFile(state, fileName.c_str());
+        DeleteObject(state);
+    }
 }
 
 void App::HideWindowCopyStateToClipboard() noexcept{

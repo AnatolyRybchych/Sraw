@@ -8,7 +8,7 @@ void EraserTool::Erse(int x, int y) const noexcept{
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
-    glBindTexture(GL_TEXTURE_2D, GetBg().GetGLID());
+    glBindTexture(GL_TEXTURE_2D, GetBg().GetGLID()); 
     glActiveTexture(GL_TEXTURE0);
     
     glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
