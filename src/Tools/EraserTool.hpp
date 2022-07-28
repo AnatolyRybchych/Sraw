@@ -27,6 +27,7 @@ private:
     int prevY;
 
     void Erse(int x, int y) const noexcept;
+    void ErseLine(int x1, int y1, int x2, int y2) const noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 

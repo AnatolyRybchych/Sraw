@@ -19,8 +19,8 @@ private:
 protected://handlers should return true if requires to redraw
     const Texture &GetCommitBuffer() const noexcept; 
     const Texture &GetBg() const noexcept; 
-    void BindFramebuffer(GLuint texture) noexcept;
-    void UnbindFramebuffer() noexcept;
+    void BindFramebuffer(GLuint texture) const noexcept;
+    void UnbindFramebuffer() const noexcept;
     void ClearCommitBuffer() noexcept;
     virtual void OnDraw() const noexcept = 0;
     void OnDrawCommit() noexcept;

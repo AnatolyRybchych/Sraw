@@ -1,14 +1,10 @@
 #include "BrushTool.hpp"
 #include "../DrawImage.hpp"
 #include "../ResourceProvider.hpp"
+#include <stdbool.h>
+#include "../Basics.hpp"
 
 #include <math.h>
-
-static int distancei(int x1, int y1, int x2, int y2){
-    int x = x2 - x1;
-    int y = y2 - y1;
-    return (int)(sqrt(x*x + y*y) + 0.5);
-}
 
 void BrushTool::DrawCircle(int x, int y) const noexcept{
     glUseProgram(prog);
@@ -29,6 +25,13 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
     glUseProgram(0);
 }
 
+void BrushTool::DrawLine(int x1, int y1, int x2,  int y2) const noexcept{
+    float step = (1.0 - 1.0 / (distance2(x1, y1, x2, y2) + 1.0)) * scale * 0.5;
+    for(float progress = 0.0; progress < 1.0; progress += step){
+        DrawCircle(lerpi(x1, x2, progress), lerpi(y1, y2, progress));
+    }
+}
+
 void BrushTool::OnDraw() const noexcept{
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     DrawImage::GetRenderer().Draw(GetCommitBuffer().GetGLID());
@@ -38,20 +41,8 @@ void BrushTool::OnDraw() const noexcept{
 bool BrushTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
         BindFramebuffer(GetCommitBuffer().GetGLID());
-        int points = distancei(prevX, prevY, x, y);
-        int distanceX = x - prevX;
-        int distanceY = y - prevY;
-        for(int i = 0; i <= points; i++){
-            DrawCircle(
-                prevX + (i / (float)points) * (float)distanceX,
-                prevY + (i / (float)points) * (float)distanceY
-            );
-        }
-
+        DrawLine(prevX, prevY, x, y);
         UnbindFramebuffer();
-        prevX = x;
-        prevY = y;
-        return true;
     }
     prevX = x;
     prevY = y;
@@ -62,20 +53,17 @@ bool BrushTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     prevX = x;
     prevY = y;
-    OnMouseMove(x + 1, y);
+    BindFramebuffer(GetCommitBuffer().GetGLID());
+    DrawCircle(x, y);
+    UnbindFramebuffer();
     return true;
 }
 
 bool BrushTool::OnLMouseUp(int x, int y) noexcept{
     if(isMouseDown){
-        OnMouseMove(x, y);
         isMouseDown = false;
-
         Commit();
         ClearCommitBuffer();
-        prevX = x;
-        prevY = y;
-        return true;
     }
     prevX = x;
     prevY = y;

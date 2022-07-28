@@ -20,12 +20,12 @@ const Texture &DrawingTool::GetBg() const noexcept{
     return bg;
 }
 
-void DrawingTool::BindFramebuffer(GLuint texture) noexcept{
+void DrawingTool::BindFramebuffer(GLuint texture) const noexcept{
     framebuffer.Bind();
     framebuffer.AttachTexture2D(texture);
 }
 
-void DrawingTool::UnbindFramebuffer() noexcept{
+void DrawingTool::UnbindFramebuffer() const noexcept{
     framebuffer.Unbind();
 }
 

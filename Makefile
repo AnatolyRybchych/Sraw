@@ -23,6 +23,7 @@ objects	+= obj/SelectToolMenuManager.o
 objects	+= obj/ResourceProvider.o
 objects	+= obj/RenderText.o
 objects	+= obj/FreeType.o
+objects	+= obj/Basics.o
 
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o
@@ -36,23 +37,20 @@ objects	+= obj/MouseHighlightTool.o
 objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
 
-obj_dir:
-	mkdir -p obj
-
 build_exe:$(objects)
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)
 
-obj/%.o:src/%.cpp obj_dir
+obj/%.o:src/%.cpp
+	@mkdir -p obj
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
-obj/%.o:src/GlWrappers/%.cpp obj_dir
+obj/%.o:src/GlWrappers/%.cpp
+	@mkdir -p obj
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
-obj/%.o:src/Tools/%.cpp obj_dir
+obj/%.o:src/Tools/%.cpp
+	@mkdir -p obj
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
-
-obj/glad.o: glad/glad.c obj_dir
-	gcc $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 #output dir
 bin_dir:

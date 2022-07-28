@@ -36,6 +36,7 @@ private:
     int prevY;
 
     void DrawCircle(int x, int y) const noexcept;
+    void DrawLine(int x1, int y1, int x2,  int y2) const noexcept;
     ColorPaletTool &colorPalet;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
