@@ -1,5 +1,0 @@
-make.exe --dry-run --keep-going --print-directory
-make.exe: Entering directory 'c:/Users/Velichaisyi/Desktop/Sraw'
-g++ -g -ggdb -IC:\include -IC:\include\freetype2 -o bin/Sraw.exe obj/main.o obj/Window.o obj/MainWindow.o obj/MainWindowState.o obj/MonitorInfo.o obj/GlobalWindowInput.o obj/App.o obj/DrawingCanvas.o obj/ShaderProgram.o obj/DrawImage.o obj/MouseHighlight.o obj/DrawingTool.o obj/SelectToolMenuManager.o obj/ResourceProvider.o obj/RenderText.o obj/FreeType.o obj/Texture.o obj/Framebuffer.o obj/SelectToolTool.o obj/SelectToolNode.o obj/BrushTool.o obj/EraserTool.o obj/ColorPaletTool.o obj/MouseHighlightTool.o obj/SelectMenuToolNode.o obj/SelectActionToolNode.o -LC:\bin -lgdi32 -lopengl32 -lglew32 -lfreetype
-make.exe: Leaving directory 'c:/Users/Velichaisyi/Desktop/Sraw'
- 
