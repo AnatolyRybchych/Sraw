@@ -4,6 +4,7 @@ LIB_INCLUDE_PATH	:= -IC:\include -IC:\include\freetype2
 LIB_BIN_PATH		:= -LC:\bin
 LIBS				:= -lgdi32 -lopengl32 -lglew32 -lfreetype
 
+
 out		:= Sraw.exe
 
 objects	+= obj/main.o
@@ -35,23 +36,48 @@ objects	+= obj/MouseHighlightTool.o
 objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
 
-build:$(objects)
-	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o $(out) $^ $(LIB_BIN_PATH) $(LIBS)
+obj_dir:
+	mkdir -p obj
 
-obj/%.o:src/%.cpp
+build_exe:$(objects)
+	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)
+
+obj/%.o:src/%.cpp obj_dir
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
-obj/%.o:src/GlWrappers/%.cpp
+obj/%.o:src/GlWrappers/%.cpp obj_dir
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
-obj/%.o:src/Tools/%.cpp
+obj/%.o:src/Tools/%.cpp obj_dir
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
 
-obj/glad.o: glad/glad.c
+obj/glad.o: glad/glad.c obj_dir
 	gcc $(LIB_INCLUDE_PATH) -c -o $@ $<
 
+#output dir
+bin_dir:
+	mkdir -p bin
+
+dlls: bin_dir
+	cp dlls/* bin/
+
+fonts: bin_dir
+	mkdir -p bin/fonts
+	cp fonts/* bin/fonts/
+	
+images: bin_dir
+	mkdir -p bin/images
+	cp images/* bin/images/
+
+shaders: bin_dir
+	mkdir -p bin/shaders
+	cp shaders/* bin/shaders/
+
+build: bin_dir build_exe dlls fonts images shaders
+#output dir end
+
 run:build
-	./$(out)
+	cd ./bin ; ./$(out)
 
 gdb:build
-	gdb ./$(out)
+	cd ./bin ; gdb ./$(out)

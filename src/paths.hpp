@@ -1,16 +1,17 @@
 #pragma once
 
-constexpr const char *FileMouseHighlightIcon = "MouseHighlightIcon.png";
-constexpr const char *FileBrushIcon = "BrushIcon.png";
-constexpr const char *FileEraserIcon = "EraserIcon.png";
-constexpr const char *FileColorPaletteIcon = "ColorPaleteIcon.png";
-constexpr const char *FilePalette = "Palette.png";
-constexpr const char *FileQuiticon = "QuitIcon.png";
-constexpr const char *FileClearicon = "ClearIcon.png";
-constexpr const char *FileHideicon = "HideIcon.png";
-constexpr const char *FileSaveToFileicon = "SaveToFileIcon.png";
-constexpr const char *FileCopyToClipboardicon = "CopyToClipboardIcon.png";
-constexpr const char *FileToolsicon = "ToolsIcon.png";
+#define IMAGES_DIR "images/"
+constexpr const char *FileMouseHighlightIcon = IMAGES_DIR"MouseHighlightIcon.png";
+constexpr const char *FileBrushIcon = IMAGES_DIR"BrushIcon.png";
+constexpr const char *FileEraserIcon = IMAGES_DIR"EraserIcon.png";
+constexpr const char *FileColorPaletteIcon = IMAGES_DIR"ColorPaleteIcon.png";
+constexpr const char *FilePalette = IMAGES_DIR"Palette.png";
+constexpr const char *FileQuiticon = IMAGES_DIR"QuitIcon.png";
+constexpr const char *FileClearicon = IMAGES_DIR"ClearIcon.png";
+constexpr const char *FileHideicon = IMAGES_DIR"HideIcon.png";
+constexpr const char *FileSaveToFileicon = IMAGES_DIR"SaveToFileIcon.png";
+constexpr const char *FileCopyToClipboardicon = IMAGES_DIR"CopyToClipboardIcon.png";
+constexpr const char *FileToolsicon = IMAGES_DIR"ToolsIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";
