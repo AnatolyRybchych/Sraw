@@ -1,4 +1,4 @@
 # Sraw
-## platform: Windows
+platform: Windows
 ## build outputs stored in folder ./bin (portable folder)
 
