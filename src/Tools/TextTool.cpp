@@ -11,7 +11,8 @@ void TextTool::OnDraw() const noexcept{
         currX - textWidth / 2, currY - fontSize / 2, 
         colorPalete.GetRed(),
         colorPalete.GetGreen(),
-        colorPalete.GetBlue());
+        colorPalete.GetBlue(),
+        false);
 }
 
 bool TextTool::OnMouseMove(int x, int y) noexcept{

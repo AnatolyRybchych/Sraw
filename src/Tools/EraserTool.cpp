@@ -26,7 +26,7 @@ void EraserTool::Erse(int x, int y) const noexcept{
 }
 
 void EraserTool::ErseLine(int x1, int y1, int x2, int y2) const noexcept{
-    float step = (1.0 - 1.0 / (distance2(x1, y1, x2, y2) + 1.0)) * scale * 0.5;
+    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance2(x1, y1, x2, y2)) * scale * 0.2;
     for(float progress = 0.0; progress < 1.0; progress += step){
         Erse(lerpi(x1, x2, progress), lerpi(y1, y2, progress));
     }
