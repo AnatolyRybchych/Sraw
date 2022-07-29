@@ -88,15 +88,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         new SelectActionToolNode(
             ResourceProvider::GetProvider().GetTextTexture(),
             L"Text", 
-            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
-        )
-    );
-
-    mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
-        new SelectActionToolNode(
-            ResourceProvider::GetProvider().GetMouseHighlightTexture(),
-            L"Mouse highlight", 
-            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
+            std::bind(SelectToolMenuManager::OpenText, this)
         )
     );
 
@@ -177,6 +169,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
+    textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -221,6 +214,10 @@ void SelectToolMenuManager::OpenBrush() noexcept{
 
 void SelectToolMenuManager::OpenEraser() noexcept{
     SetCurrTool(eraserTool.get());
+}
+
+void SelectToolMenuManager::OpenText() noexcept{
+    SetCurrTool(textTool.get());
 }
 
 void SelectToolMenuManager::OpenColorPalette() noexcept{

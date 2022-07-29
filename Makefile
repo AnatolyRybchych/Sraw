@@ -25,6 +25,8 @@ objects	+= obj/RenderText.o
 objects	+= obj/FreeType.o
 objects	+= obj/Basics.o
 objects	+= obj/CutBmpWindow.o
+objects	+= obj/SelectMenuToolNode.o
+objects	+= obj/SelectActionToolNode.o
 
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o
@@ -33,10 +35,9 @@ objects	+= obj/SelectToolTool.o
 objects	+= obj/SelectToolNode.o
 objects	+= obj/BrushTool.o
 objects	+= obj/EraserTool.o
+objects	+= obj/TextTool.o
 objects	+= obj/ColorPaletTool.o
 objects	+= obj/MouseHighlightTool.o
-objects	+= obj/SelectMenuToolNode.o
-objects	+= obj/SelectActionToolNode.o
 
 build_exe:$(objects)
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)

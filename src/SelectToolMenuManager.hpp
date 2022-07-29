@@ -5,6 +5,7 @@
 #include "Tools/MouseHighlightTool.hpp"
 #include "Tools/BrushTool.hpp"
 #include "Tools/EraserTool.hpp"
+#include "Tools/TextTool.hpp"
 #include "Tools/ColorPaletTool.hpp"
 #include "Quitable.hpp"
 
@@ -40,6 +41,7 @@ private:
     std::unique_ptr<BrushTool> brushTool;
     std::unique_ptr<EraserTool> eraserTool;
     std::unique_ptr<ColorPaletTool> colorPaletTool;
+    std::unique_ptr<TextTool> textTool;
 
     DrawingTool * currTool;
 
@@ -54,6 +56,7 @@ public:
     void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;
+    void OpenText() noexcept;
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;
