@@ -32,7 +32,11 @@ clearTexture(ReadTexture(FileClearicon)),
 hideTexture(ReadTexture(FileHideicon)),
 saveToFileTexture(ReadTexture(FileSaveToFileicon)),
 copyToClipboardTexture(ReadTexture(FileCopyToClipboardicon)),
-toolsTexture(ReadTexture(FileToolsicon)){
+toolsTexture(ReadTexture(FileToolsicon)),
+textTexture(ReadTexture(FileTexticon)),
+othersTexture(ReadTexture(FileOthersicon)),
+primitivesTexture(ReadTexture(FilePrimitivesicon)),
+blockDiagramTexture(ReadTexture(FileBlockDiagramicon)){
 
     menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
     drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
@@ -118,6 +122,23 @@ const Texture &ResourceProvider::GetCopyToClipboardTexture() const noexcept{
 const Texture &ResourceProvider::GetToolsTexture() const noexcept{
     return toolsTexture;
 }
+
+const Texture &ResourceProvider::GetTextTexture() const noexcept{
+    return textTexture;
+}
+
+const Texture &ResourceProvider::GetOthersTexture() const noexcept{
+    return othersTexture;
+}
+
+const Texture &ResourceProvider::GetPrimitivesTexture() const noexcept{
+    return primitivesTexture;
+}
+
+const Texture &ResourceProvider::GetBlockDiagramTexture() const noexcept{
+    return blockDiagramTexture;
+}
+
     
 GLuint ResourceProvider::GetMenuBgProgram() const noexcept{
     return menuBgProgram;

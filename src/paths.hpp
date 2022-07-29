@@ -12,6 +12,10 @@ constexpr const char *FileHideicon = IMAGES_DIR"HideIcon.png";
 constexpr const char *FileSaveToFileicon = IMAGES_DIR"SaveToFileIcon.png";
 constexpr const char *FileCopyToClipboardicon = IMAGES_DIR"CopyToClipboardIcon.png";
 constexpr const char *FileToolsicon = IMAGES_DIR"ToolsIcon.png";
+constexpr const char *FileTexticon = IMAGES_DIR"TextIcon.png";
+constexpr const char *FileOthersicon = IMAGES_DIR"OthersIcon.png";
+constexpr const char *FilePrimitivesicon = IMAGES_DIR"PrimitivesIcon.png";
+constexpr const char *FileBlockDiagramicon = IMAGES_DIR"BlockDiagramIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";

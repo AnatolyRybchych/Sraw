@@ -29,21 +29,11 @@ private:
             std::unique_ptr<SelectActionToolNode> saveToClipboardNode; 
             std::unique_ptr<SelectActionToolNode> quitAppNode; 
         std::unique_ptr<SelectMenuToolNode> toolsMenuNode;
-            std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
-            //shapes tools menu
-                //fill rectangle tool
-                //rectangle tool
-                //elipse tool
-                //fill elipse tool
-                //line tool
-            //text stamp tool
-            //block diagram shapes menu
-                //action
-                //condition
-                //arrow
-                //input
-                //output
-            //simple math diagram
+            std::unique_ptr<SelectMenuToolNode> primitivesMenuNode;
+            std::unique_ptr<SelectActionToolNode> textToolNode; 
+            std::unique_ptr<SelectMenuToolNode> blockDiagramToolNode; 
+            std::unique_ptr<SelectMenuToolNode> othersMenuNode;
+                std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
 
     std::unique_ptr<SelectToolTool> selectToolmenu;
     std::unique_ptr<MouseHighlightTool> mouseHighlightTool;
@@ -58,6 +48,9 @@ public:
     SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable);
     void OpenToolMenu() noexcept;
     void OpenTool_ToolsMenu() noexcept;
+    void OpenTool_PrimitivesMenu() noexcept;
+    void OpenTool_BlockDiagramMenu() noexcept;
+    void OpenTool_OthersMenu() noexcept;
     void OpenQuitMenu() noexcept;
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;

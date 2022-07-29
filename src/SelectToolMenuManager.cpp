@@ -12,14 +12,6 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     this->cx = cx;
     this->cy = cy;
 
-    mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
-        new SelectActionToolNode(
-            ResourceProvider::GetProvider().GetMouseHighlightTexture(),
-            L"Mouse highlight", 
-            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
-        )
-    );
-
     brushToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
             ResourceProvider::GetProvider().GetBrushTexture(),
@@ -84,10 +76,68 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );
 
-    toolsMenuNode = std::unique_ptr<SelectMenuToolNode>(
+    mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetMouseHighlightTexture(),
+            L"Mouse highlight", 
+            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
+        )
+    );
+
+    textToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetTextTexture(),
+            L"Text", 
+            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
+        )
+    );
+
+    mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetMouseHighlightTexture(),
+            L"Mouse highlight", 
+            std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
+        )
+    );
+
+    primitivesMenuNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+        std::vector<SelectToolNode*>{
+        }, 
+        L"Menu/Tools/Primitives", 
+        ResourceProvider::GetProvider().GetPrimitivesTexture(),
+        std::bind(SelectToolMenuManager::OpenTool_PrimitivesMenu, this)
+        )
+    );  
+
+    blockDiagramToolNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+        std::vector<SelectToolNode*>{
+        }, 
+        L"Menu/Tools/Block diagram", 
+        ResourceProvider::GetProvider().GetBlockDiagramTexture(),
+        std::bind(SelectToolMenuManager::OpenTool_BlockDiagramMenu, this)
+        )
+    ); 
+
+    othersMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
             mouseHighlightToolNode.get(),
+        }, 
+        L"Menu/Tools/Others", 
+        ResourceProvider::GetProvider().GetOthersTexture(),
+        std::bind(SelectToolMenuManager::OpenTool_OthersMenu, this)
+        )
+    ); 
+
+    toolsMenuNode = std::unique_ptr<SelectMenuToolNode>(
+        new SelectMenuToolNode(
+        std::vector<SelectToolNode*>{
+            primitivesMenuNode.get(),
+            textToolNode.get(),
+            blockDiagramToolNode.get(),
+            othersMenuNode.get()
         }, 
         L"Menu/Tools", 
         ResourceProvider::GetProvider().GetToolsTexture(),
@@ -147,6 +197,18 @@ void SelectToolMenuManager::OpenToolMenu() noexcept{
 
 void SelectToolMenuManager::OpenTool_ToolsMenu() noexcept{
     selectToolmenu->SetCurrNode(toolsMenuNode.get());
+}
+
+void SelectToolMenuManager::OpenTool_PrimitivesMenu() noexcept{
+    selectToolmenu->SetCurrNode(primitivesMenuNode.get());
+}
+
+void SelectToolMenuManager::OpenTool_BlockDiagramMenu() noexcept{
+    selectToolmenu->SetCurrNode(blockDiagramToolNode.get());
+}
+
+void SelectToolMenuManager::OpenTool_OthersMenu() noexcept{
+    selectToolmenu->SetCurrNode(othersMenuNode.get());
 }
 
 void SelectToolMenuManager::OpenQuitMenu() noexcept{

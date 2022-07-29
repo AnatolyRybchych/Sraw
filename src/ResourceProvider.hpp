@@ -20,6 +20,10 @@ private:
     Texture saveToFileTexture;
     Texture copyToClipboardTexture;
     Texture toolsTexture;
+    Texture textTexture;
+    Texture othersTexture;
+    Texture primitivesTexture;
+    Texture blockDiagramTexture;
 
     GLuint menuBgProgram;
     GLuint drawImageProgram;
@@ -43,6 +47,10 @@ public:
     const Texture &GetSaveToFileTexture() const noexcept;
     const Texture &GetCopyToClipboardTexture() const noexcept;
     const Texture &GetToolsTexture() const noexcept;
+    const Texture &GetTextTexture() const noexcept;
+    const Texture &GetOthersTexture() const noexcept;
+    const Texture &GetPrimitivesTexture() const noexcept;
+    const Texture &GetBlockDiagramTexture() const noexcept;
         
     GLuint GetMenuBgProgram() const noexcept;
     GLuint GetDrawImageProgram() const noexcept;
