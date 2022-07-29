@@ -2,7 +2,7 @@
 
 LIB_INCLUDE_PATH	:= -I.\include -I.\include\freetype2
 LIB_BIN_PATH		:= -L.\dlls
-LIBS				:= -lgdi32 -lopengl32 -lglew32 -lfreetype -lComdlg32
+LIBS				:= -lgdi32 -lopengl32 -lglew32 -lfreetype -lComdlg32 -lGdiplus
 
 
 out		:= Sraw.exe
@@ -24,6 +24,7 @@ objects	+= obj/ResourceProvider.o
 objects	+= obj/RenderText.o
 objects	+= obj/FreeType.o
 objects	+= obj/Basics.o
+objects	+= obj/CutBmpWindow.o
 
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o

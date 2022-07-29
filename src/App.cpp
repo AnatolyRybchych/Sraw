@@ -7,6 +7,7 @@
 #include "GlWrappers/RenderText.hpp"
 #include <shlobj.h>
 
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -44,18 +45,32 @@ static void SaveHbitmapToFile(HBITMAP bmp, const wchar_t *file){
     GetTempPathA(tmpDir.size(), tmpDir.data());
     sprintf(tmpDir.data(), "%s%s", tmpDir.c_str(), "__img__.png");
 
-    BITMAP bmpHdr;
-    GetObjectW(bmp, sizeof(bmpHdr), &bmpHdr);
-    int bmpDataSize = bmpHdr.bmWidthBytes * bmpHdr.bmHeight;
-    char *bmpData = new char[bmpDataSize];
-    GetBitmapBits(bmp, bmpDataSize, bmpData);
-    for(int i = 0; i < bmpDataSize / 4; i++){
+    HDC memDc = CreateCompatibleDC(NULL);
+    SelectObject(memDc, bmp);
+
+    BITMAPINFO bi;
+    memset(&bi, 0, sizeof(bi));
+    bi.bmiHeader.biSize = sizeof(bi.bmiHeader);
+    GetDIBits(memDc, bmp, 0, 0, NULL, &bi, DIB_RGB_COLORS);
+    int cx = bi.bmiHeader.biWidth;
+    int cy = bi.bmiHeader.biHeight;
+
+    char *bmpData = new char[cx * cy * 4];
+    bi.bmiHeader.biCompression = 0;
+    GetDIBits(memDc, bmp, 0, cy, bmpData, &bi, DIB_RGB_COLORS);
+    DeleteDC(memDc);
+
+    for(int i = 0; i < cx * cy; i++){
         int pixel = i * 4;
         char tmp = bmpData[pixel];
-        bmpData[pixel] = bmpData[pixel+2];
+        bmpData[pixel] = bmpData[pixel +2];
         bmpData[pixel+2] = tmp;
     }
-    stbi_write_png(tmpDir.c_str(), bmpHdr.bmWidth, bmpHdr.bmHeight, 4, bmpData, bmpHdr.bmWidth * 4);
+
+    stbi_flip_vertically_on_write(1);
+    stbi_write_png(tmpDir.c_str(), cx, cy, 4, bmpData, cx * 4);
+
+
     delete[] bmpData;
 
     FILE *tmpFile = fopen(tmpDir.c_str(), "rb");
@@ -79,6 +94,8 @@ App::App(HINSTANCE hInstance){
 }
 
 int App::Run(){
+    Gdiplus::GdiplusStartup(&gdiToken, &startInput, NULL);
+
     window = new MainWindow(hInstance, *this);
     GlobalWindowInput::Init(*this);
 
@@ -115,24 +132,31 @@ void App::HideWindowAndResoreState() noexcept{
 
 void App::HideWindowSaveStateToFile() noexcept{
     HideWindow();
-
-    std::wstring fileName(1000, 0);
-
-    if(SaveFileName(fileName.data(), fileName.size(), DesctopDirUnicode(), L"save image", L"png file (*.png), *.png", OFN_PATHMUSTEXIST)){
-        HBITMAP state = window->CreateCurrentStateBitmap();
-        SaveHbitmapToFile(state, fileName.c_str());
-        DeleteObject(state);
-    }
+    HBITMAP state = window->CreateCurrentStateBitmap(); 
+    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, state, std::bind(SaveCutedImageToFile, this, std::placeholders::_1)));
+    DeleteObject(state);  
 }
 
 void App::HideWindowCopyStateToClipboard() noexcept{
     HideWindow();
+    HBITMAP state = window->CreateCurrentStateBitmap();
+    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, state, std::bind(CopyCutedImageToClipboard, this, std::placeholders::_1)));
+    DeleteObject(state);
+}
+
+void App::SaveCutedImageToFile(HBITMAP bmp) noexcept{    
+    std::wstring fileName(1000, 0);
+    if(SaveFileName(fileName.data(), fileName.size(), DesctopDirUnicode(), L"save image", L"png file (*.png), *.png", OFN_PATHMUSTEXIST)){
+        SaveHbitmapToFile(bmp, fileName.c_str());
+    }
+}
+
+void App::CopyCutedImageToClipboard(HBITMAP bmp) noexcept{
     OpenClipboard(window->GetHWnd());
     EmptyClipboard();
-    HBITMAP stateBmp = window->CreateCurrentStateBitmap();
-    SetClipboardData(CF_BITMAP, stateBmp);
+    SetClipboardData(CF_BITMAP, bmp);
     CloseClipboard();
-    DeleteObject(stateBmp);
+    
 }
 
 bool App::OnKeyboardHookLL(KeyboardMessages message, KBDLLHOOKSTRUCT *args) noexcept{
