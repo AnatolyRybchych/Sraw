@@ -107,10 +107,7 @@ bool EraserTool::OnScrollDown() noexcept{
 EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept
     :DrawingTool(cx, cy, commitHandler, bg){
 
-    prog = BuildShaderProgram(
-        ResourceProvider::GetProvider().GetErseVertex().c_str(),
-        ResourceProvider::GetProvider().GetErseFragment().c_str()
-    );
+    prog = ResourceProvider::GetProvider().GetErseProgram();
 
     vertex_pPos = glGetAttribLocation(prog, "vertex_p");
     posPos = glGetUniformLocation(prog, "pos");

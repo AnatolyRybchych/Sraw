@@ -118,10 +118,7 @@ BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture
     DrawingTool(cx, cy, commitHandler, bg),
     colorPalet(colorPalet){
 
-    prog = BuildShaderProgram(
-        ResourceProvider::GetProvider().GetDrawCircleVertex().c_str(),
-        ResourceProvider::GetProvider().GetDrawCircleFragment().c_str()
-    );
+    prog = ResourceProvider::GetProvider().GetDrawCircleProgram();
 
     vertex_pPos = glGetAttribLocation(prog, "vertex_p");
     colorPos = glGetUniformLocation(prog, "color");

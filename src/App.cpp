@@ -1,6 +1,6 @@
 #include "App.hpp"
 #include "DrawImage.hpp"
-#include "Tools/MouseHighlight.hpp"
+#include "MouseHighlight.hpp"
 #include <iostream>
 #include "UnicodeWindows.hpp"
 #include "paths.hpp"
@@ -97,6 +97,7 @@ int App::Run(){
     Gdiplus::GdiplusStartup(&gdiToken, &startInput, NULL);
 
     window = new MainWindow(hInstance, *this);
+    ResourceProvider::InitProvider();
     GlobalWindowInput::Init(*this);
 
     glEnable(GL_BLEND);

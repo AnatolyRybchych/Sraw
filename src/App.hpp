@@ -5,6 +5,7 @@
 #include "Quitable.hpp"
 #include "CutBmpWindow.hpp"
 #include <gdiplus.h>
+#include "ResourceProvider.hpp"
 
 class App: public KeyboardLowLevelHandler, public Quitable{
 private:

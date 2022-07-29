@@ -5,17 +5,6 @@
 
 SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable)
     :emptyTexture((GLuint)0),
-    MouseHighlightTexture(ResourceProvider::GetProvider().GetMouseHighlightIcon()),
-    BrushTexture(ResourceProvider::GetProvider().GetBrushIcon()),
-    EraserTexture(ResourceProvider::GetProvider().GetEraserIcon()),
-    ColorPaletteTexture(ResourceProvider::GetProvider().GetColorPaletteIcon()),
-    PaletteTexture(ResourceProvider::GetProvider().GetPalette()),
-    QuitTexture(ResourceProvider::GetProvider().GetQuitIcon()),
-    ClearTexture(ResourceProvider::GetProvider().GetClearIcon()),
-    HideTexture(ResourceProvider::GetProvider().GetHideIcon()),
-    SaveToFileTexture(ResourceProvider::GetProvider().GetSaveToFileIcon()),
-    CopyToClipboardTexture(ResourceProvider::GetProvider().GetCopyToClipboardIcon()),
-    ToolsTexture(ResourceProvider::GetProvider().GetToolsIcon()),
     commitHandler(commitHandler),
     quitable(quitable),
     bg(bg){
@@ -25,7 +14,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     mouseHighlightToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            MouseHighlightTexture, 
+            ResourceProvider::GetProvider().GetMouseHighlightTexture(),
             L"Mouse highlight", 
             std::bind(SelectToolMenuManager::OpenMouseHighlightTool, this)
         )
@@ -33,7 +22,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     brushToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            BrushTexture, 
+            ResourceProvider::GetProvider().GetBrushTexture(),
             L"Brush", 
             std::bind(SelectToolMenuManager::OpenBrush, this)
         )
@@ -41,7 +30,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     eraserToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            EraserTexture, 
+            ResourceProvider::GetProvider().GetEraserTexture(),
             L"Eraser", 
             std::bind(SelectToolMenuManager::OpenEraser, this)
         )
@@ -49,7 +38,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     colorPaletToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            ColorPaletteTexture, 
+            ResourceProvider::GetProvider().GetColorPaletteTexture(),
             L"Color palette", 
             std::bind(SelectToolMenuManager::OpenColorPalette, this)
         )
@@ -57,7 +46,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     clearNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            ClearTexture, 
+            ResourceProvider::GetProvider().GetClearTexture(),
             L"Clear canvas", 
             std::bind(Quitable::HideWindowAndResoreState, &quitable)
         )
@@ -65,7 +54,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     hideNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            HideTexture, 
+            ResourceProvider::GetProvider().GetHideTexture(),
             L"Hide canvas", 
             std::bind(Quitable::HideWindow, &quitable)
         )
@@ -73,7 +62,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     saveToFileNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            SaveToFileTexture, 
+            ResourceProvider::GetProvider().GetSaveToFileTexture(),
             L"Save to file", 
             std::bind(Quitable::HideWindowSaveStateToFile, &quitable)
         )
@@ -81,7 +70,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     saveToClipboardNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            CopyToClipboardTexture, 
+            ResourceProvider::GetProvider().GetCopyToClipboardTexture(),
             L"Copy to clipboard", 
             std::bind(Quitable::HideWindowCopyStateToClipboard, &quitable)
         )
@@ -89,7 +78,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
 
     quitAppNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            QuitTexture, 
+            ResourceProvider::GetProvider().GetQuitTexture(),
             L"Quit application", 
             std::bind(Quitable::QuitApp, &quitable)
         )
@@ -101,7 +90,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             mouseHighlightToolNode.get(),
         }, 
         L"Menu/Tools", 
-        ToolsTexture,
+        ResourceProvider::GetProvider().GetToolsTexture(),
         std::bind(SelectToolMenuManager::OpenTool_ToolsMenu, this)
         )
     );    
@@ -116,7 +105,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             quitAppNode.get(),
         }, 
         L"Menu/Quit", 
-        QuitTexture,
+        ResourceProvider::GetProvider().GetQuitTexture(),
         std::bind(SelectToolMenuManager::OpenQuitMenu, this)
         )
     );
@@ -135,7 +124,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     );
 
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, commitHandler, bg));
-    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, PaletteTexture.GetGLID()));
+    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));

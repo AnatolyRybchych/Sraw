@@ -1,7 +1,7 @@
 #pragma once
 #include "Tools/SelectToolTool.hpp"
-#include "Tools/SelectMenuToolNode.hpp"
-#include "Tools/SelectActionToolNode.hpp"
+#include "SelectMenuToolNode.hpp"
+#include "SelectActionToolNode.hpp"
 #include "Tools/MouseHighlightTool.hpp"
 #include "Tools/BrushTool.hpp"
 #include "Tools/EraserTool.hpp"
@@ -17,17 +17,6 @@ private:
     int cx, cy;
 
     Texture emptyTexture;
-    Texture MouseHighlightTexture;
-    Texture BrushTexture;
-    Texture EraserTexture;
-    Texture ColorPaletteTexture;
-    Texture PaletteTexture;
-    Texture QuitTexture;
-    Texture ClearTexture;
-    Texture HideTexture;
-    Texture SaveToFileTexture;
-    Texture CopyToClipboardTexture;
-    Texture ToolsTexture;
 
     std::unique_ptr<SelectMenuToolNode> rootMenuNode;
         std::unique_ptr<SelectActionToolNode> brushToolNode; 

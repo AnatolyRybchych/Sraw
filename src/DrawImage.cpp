@@ -13,10 +13,7 @@ const DrawImage &DrawImage::GetRenderer() noexcept{
 }
 
 DrawImage::DrawImage() noexcept{
-    prog = BuildShaderProgram(
-        ResourceProvider::GetProvider().GetDrawImageVertex().c_str(), 
-        ResourceProvider::GetProvider().GetDrawImageFragment().c_str()
-    );
+    prog = ResourceProvider::GetProvider().GetDrawImageProgram();
     drawImageVertexP = glGetAttribLocation(prog, "vertex_p");
     drawImageTex = glGetUniformLocation(prog, "tex");
 

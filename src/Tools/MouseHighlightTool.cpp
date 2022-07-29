@@ -1,5 +1,5 @@
 #include "MouseHighlightTool.hpp"
-#include "MouseHighlight.hpp"
+#include "../MouseHighlight.hpp"
 #include <math.h>
 
 MouseHighlightTool::MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept

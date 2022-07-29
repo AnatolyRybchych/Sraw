@@ -3,7 +3,7 @@
 
 #include <stb_image.h>
 #include "paths.hpp"
-
+#include "GlWrappers/ShaderProgram.hpp"
 #include <fstream>
 
 std::unique_ptr<ResourceProvider> ResourceProvider::provider;
@@ -11,113 +11,46 @@ std::unique_ptr<ResourceProvider> ResourceProvider::provider;
 static std::string FReadAllText(std::string path);
 static GLuint ReadTexture(std::string path);
 
-const ResourceProvider &ResourceProvider::GetProvider() noexcept{
-    if(provider == nullptr) provider = std::unique_ptr<ResourceProvider>(new ResourceProvider());
+void ResourceProvider::InitProvider(){
+    if(provider != nullptr) throw std::logic_error("provider is already initialized");
+    provider = std::unique_ptr<ResourceProvider>(new ResourceProvider());
+}
 
+const ResourceProvider &ResourceProvider::GetProvider(){
+    if(provider == nullptr) throw std::logic_error("provider is not initialized");
     return *provider;
 }
 
-ResourceProvider::ResourceProvider() noexcept{
+ResourceProvider::ResourceProvider() noexcept
+:mouseHighlightTexture(ReadTexture(FileMouseHighlightIcon)),
+brushTexture(ReadTexture(FileBrushIcon)),
+eraserTexture(ReadTexture(FileEraserIcon)),
+colorPaletteTexture(ReadTexture(FileColorPaletteIcon)),
+paletteTexture(ReadTexture(FilePalette)),
+quitTexture(ReadTexture(FileQuiticon)),
+clearTexture(ReadTexture(FileClearicon)),
+hideTexture(ReadTexture(FileHideicon)),
+saveToFileTexture(ReadTexture(FileSaveToFileicon)),
+copyToClipboardTexture(ReadTexture(FileCopyToClipboardicon)),
+toolsTexture(ReadTexture(FileToolsicon)){
 
+    menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
+    drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
+    menuItemProgram = BuildShaderProgram(FReadAllText(FileMenuItemVertex).c_str(), FReadAllText(FileMenuItemFragment).c_str());
+    drawCircleProgram = BuildShaderProgram(FReadAllText(FileDrawCircleVertex).c_str(), FReadAllText(FileDrawCircleFragment).c_str());
+    erseProgram = BuildShaderProgram(FReadAllText(FileErseVertex).c_str(), FReadAllText(FileErseFragment).c_str());
+    paletteProgram = BuildShaderProgram(FReadAllText(FilePaletteVertex).c_str(), FReadAllText(FilePaletteFragment).c_str());
+    mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
 }
 
-GLuint ResourceProvider::GetMouseHighlightIcon() const noexcept{
-    return ReadTexture(FileMouseHighlightIcon);
-}
-
-GLuint ResourceProvider::GetBrushIcon() const noexcept{
-    return ReadTexture(FileBrushIcon);
-}
-
-GLuint ResourceProvider::GetEraserIcon() const noexcept{
-    return ReadTexture(FileEraserIcon);
-}
-
-GLuint ResourceProvider::GetColorPaletteIcon() const noexcept{
-    return ReadTexture(FileColorPaletteIcon); 
-}
-
-GLuint ResourceProvider::GetPalette() const noexcept{
-    return ReadTexture(FilePalette); 
-}
-
-GLuint ResourceProvider::GetQuitIcon() const noexcept{
-    return ReadTexture(FileQuiticon); 
-}
-
-GLuint ResourceProvider::GetClearIcon() const noexcept{
-    return ReadTexture(FileClearicon); 
-}
-
-GLuint ResourceProvider::GetHideIcon() const noexcept{
-    return ReadTexture(FileHideicon); 
-}
-
-GLuint ResourceProvider::GetSaveToFileIcon() const noexcept{
-    return ReadTexture(FileSaveToFileicon); 
-}
-
-GLuint ResourceProvider::GetCopyToClipboardIcon() const noexcept{
-    return ReadTexture(FileCopyToClipboardicon); 
-}
-
-GLuint ResourceProvider::GetToolsIcon() const noexcept{
-    return ReadTexture(FileToolsicon); 
-}
-
-std::string ResourceProvider::GetMenuBgFragment() const noexcept{
-    return FReadAllText(FileMenuBgFragment);
-}
-
-std::string ResourceProvider::GetMenuBgVertex() const noexcept{
-    return FReadAllText(FileMenuBgVertex);
-}
-
-std::string ResourceProvider::GetDrawImageVertex() const noexcept{
-    return FReadAllText(FileDrawImageVertex);
-}
-
-std::string ResourceProvider::GetDrawImageFragment() const noexcept{
-    return FReadAllText(FileDrawImageFragment);
-}
-
-std::string ResourceProvider::GetMenuItemFragment() const noexcept{
-    return FReadAllText(FileMenuItemFragment);
-}
-
-std::string ResourceProvider::GetMenuItemVertex() const noexcept{
-    return FReadAllText(FileMenuItemVertex);
-}
-
-std::string ResourceProvider::GetDrawCircleVertex() const noexcept{
-    return FReadAllText(FileDrawCircleVertex);
-}
-
-std::string ResourceProvider::GetDrawCircleFragment() const noexcept{
-    return FReadAllText(FileDrawCircleFragment);
-}
-
-std::string ResourceProvider::GetErseVertex() const noexcept{
-    return FReadAllText(FileErseVertex);
-}
-
-std::string ResourceProvider::GetErseFragment() const noexcept{
-    return FReadAllText(FileErseFragment);
-}
-
-std::string ResourceProvider::GetPaletteVertex() const noexcept{
-    return FReadAllText(FilePaletteVertex);
-}
-
-std::string ResourceProvider::GetPaletteFragment() const noexcept{
-    return FReadAllText(FilePaletteFragment);
-}
 
 static std::string FReadAllText(std::string path){
     std::ifstream file(path);
     if(file.is_open() == false) throw std::runtime_error(std::string("cannot open file \"") + path + "\"");
 
-    return std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    std::string result((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+    return result;
 }
 
 static GLuint ReadTexture(std::string path){
@@ -141,3 +74,76 @@ static GLuint ReadTexture(std::string path){
 
     return result;
 }
+
+const Texture &ResourceProvider::GetMouseHighlightTexture() const noexcept{
+    return mouseHighlightTexture;
+}
+
+const Texture &ResourceProvider::GetBrushTexture() const noexcept{
+    return brushTexture;
+}
+
+const Texture &ResourceProvider::GetEraserTexture() const noexcept{
+    return eraserTexture;
+}
+
+const Texture &ResourceProvider::GetColorPaletteTexture() const noexcept{
+    return colorPaletteTexture;
+}
+
+const Texture &ResourceProvider::GetPaletteTexture() const noexcept{
+    return paletteTexture;
+}
+
+const Texture &ResourceProvider::GetQuitTexture() const noexcept{
+    return quitTexture;
+}
+
+const Texture &ResourceProvider::GetClearTexture() const noexcept{
+    return clearTexture;
+}
+
+const Texture &ResourceProvider::GetHideTexture() const noexcept{
+    return hideTexture;
+}
+
+const Texture &ResourceProvider::GetSaveToFileTexture() const noexcept{
+    return saveToFileTexture;
+}
+
+const Texture &ResourceProvider::GetCopyToClipboardTexture() const noexcept{
+    return copyToClipboardTexture;
+}
+
+const Texture &ResourceProvider::GetToolsTexture() const noexcept{
+    return toolsTexture;
+}
+    
+GLuint ResourceProvider::GetMenuBgProgram() const noexcept{
+    return menuBgProgram;
+}
+
+GLuint ResourceProvider::GetDrawImageProgram() const noexcept{
+    return drawImageProgram;
+}
+
+GLuint ResourceProvider::GetMenuItemProgram() const noexcept{
+    return menuItemProgram;
+}
+
+GLuint ResourceProvider::GetDrawCircleProgram() const noexcept{
+    return drawCircleProgram;
+}
+
+GLuint ResourceProvider::GetErseProgram() const noexcept{
+    return erseProgram;
+}
+
+GLuint ResourceProvider::GetPaletteProgram() const noexcept{
+    return paletteProgram;
+}
+
+GLuint ResourceProvider::GetMouseHighlightProgram() const noexcept{
+    return mouseHighlightProgram;
+}
+

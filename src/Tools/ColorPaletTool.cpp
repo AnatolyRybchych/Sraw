@@ -98,10 +98,7 @@ ColorPaletTool::ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, con
 
     isMouseDown = false;
 
-    prog = BuildShaderProgram(
-        ResourceProvider::GetProvider().GetPaletteVertex().c_str(),
-        ResourceProvider::GetProvider().GetPaletteFragment().c_str()
-    );
+    prog = ResourceProvider::GetProvider().GetPaletteProgram();
 
     vertex_pPos = glGetAttribLocation(prog, "vertex_p");
     colorPos = glGetUniformLocation(prog, "color");
