@@ -128,6 +128,5 @@ EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Textu
 }
 
 EraserTool::~EraserTool() noexcept{
-    glDeleteProgram(prog);
     glDeleteBuffers(1, &VBO);
 }

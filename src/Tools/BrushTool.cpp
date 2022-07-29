@@ -139,6 +139,5 @@ BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture
 }
 
 BrushTool::~BrushTool() noexcept{
-    glDeleteProgram(prog);
     glDeleteBuffers(1, &VBO);
 }

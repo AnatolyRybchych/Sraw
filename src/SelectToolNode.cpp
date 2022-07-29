@@ -125,6 +125,5 @@ SelectToolNode::SelectToolNode() noexcept{
 }
 
 SelectToolNode::~SelectToolNode() noexcept{
-    glDeleteProgram(progMenuBg);
 }
 

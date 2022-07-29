@@ -117,7 +117,6 @@ ColorPaletTool::ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, con
 }
 
 ColorPaletTool::~ColorPaletTool() noexcept{
-    glDeleteProgram(prog);
     glDeleteBuffers(1, &VBO);
 }
 
