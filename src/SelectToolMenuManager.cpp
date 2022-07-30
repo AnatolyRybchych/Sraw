@@ -113,7 +113,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         new SelectActionToolNode(
             ResourceProvider::GetProvider().GetBlockDiagram3Texture(),
             L"Condition", 
-            std::bind(SelectToolMenuManager::OpenActionDiagram, this)
+            std::bind(SelectToolMenuManager::OpenConditionDiagram, this)
         )
     );
 
@@ -190,7 +190,8 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
 
     diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
-    actionDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
+    actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
+    conditionBlockDiagramTool = std::unique_ptr<ConditionBlockDiagramTool>(new ConditionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -242,7 +243,11 @@ void SelectToolMenuManager::OpenText() noexcept{
 }
 
 void SelectToolMenuManager::OpenActionDiagram() noexcept{
-    SetCurrTool(actionDiagramTool.get());
+    SetCurrTool(actionBlockDiagramTool.get());
+}
+
+void SelectToolMenuManager::OpenConditionDiagram() noexcept{
+    SetCurrTool(conditionBlockDiagramTool.get());
 }
 
 void SelectToolMenuManager::OpenColorPalette() noexcept{

@@ -35,6 +35,7 @@ private:
     GLuint paletteProgram;
     GLuint mouseHighlightProgram;
     GLuint drawActionDiagramBgProgram;
+    GLuint drawConditionDiagramBgProgram;
 public:
     static void InitProvider();
     static const ResourceProvider &GetProvider();
@@ -65,5 +66,6 @@ public:
     GLuint GetPaletteProgram() const noexcept;
     GLuint GetMouseHighlightProgram() const noexcept;
     GLuint GetDrawActionDiagramBgProgram() const noexcept;
+    GLuint GetDrawConditionDiagramBgProgram() const noexcept;
     
 };

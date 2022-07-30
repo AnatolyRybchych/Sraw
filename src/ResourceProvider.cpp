@@ -49,6 +49,7 @@ blockDiagram3Texture(ReadTexture(FileBlockDiagram3icon))
     paletteProgram = BuildShaderProgram(FReadAllText(FilePaletteVertex).c_str(), FReadAllText(FilePaletteFragment).c_str());
     mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
     drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawActionDiagramBgVertex).c_str(), FReadAllText(FileDrawActionDiagramBgFragment).c_str());
+    drawConditionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawConditionDiagramBgVertex).c_str(), FReadAllText(FileDrawConditionDiagramBgFragment).c_str());
 }
 
 
@@ -182,5 +183,9 @@ GLuint ResourceProvider::GetMouseHighlightProgram() const noexcept{
 
 GLuint ResourceProvider::GetDrawActionDiagramBgProgram() const noexcept{
     return drawActionDiagramBgProgram;
+}
+
+GLuint ResourceProvider::GetDrawConditionDiagramBgProgram() const noexcept{
+    return drawConditionDiagramBgProgram;
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "../DrawingTool.hpp"
 #include "../GlWrappers/RenderText.hpp"
 #include "ColorPaletTool.hpp"

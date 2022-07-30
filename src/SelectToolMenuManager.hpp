@@ -8,6 +8,7 @@
 #include "Tools/TextTool.hpp"
 #include "Tools/ColorPaletTool.hpp"
 #include "Tools/ActionBlockDiagramTool.hpp"
+#include "Tools/ConditionBlockDiagramTool.hpp"
 #include "Quitable.hpp"
 
 class SelectToolMenuManager{
@@ -47,7 +48,8 @@ private:
     std::unique_ptr<TextTool> textTool;
 
     std::unique_ptr<BlockDiagramSetting> diagamSettings;
-    std::unique_ptr<ActionBlockDiagramTool> actionDiagramTool;
+    std::unique_ptr<ActionBlockDiagramTool> actionBlockDiagramTool;
+    std::unique_ptr<ConditionBlockDiagramTool> conditionBlockDiagramTool;
 
     DrawingTool * currTool;
 
@@ -64,6 +66,7 @@ public:
     void OpenEraser() noexcept;
     void OpenText() noexcept;
     void OpenActionDiagram() noexcept;
+    void OpenConditionDiagram() noexcept;
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;

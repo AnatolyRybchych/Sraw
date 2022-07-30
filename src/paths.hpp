@@ -36,6 +36,8 @@ constexpr const char *FileMouseHighlightVertex = SHADERS_DIR"MouseHighlightVerte
 constexpr const char *FileMouseHighlightFragment = SHADERS_DIR"MouseHighlightFragment.glsl";
 constexpr const char *FileDrawActionDiagramBgVertex = SHADERS_DIR"DrawActionDiagramBgVertex.glsl";
 constexpr const char *FileDrawActionDiagramBgFragment = SHADERS_DIR"DrawActionDiagramBgFragment.glsl";
+constexpr const char *FileDrawConditionDiagramBgFragment = SHADERS_DIR"DrawConditionDiagramBgFragment.glsl";
+constexpr const char *FileDrawConditionDiagramBgVertex = SHADERS_DIR"DrawConditionDiagramBgVertex.glsl";
 
 #define FONTSS_DIR "fonts/"
 constexpr const char *FileArial = FONTSS_DIR"arial.ttf";
