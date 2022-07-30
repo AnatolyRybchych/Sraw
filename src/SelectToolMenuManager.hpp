@@ -9,6 +9,9 @@
 #include "Tools/ColorPaletTool.hpp"
 #include "Tools/ActionBlockDiagramTool.hpp"
 #include "Tools/ConditionBlockDiagramTool.hpp"
+#include "Tools/StartEndBlockDiagramTool.hpp"
+#include "Tools/InOutBlockDiagramTool.hpp"
+#include "Tools/FuncBlockDiagramTool.hpp"
 #include "Quitable.hpp"
 
 class SelectToolMenuManager{
@@ -37,6 +40,9 @@ private:
             std::unique_ptr<SelectMenuToolNode> blockDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> actionDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> conditionDiagramToolNode; 
+                std::unique_ptr<SelectActionToolNode> startEndDiagramToolNode; 
+                std::unique_ptr<SelectActionToolNode> inOutDiagramToolNode; 
+                std::unique_ptr<SelectActionToolNode> funcDiagramToolNode; 
             std::unique_ptr<SelectMenuToolNode> othersMenuNode;
                 std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
 
@@ -50,6 +56,9 @@ private:
     std::unique_ptr<BlockDiagramSetting> diagamSettings;
     std::unique_ptr<ActionBlockDiagramTool> actionBlockDiagramTool;
     std::unique_ptr<ConditionBlockDiagramTool> conditionBlockDiagramTool;
+    std::unique_ptr<StartEndBlockDiagramTool> startEndBlockDiagramTool;
+    std::unique_ptr<InOutBlockDiagramTool> inOutBlockDiagramTool;
+    std::unique_ptr<FuncBlockDiagramTool> funcBlockDiagramTool;
 
     DrawingTool * currTool;
 
@@ -67,6 +76,9 @@ public:
     void OpenText() noexcept;
     void OpenActionDiagram() noexcept;
     void OpenConditionDiagram() noexcept;
+    void OpenStartEndDiagram() noexcept;
+    void OpenInOutDiagram() noexcept;
+    void OpenFuncDiagram() noexcept;
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;

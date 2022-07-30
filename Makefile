@@ -42,6 +42,9 @@ objects	+= obj/MouseHighlightTool.o
 objects	+= obj/BlockDiagramTool.o
 objects	+= obj/ActionBlockDiagramTool.o
 objects	+= obj/ConditionBlockDiagramTool.o
+objects	+= obj/StartEndBlockDiagramTool.o
+objects	+= obj/InOutBlockDiagramTool.o
+objects	+= obj/FuncBlockDiagramTool.o
 
 build_exe:$(objects)
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)

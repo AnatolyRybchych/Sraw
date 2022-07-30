@@ -37,8 +37,10 @@ textTexture(ReadTexture(FileTexticon)),
 othersTexture(ReadTexture(FileOthersicon)),
 primitivesTexture(ReadTexture(FilePrimitivesicon)),
 blockDiagramTexture(ReadTexture(FileBlockDiagramicon)),
-blockDiagram2Texture(ReadTexture(FileBlockDiagram2icon)),
-blockDiagram3Texture(ReadTexture(FileBlockDiagram3icon))
+blockDiagramConditionTexture(ReadTexture(FileBlockDiagramConditionicon)),
+blockDiagramStartEndTexture(ReadTexture(FileBlockDiagramStartEndicon)),
+blockDiagramInOutTexture(ReadTexture(FileBlockDiagramInOuticon)),
+blockDiagramFuncTexture(ReadTexture(FileBlockDiagramFuncicon))
 {
 
     menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
@@ -50,6 +52,9 @@ blockDiagram3Texture(ReadTexture(FileBlockDiagram3icon))
     mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
     drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawActionDiagramBgVertex).c_str(), FReadAllText(FileDrawActionDiagramBgFragment).c_str());
     drawConditionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawConditionDiagramBgVertex).c_str(), FReadAllText(FileDrawConditionDiagramBgFragment).c_str());
+    drawStartEndDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawStartEndDiagramBgVertex).c_str(), FReadAllText(FileDrawStartEndDiagramBgFragment).c_str());
+    drawInOutDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawInOutDiagramBgVertex).c_str(), FReadAllText(FileDrawInOutDiagramBgFragment).c_str());
+    drawFuncDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawFuncDiagramBgVertex).c_str(), FReadAllText(FileDrawFuncDiagramBgFragment).c_str());
 }
 
 
@@ -144,14 +149,21 @@ const Texture &ResourceProvider::GetBlockDiagramTexture() const noexcept{
     return blockDiagramTexture;
 }
 
-const Texture &ResourceProvider::GetBlockDiagram2Texture() const noexcept{
-    return blockDiagram2Texture;
+const Texture &ResourceProvider::GetBlockDiagramConditionTexture() const noexcept{
+    return blockDiagramConditionTexture;
 }
 
-const Texture &ResourceProvider::GetBlockDiagram3Texture() const noexcept{
-    return blockDiagram3Texture;
+const Texture &ResourceProvider::GetBlockDiagramStartEndTexture() const noexcept{
+    return blockDiagramStartEndTexture;
 }
 
+const Texture &ResourceProvider::GetBlockDiagramInOutTexture() const noexcept{
+    return blockDiagramInOutTexture;
+}
+
+const Texture &ResourceProvider::GetBlockDiagramFuncTexture() const noexcept{
+    return blockDiagramFuncTexture;
+}
     
 GLuint ResourceProvider::GetMenuBgProgram() const noexcept{
     return menuBgProgram;
@@ -187,5 +199,17 @@ GLuint ResourceProvider::GetDrawActionDiagramBgProgram() const noexcept{
 
 GLuint ResourceProvider::GetDrawConditionDiagramBgProgram() const noexcept{
     return drawConditionDiagramBgProgram;
+}
+
+GLuint ResourceProvider::GetDrawStartEndDiagramBgProgram() const noexcept{
+    return drawStartEndDiagramBgProgram;
+}
+
+GLuint ResourceProvider::GetDrawInOutDiagramBgProgram() const noexcept{
+    return drawInOutDiagramBgProgram;
+}
+
+GLuint ResourceProvider::GetDrawFuncDiagramBgProgram() const noexcept{
+    return drawFuncDiagramBgProgram;
 }
 

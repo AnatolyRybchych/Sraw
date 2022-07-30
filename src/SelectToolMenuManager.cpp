@@ -102,6 +102,14 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );  
 
+    startEndDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetBlockDiagramStartEndTexture(),
+            L"Start | End", 
+            std::bind(SelectToolMenuManager::OpenStartEndDiagram, this)
+        )
+    );
+
     actionDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
             ResourceProvider::GetProvider().GetBlockDiagramTexture(),
@@ -109,9 +117,23 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             std::bind(SelectToolMenuManager::OpenActionDiagram, this)
         )
     );
+    inOutDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetBlockDiagramInOutTexture(),
+            L"Input | Output", 
+            std::bind(SelectToolMenuManager::OpenInOutDiagram, this)
+        )
+    );
+    funcDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetBlockDiagramFuncTexture(),
+            L"Function", 
+            std::bind(SelectToolMenuManager::OpenFuncDiagram, this)
+        )
+    );
     conditionDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-            ResourceProvider::GetProvider().GetBlockDiagram3Texture(),
+            ResourceProvider::GetProvider().GetBlockDiagramConditionTexture(),
             L"Condition", 
             std::bind(SelectToolMenuManager::OpenConditionDiagram, this)
         )
@@ -120,8 +142,11 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     blockDiagramToolNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
+            startEndDiagramToolNode.get(),
             actionDiagramToolNode.get(),
             conditionDiagramToolNode.get(),
+            inOutDiagramToolNode.get(),
+            funcDiagramToolNode.get(),
         }, 
         L"Menu/Tools/Block diagram", 
         ResourceProvider::GetProvider().GetBlockDiagramTexture(),
@@ -192,6 +217,9 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
     actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
     conditionBlockDiagramTool = std::unique_ptr<ConditionBlockDiagramTool>(new ConditionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
+    startEndBlockDiagramTool = std::unique_ptr<StartEndBlockDiagramTool>(new StartEndBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
+    inOutBlockDiagramTool = std::unique_ptr<InOutBlockDiagramTool>(new InOutBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
+    funcBlockDiagramTool = std::unique_ptr<FuncBlockDiagramTool>(new FuncBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -248,6 +276,18 @@ void SelectToolMenuManager::OpenActionDiagram() noexcept{
 
 void SelectToolMenuManager::OpenConditionDiagram() noexcept{
     SetCurrTool(conditionBlockDiagramTool.get());
+}
+
+void SelectToolMenuManager::OpenStartEndDiagram() noexcept{
+    SetCurrTool(startEndBlockDiagramTool.get());
+}
+
+void SelectToolMenuManager::OpenInOutDiagram() noexcept{
+    SetCurrTool(inOutBlockDiagramTool.get());
+}
+
+void SelectToolMenuManager::OpenFuncDiagram() noexcept{
+    SetCurrTool(funcBlockDiagramTool.get());
 }
 
 void SelectToolMenuManager::OpenColorPalette() noexcept{

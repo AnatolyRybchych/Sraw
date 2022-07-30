@@ -16,8 +16,10 @@ constexpr const char *FileTexticon = IMAGES_DIR"TextIcon.png";
 constexpr const char *FileOthersicon = IMAGES_DIR"OthersIcon.png";
 constexpr const char *FilePrimitivesicon = IMAGES_DIR"PrimitivesIcon.png";
 constexpr const char *FileBlockDiagramicon = IMAGES_DIR"BlockDiagramIcon.png";
-constexpr const char *FileBlockDiagram2icon = IMAGES_DIR"BlockDiagram2Icon.png";
-constexpr const char *FileBlockDiagram3icon = IMAGES_DIR"BlockDiagram3Icon.png";
+constexpr const char *FileBlockDiagramConditionicon = IMAGES_DIR"BlockDiagramConditionIcon.png";
+constexpr const char *FileBlockDiagramStartEndicon = IMAGES_DIR"BlockDiagramStartEndIcon.png";
+constexpr const char *FileBlockDiagramInOuticon = IMAGES_DIR"BlockDiagramInOutIcon.png";
+constexpr const char *FileBlockDiagramFuncicon = IMAGES_DIR"BlockDiagramFuncIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";
@@ -38,6 +40,12 @@ constexpr const char *FileDrawActionDiagramBgVertex = SHADERS_DIR"DrawActionDiag
 constexpr const char *FileDrawActionDiagramBgFragment = SHADERS_DIR"DrawActionDiagramBgFragment.glsl";
 constexpr const char *FileDrawConditionDiagramBgFragment = SHADERS_DIR"DrawConditionDiagramBgFragment.glsl";
 constexpr const char *FileDrawConditionDiagramBgVertex = SHADERS_DIR"DrawConditionDiagramBgVertex.glsl";
+constexpr const char *FileDrawStartEndDiagramBgFragment = SHADERS_DIR"DrawStartEndDiagramBgFragment.glsl";
+constexpr const char *FileDrawStartEndDiagramBgVertex = SHADERS_DIR"DrawStartEndDiagramBgVertex.glsl";
+constexpr const char *FileDrawInOutDiagramBgFragment = SHADERS_DIR"DrawInOutDiagramBgFragment.glsl";
+constexpr const char *FileDrawInOutDiagramBgVertex = SHADERS_DIR"DrawInOutDiagramBgVertex.glsl";
+constexpr const char *FileDrawFuncDiagramBgFragment = SHADERS_DIR"DrawFuncDiagramBgFragment.glsl";
+constexpr const char *FileDrawFuncDiagramBgVertex = SHADERS_DIR"DrawFuncDiagramBgVertex.glsl";
 
 #define FONTSS_DIR "fonts/"
 constexpr const char *FileArial = FONTSS_DIR"arial.ttf";

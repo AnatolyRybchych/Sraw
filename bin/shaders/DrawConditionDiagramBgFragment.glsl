@@ -1,6 +1,6 @@
 #version 110
 
-#define BG_CONTRAST 0.01
+#define BG_CONTRAST 0.4
 
 uniform vec2 scale;
 uniform vec3 color;
@@ -20,8 +20,8 @@ float over(float x, float y){
 void main(){
     float brightness = (color.r + color.g + color.b) / 3.0;
     float bg_offset;
-    if(brightness > 0.5) bg_offset = brightness - BG_CONTRAST;
-    else bg_offset = brightness + BG_CONTRAST;
+    if(brightness > 0.5) bg_offset = -BG_CONTRAST;
+    else bg_offset = +BG_CONTRAST;
 
     vec3 bg_color = color + vec3(bg_offset, bg_offset, bg_offset);
 

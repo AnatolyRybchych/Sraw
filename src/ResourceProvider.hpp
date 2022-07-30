@@ -24,8 +24,10 @@ private:
     Texture othersTexture;
     Texture primitivesTexture;
     Texture blockDiagramTexture;
-    Texture blockDiagram2Texture;
-    Texture blockDiagram3Texture;
+    Texture blockDiagramConditionTexture;
+    Texture blockDiagramStartEndTexture;
+    Texture blockDiagramInOutTexture;
+    Texture blockDiagramFuncTexture;
 
     GLuint menuBgProgram;
     GLuint drawImageProgram;
@@ -36,6 +38,9 @@ private:
     GLuint mouseHighlightProgram;
     GLuint drawActionDiagramBgProgram;
     GLuint drawConditionDiagramBgProgram;
+    GLuint drawStartEndDiagramBgProgram;
+    GLuint drawInOutDiagramBgProgram;
+    GLuint drawFuncDiagramBgProgram;
 public:
     static void InitProvider();
     static const ResourceProvider &GetProvider();
@@ -55,8 +60,10 @@ public:
     const Texture &GetOthersTexture() const noexcept;
     const Texture &GetPrimitivesTexture() const noexcept;
     const Texture &GetBlockDiagramTexture() const noexcept;
-    const Texture &GetBlockDiagram2Texture() const noexcept;
-    const Texture &GetBlockDiagram3Texture() const noexcept;
+    const Texture &GetBlockDiagramConditionTexture() const noexcept;
+    const Texture &GetBlockDiagramStartEndTexture() const noexcept;
+    const Texture &GetBlockDiagramInOutTexture() const noexcept;
+    const Texture &GetBlockDiagramFuncTexture() const noexcept;
         
     GLuint GetMenuBgProgram() const noexcept;
     GLuint GetDrawImageProgram() const noexcept;
@@ -67,5 +74,8 @@ public:
     GLuint GetMouseHighlightProgram() const noexcept;
     GLuint GetDrawActionDiagramBgProgram() const noexcept;
     GLuint GetDrawConditionDiagramBgProgram() const noexcept;
+    GLuint GetDrawStartEndDiagramBgProgram() const noexcept;
+    GLuint GetDrawInOutDiagramBgProgram() const noexcept;
+    GLuint GetDrawFuncDiagramBgProgram() const noexcept;
     
 };
