@@ -7,6 +7,7 @@
 #include "Tools/EraserTool.hpp"
 #include "Tools/TextTool.hpp"
 #include "Tools/ColorPaletTool.hpp"
+#include "Tools/ActionBlockDiagramTool.hpp"
 #include "Quitable.hpp"
 
 class SelectToolMenuManager{
@@ -33,6 +34,8 @@ private:
             std::unique_ptr<SelectMenuToolNode> primitivesMenuNode;
             std::unique_ptr<SelectActionToolNode> textToolNode; 
             std::unique_ptr<SelectMenuToolNode> blockDiagramToolNode; 
+                std::unique_ptr<SelectActionToolNode> actionDiagramToolNode; 
+                std::unique_ptr<SelectActionToolNode> conditionDiagramToolNode; 
             std::unique_ptr<SelectMenuToolNode> othersMenuNode;
                 std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
 
@@ -42,6 +45,9 @@ private:
     std::unique_ptr<EraserTool> eraserTool;
     std::unique_ptr<ColorPaletTool> colorPaletTool;
     std::unique_ptr<TextTool> textTool;
+
+    std::unique_ptr<BlockDiagramSetting> diagamSettings;
+    std::unique_ptr<ActionBlockDiagramTool> actionDiagramTool;
 
     DrawingTool * currTool;
 
@@ -57,6 +63,7 @@ public:
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;
     void OpenText() noexcept;
+    void OpenActionDiagram() noexcept;
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;

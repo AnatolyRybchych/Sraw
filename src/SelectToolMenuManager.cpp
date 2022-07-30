@@ -102,9 +102,26 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );  
 
+    actionDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetBlockDiagramTexture(),
+            L"Action", 
+            std::bind(SelectToolMenuManager::OpenActionDiagram, this)
+        )
+    );
+    conditionDiagramToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetBlockDiagram3Texture(),
+            L"Condition", 
+            std::bind(SelectToolMenuManager::OpenActionDiagram, this)
+        )
+    );
+
     blockDiagramToolNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
+            actionDiagramToolNode.get(),
+            conditionDiagramToolNode.get(),
         }, 
         L"Menu/Tools/Block diagram", 
         ResourceProvider::GetProvider().GetBlockDiagramTexture(),
@@ -165,11 +182,15 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         emptyTexture)
     );
 
+
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, commitHandler, bg));
     colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
     textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
+
+    diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
+    actionDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -218,6 +239,10 @@ void SelectToolMenuManager::OpenEraser() noexcept{
 
 void SelectToolMenuManager::OpenText() noexcept{
     SetCurrTool(textTool.get());
+}
+
+void SelectToolMenuManager::OpenActionDiagram() noexcept{
+    SetCurrTool(actionDiagramTool.get());
 }
 
 void SelectToolMenuManager::OpenColorPalette() noexcept{

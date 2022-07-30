@@ -24,6 +24,8 @@ private:
     Texture othersTexture;
     Texture primitivesTexture;
     Texture blockDiagramTexture;
+    Texture blockDiagram2Texture;
+    Texture blockDiagram3Texture;
 
     GLuint menuBgProgram;
     GLuint drawImageProgram;
@@ -32,6 +34,7 @@ private:
     GLuint erseProgram;
     GLuint paletteProgram;
     GLuint mouseHighlightProgram;
+    GLuint drawActionDiagramBgProgram;
 public:
     static void InitProvider();
     static const ResourceProvider &GetProvider();
@@ -51,6 +54,8 @@ public:
     const Texture &GetOthersTexture() const noexcept;
     const Texture &GetPrimitivesTexture() const noexcept;
     const Texture &GetBlockDiagramTexture() const noexcept;
+    const Texture &GetBlockDiagram2Texture() const noexcept;
+    const Texture &GetBlockDiagram3Texture() const noexcept;
         
     GLuint GetMenuBgProgram() const noexcept;
     GLuint GetDrawImageProgram() const noexcept;
@@ -59,5 +64,6 @@ public:
     GLuint GetErseProgram() const noexcept;
     GLuint GetPaletteProgram() const noexcept;
     GLuint GetMouseHighlightProgram() const noexcept;
+    GLuint GetDrawActionDiagramBgProgram() const noexcept;
     
 };

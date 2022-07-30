@@ -36,7 +36,10 @@ toolsTexture(ReadTexture(FileToolsicon)),
 textTexture(ReadTexture(FileTexticon)),
 othersTexture(ReadTexture(FileOthersicon)),
 primitivesTexture(ReadTexture(FilePrimitivesicon)),
-blockDiagramTexture(ReadTexture(FileBlockDiagramicon)){
+blockDiagramTexture(ReadTexture(FileBlockDiagramicon)),
+blockDiagram2Texture(ReadTexture(FileBlockDiagram2icon)),
+blockDiagram3Texture(ReadTexture(FileBlockDiagram3icon))
+{
 
     menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
     drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
@@ -45,6 +48,7 @@ blockDiagramTexture(ReadTexture(FileBlockDiagramicon)){
     erseProgram = BuildShaderProgram(FReadAllText(FileErseVertex).c_str(), FReadAllText(FileErseFragment).c_str());
     paletteProgram = BuildShaderProgram(FReadAllText(FilePaletteVertex).c_str(), FReadAllText(FilePaletteFragment).c_str());
     mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
+    drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawActionDiagramBgVertex).c_str(), FReadAllText(FileDrawActionDiagramBgFragment).c_str());
 }
 
 
@@ -139,6 +143,14 @@ const Texture &ResourceProvider::GetBlockDiagramTexture() const noexcept{
     return blockDiagramTexture;
 }
 
+const Texture &ResourceProvider::GetBlockDiagram2Texture() const noexcept{
+    return blockDiagram2Texture;
+}
+
+const Texture &ResourceProvider::GetBlockDiagram3Texture() const noexcept{
+    return blockDiagram3Texture;
+}
+
     
 GLuint ResourceProvider::GetMenuBgProgram() const noexcept{
     return menuBgProgram;
@@ -166,5 +178,9 @@ GLuint ResourceProvider::GetPaletteProgram() const noexcept{
 
 GLuint ResourceProvider::GetMouseHighlightProgram() const noexcept{
     return mouseHighlightProgram;
+}
+
+GLuint ResourceProvider::GetDrawActionDiagramBgProgram() const noexcept{
+    return drawActionDiagramBgProgram;
 }
 

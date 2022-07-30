@@ -16,6 +16,8 @@ constexpr const char *FileTexticon = IMAGES_DIR"TextIcon.png";
 constexpr const char *FileOthersicon = IMAGES_DIR"OthersIcon.png";
 constexpr const char *FilePrimitivesicon = IMAGES_DIR"PrimitivesIcon.png";
 constexpr const char *FileBlockDiagramicon = IMAGES_DIR"BlockDiagramIcon.png";
+constexpr const char *FileBlockDiagram2icon = IMAGES_DIR"BlockDiagram2Icon.png";
+constexpr const char *FileBlockDiagram3icon = IMAGES_DIR"BlockDiagram3Icon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";
@@ -32,6 +34,8 @@ constexpr const char *FilePaletteVertex = SHADERS_DIR"PaletteVertex.glsl";
 constexpr const char *FilePaletteFragment = SHADERS_DIR"PaletteFragment.glsl";
 constexpr const char *FileMouseHighlightVertex = SHADERS_DIR"MouseHighlightVertex.glsl";
 constexpr const char *FileMouseHighlightFragment = SHADERS_DIR"MouseHighlightFragment.glsl";
+constexpr const char *FileDrawActionDiagramBgVertex = SHADERS_DIR"DrawActionDiagramBgVertex.glsl";
+constexpr const char *FileDrawActionDiagramBgFragment = SHADERS_DIR"DrawActionDiagramBgFragment.glsl";
 
 #define FONTSS_DIR "fonts/"
 constexpr const char *FileArial = FONTSS_DIR"arial.ttf";
