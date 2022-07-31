@@ -92,6 +92,14 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
         )
     );
 
+    selectionToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+            ResourceProvider::GetProvider().GetSelectionTexture(),
+            L"Selection", 
+            std::bind(SelectToolMenuManager::OpenSelection, this)
+        )
+    );
+
     primitivesMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
@@ -171,6 +179,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
             primitivesMenuNode.get(),
             textToolNode.get(),
             blockDiagramToolNode.get(),
+            selectionToolNode.get(),
             othersMenuNode.get()
         }, 
         L"Menu/Tools", 
@@ -268,6 +277,10 @@ void SelectToolMenuManager::OpenEraser() noexcept{
 
 void SelectToolMenuManager::OpenText() noexcept{
     SetCurrTool(textTool.get());
+}
+
+void SelectToolMenuManager::OpenSelection() noexcept{
+
 }
 
 void SelectToolMenuManager::OpenActionDiagram() noexcept{

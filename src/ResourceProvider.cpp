@@ -40,9 +40,9 @@ blockDiagramTexture(ReadTexture(FileBlockDiagramicon)),
 blockDiagramConditionTexture(ReadTexture(FileBlockDiagramConditionicon)),
 blockDiagramStartEndTexture(ReadTexture(FileBlockDiagramStartEndicon)),
 blockDiagramInOutTexture(ReadTexture(FileBlockDiagramInOuticon)),
-blockDiagramFuncTexture(ReadTexture(FileBlockDiagramFuncicon))
+blockDiagramFuncTexture(ReadTexture(FileBlockDiagramFuncicon)),
+selectionTexture(ReadTexture(FileSelectionicon))
 {
-
     menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
     drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
     menuItemProgram = BuildShaderProgram(FReadAllText(FileMenuItemVertex).c_str(), FReadAllText(FileMenuItemFragment).c_str());
@@ -163,6 +163,10 @@ const Texture &ResourceProvider::GetBlockDiagramInOutTexture() const noexcept{
 
 const Texture &ResourceProvider::GetBlockDiagramFuncTexture() const noexcept{
     return blockDiagramFuncTexture;
+}
+
+const Texture &ResourceProvider::GetSelectionTexture() const noexcept{
+    return selectionTexture;
 }
     
 GLuint ResourceProvider::GetMenuBgProgram() const noexcept{

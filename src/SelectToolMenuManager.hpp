@@ -43,6 +43,7 @@ private:
                 std::unique_ptr<SelectActionToolNode> startEndDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> inOutDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> funcDiagramToolNode; 
+            std::unique_ptr<SelectActionToolNode> selectionToolNode; 
             std::unique_ptr<SelectMenuToolNode> othersMenuNode;
                 std::unique_ptr<SelectActionToolNode> mouseHighlightToolNode; 
 
@@ -74,6 +75,7 @@ public:
     void OpenBrush() noexcept;
     void OpenEraser() noexcept;
     void OpenText() noexcept;
+    void OpenSelection() noexcept;
     void OpenActionDiagram() noexcept;
     void OpenConditionDiagram() noexcept;
     void OpenStartEndDiagram() noexcept;

@@ -28,6 +28,7 @@ private:
     Texture blockDiagramStartEndTexture;
     Texture blockDiagramInOutTexture;
     Texture blockDiagramFuncTexture;
+    Texture selectionTexture;
 
     GLuint menuBgProgram;
     GLuint drawImageProgram;
@@ -64,6 +65,7 @@ public:
     const Texture &GetBlockDiagramStartEndTexture() const noexcept;
     const Texture &GetBlockDiagramInOutTexture() const noexcept;
     const Texture &GetBlockDiagramFuncTexture() const noexcept;
+    const Texture &GetSelectionTexture() const noexcept;
         
     GLuint GetMenuBgProgram() const noexcept;
     GLuint GetDrawImageProgram() const noexcept;

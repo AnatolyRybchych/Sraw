@@ -20,6 +20,7 @@ constexpr const char *FileBlockDiagramConditionicon = IMAGES_DIR"BlockDiagramCon
 constexpr const char *FileBlockDiagramStartEndicon = IMAGES_DIR"BlockDiagramStartEndIcon.png";
 constexpr const char *FileBlockDiagramInOuticon = IMAGES_DIR"BlockDiagramInOutIcon.png";
 constexpr const char *FileBlockDiagramFuncicon = IMAGES_DIR"BlockDiagramFuncIcon.png";
+constexpr const char *FileSelectionicon = IMAGES_DIR"SelectionIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";
