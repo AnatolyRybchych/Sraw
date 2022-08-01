@@ -6,6 +6,7 @@
 #include "Tools/BrushTool.hpp"
 #include "Tools/EraserTool.hpp"
 #include "Tools/TextTool.hpp"
+#include "Tools/SelectionTool.hpp"
 #include "Tools/ColorPaletTool.hpp"
 #include "Tools/ActionBlockDiagramTool.hpp"
 #include "Tools/ConditionBlockDiagramTool.hpp"
@@ -13,11 +14,13 @@
 #include "Tools/InOutBlockDiagramTool.hpp"
 #include "Tools/FuncBlockDiagramTool.hpp"
 #include "Quitable.hpp"
+#include "DrawingTarget.hpp"
 
 class SelectToolMenuManager{
 private:
     Quitable &quitable;
     CommitHandler &commitHandler;
+    const DrawingTarget &drawingTarget;
     const Texture &bg;
 
     int cx, cy;
@@ -53,6 +56,7 @@ private:
     std::unique_ptr<EraserTool> eraserTool;
     std::unique_ptr<ColorPaletTool> colorPaletTool;
     std::unique_ptr<TextTool> textTool;
+    std::unique_ptr<SelectionTool> selectionTool;
 
     std::unique_ptr<BlockDiagramSetting> diagamSettings;
     std::unique_ptr<ActionBlockDiagramTool> actionBlockDiagramTool;
@@ -65,7 +69,7 @@ private:
 
     void SetCurrTool(DrawingTool *tool) noexcept;
 public:
-    SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable);
+    SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget);
     void OpenToolMenu() noexcept;
     void OpenTool_ToolsMenu() noexcept;
     void OpenTool_PrimitivesMenu() noexcept;

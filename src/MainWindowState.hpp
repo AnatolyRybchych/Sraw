@@ -5,6 +5,7 @@
 #include "MonitorInfo.hpp"
 #include "MainWindowStateStage.hpp"
 #include "DrawingCanvas.hpp"
+#include "DrawingTarget.hpp"
 
 
 class MainWindow;
@@ -17,11 +18,13 @@ private:
     std::unique_ptr<Texture> screenshot;
     std::unique_ptr<DrawingCanvas> canvas = nullptr;
     Quitable &quitable;
+    const DrawingTarget &drawingTarget;
+    
 
     void GetScreenshot() noexcept;
 public:
     const Texture &GetStateTexture() const noexcept;
-    MainWindowState(MainWindow &window, HMONITOR monitor, Quitable &quitable);
+    MainWindowState(MainWindow &window, HMONITOR monitor, Quitable &quitable, const DrawingTarget &drawingTarget);
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
     HMONITOR GetMonitor() const noexcept;
     ~MainWindowState() noexcept;

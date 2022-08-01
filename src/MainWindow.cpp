@@ -23,6 +23,9 @@ LRESULT MainWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) n
     }
 }
 
+void MainWindow::Redraw() const noexcept{
+    InvalidateRect(GetHWnd(), nullptr, true);
+}
 
 MainWindow::MainWindow(HINSTANCE hInstance, App &app)
     :Window(hInstance, L"WNDCLASS_MAINWINDOW", L"", 0, 0, 100, 100, WS_POPUP|WS_SYSMENU, nullptr, WS_EX_TOOLWINDOW | WS_EX_TOPMOST), app(app){
@@ -104,7 +107,7 @@ void MainWindow::SetCurrState(HMONITOR monitor){
         }
     }
 
-    currState = std::shared_ptr<MainWindowState>(new MainWindowState(*this, monitor, app));
+    currState = std::shared_ptr<MainWindowState>(new MainWindowState(*this, monitor, app, *this));
     windowStates.push_back(currState);
 }
 

@@ -47,6 +47,8 @@ constexpr const char *FileDrawInOutDiagramBgFragment = SHADERS_DIR"DrawInOutDiag
 constexpr const char *FileDrawInOutDiagramBgVertex = SHADERS_DIR"DrawInOutDiagramBgVertex.glsl";
 constexpr const char *FileDrawFuncDiagramBgFragment = SHADERS_DIR"DrawFuncDiagramBgFragment.glsl";
 constexpr const char *FileDrawFuncDiagramBgVertex = SHADERS_DIR"DrawFuncDiagramBgVertex.glsl";
+constexpr const char *FileFillRectFragment = SHADERS_DIR"FillRectFragment.glsl";
+constexpr const char *FileFillRectVertex = SHADERS_DIR"FillRectVertex.glsl";
 
 #define FONTSS_DIR "fonts/"
 constexpr const char *FileArial = FONTSS_DIR"arial.ttf";

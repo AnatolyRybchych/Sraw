@@ -10,6 +10,7 @@
 #include "SelectToolMenuManager.hpp"
 #include <GL/glew.h>
 #include "Quitable.hpp"
+#include "DrawingTarget.hpp"
 
 class DrawingCanvas: public CommitHandler
 {
@@ -22,7 +23,7 @@ private:
 public:
     const Texture &GetBackground() const noexcept;
     const Texture &GetCurrentState() const noexcept;
-    DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy);
+    DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget, int cx, int cy);
     bool OnMouseMove(int x, int y);
     bool OnLMouseDown(int x, int y);
     bool OnLMouseUp(int x, int y);

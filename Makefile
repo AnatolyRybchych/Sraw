@@ -28,6 +28,8 @@ objects	+= obj/CutBmpWindow.o
 objects	+= obj/SelectMenuToolNode.o
 objects	+= obj/SelectActionToolNode.o
 objects	+= obj/DrawDiagramBgProgram.o
+objects	+= obj/RectRenderer.o
+objects	+= obj/Coords.o
 
 objects	+= obj/Texture.o
 objects	+= obj/Framebuffer.o
@@ -45,6 +47,7 @@ objects	+= obj/ConditionBlockDiagramTool.o
 objects	+= obj/StartEndBlockDiagramTool.o
 objects	+= obj/InOutBlockDiagramTool.o
 objects	+= obj/FuncBlockDiagramTool.o
+objects	+= obj/SelectionTool.o
 
 build_exe:$(objects)
 	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)

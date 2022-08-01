@@ -6,10 +6,11 @@
 #include "Window.hpp"
 #include "MainWindowState.hpp"
 #include "Quitable.hpp"
+#include "DrawingTarget.hpp"
 
 class App;
 
-class MainWindow:public Window{
+class MainWindow:public Window, public DrawingTarget{
 private:
     std::vector<std::shared_ptr<MainWindowState>> windowStates;
     std::shared_ptr<MainWindowState> currState = nullptr;
@@ -20,6 +21,7 @@ private:
 protected:
     LRESULT WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept override;
 public:
+    virtual void Redraw() const noexcept override;
     MainWindow(HINSTANCE hInstance, App &app);
     const Texture &GetCurrentStateTexture() const;
     HBITMAP CreateCurrentStateBitmap() const;

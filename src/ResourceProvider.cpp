@@ -55,6 +55,7 @@ selectionTexture(ReadTexture(FileSelectionicon))
     drawStartEndDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawStartEndDiagramBgVertex).c_str(), FReadAllText(FileDrawStartEndDiagramBgFragment).c_str());
     drawInOutDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawInOutDiagramBgVertex).c_str(), FReadAllText(FileDrawInOutDiagramBgFragment).c_str());
     drawFuncDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawFuncDiagramBgVertex).c_str(), FReadAllText(FileDrawFuncDiagramBgFragment).c_str());
+    fillRectProgram = BuildShaderProgram(FReadAllText(FileFillRectVertex).c_str(), FReadAllText(FileFillRectFragment).c_str());
 }
 
 
@@ -215,5 +216,9 @@ GLuint ResourceProvider::GetDrawInOutDiagramBgProgram() const noexcept{
 
 GLuint ResourceProvider::GetDrawFuncDiagramBgProgram() const noexcept{
     return drawFuncDiagramBgProgram;
+}
+
+GLuint ResourceProvider::GetFillRectProgram() const noexcept{
+    return fillRectProgram;
 }
 

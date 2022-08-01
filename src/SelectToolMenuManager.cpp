@@ -3,10 +3,11 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable)
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget)
     :emptyTexture((GLuint)0),
     commitHandler(commitHandler),
     quitable(quitable),
+    drawingTarget(drawingTarget),
     bg(bg){
 
     this->cx = cx;
@@ -222,6 +223,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
     textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
+    selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, commitHandler, bg));
 
     diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
     actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
@@ -240,6 +242,7 @@ DrawingTool &SelectToolMenuManager::GetCurrTool() noexcept{
 
 void SelectToolMenuManager::SetCurrTool(DrawingTool *tool) noexcept{
     currTool = tool;
+    drawingTarget.Redraw();
 }
 
 void SelectToolMenuManager::OpenToolMenu() noexcept{
@@ -280,7 +283,7 @@ void SelectToolMenuManager::OpenText() noexcept{
 }
 
 void SelectToolMenuManager::OpenSelection() noexcept{
-
+    SetCurrTool(selectionTool.get());
 }
 
 void SelectToolMenuManager::OpenActionDiagram() noexcept{

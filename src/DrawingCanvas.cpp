@@ -13,9 +13,9 @@ const Texture &DrawingCanvas::GetCurrentState() const noexcept{
     return currState;
 }
 
-DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, int cx, int cy)
+DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarget &DrawingTarget, int cx, int cy)
     :bg(bg),
-    toolMenuManager(*this, cx, cy, bg, quitable),
+    toolMenuManager(*this, cx, cy, bg, quitable, DrawingTarget),
     currState(cx, cy){
 
     frameBuffer.Bind();
