@@ -10,7 +10,7 @@ RenderText* RenderText::GetDefaultRenderer(){
     return defaul_instance;
 }
                         
-void RenderText::InitDefaultRenderer(const char *font_path){
+void RenderText::InitDefaultRenderer(const char *font_path, GLuint program){
     if(defaul_instance != nullptr){
         delete defaul_instance;
         defaul_instance = nullptr;
@@ -23,12 +23,12 @@ void RenderText::InitDefaultRenderer(const char *font_path){
 
     default_face = new FT_Face();
     FT_New_Face(FreeType::GetLib(), font_path, 0, default_face);
-    defaul_instance = new RenderText(*default_face);
+    defaul_instance = new RenderText(*default_face, program);
 }
 
-RenderText::RenderText(FT_Face face, const char *attribVertexName, const char *uniformTextureName, const char *uniformTextColor3f, const char *vertex, const char *fragment){
+RenderText::RenderText(FT_Face face, GLuint program, const char *attribVertexName, const char *uniformTextureName, const char *uniformTextColor3f){
     this->face = face;
-    prog = BuildShaderProgram(vertex, fragment);
+    prog = program;
     vertexPos = glGetAttribLocation(prog, attribVertexName);
     texPos = glGetUniformLocation(prog, uniformTextureName);
     colorPos = glGetUniformLocation(prog, uniformTextColor3f);

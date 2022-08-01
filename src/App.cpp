@@ -106,7 +106,7 @@ int App::Run(){
 
     DrawImage::Init();
     MouseHighlight::Init();
-    RenderText::InitDefaultRenderer(FileArial);
+    RenderText::InitDefaultRenderer(FileArial, ResourceProvider::GetProvider().GetRenderTextProgram());
 
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0)){

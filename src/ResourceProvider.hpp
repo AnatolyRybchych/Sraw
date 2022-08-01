@@ -42,6 +42,7 @@ private:
     GLuint drawInOutDiagramBgProgram;
     GLuint drawFuncDiagramBgProgram;
     GLuint fillRectProgram;
+    GLuint renderTextProgram;
 public:
     static void InitProvider();
     static const ResourceProvider &GetProvider();
@@ -79,5 +80,6 @@ public:
     GLuint GetDrawInOutDiagramBgProgram() const noexcept;
     GLuint GetDrawFuncDiagramBgProgram() const noexcept;
     GLuint GetFillRectProgram() const noexcept;
+    GLuint GetRenderTextProgram() const noexcept;
     
 };
