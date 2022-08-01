@@ -236,6 +236,9 @@ bool SelectionTool::OnKeyUp(int vkCode) noexcept{
     case VK_RCONTROL:{
         isControlDown = false;
     } return false;
+    case VK_RETURN:{
+        stage = STAGE_WAITING;
+    }return true;
     }
     return false;
 }   
@@ -245,9 +248,49 @@ bool SelectionTool::OnTextInput(std::wstring str) noexcept{
 }
 
 bool SelectionTool::OnScrollUp() noexcept{
+    if(stage == STAGE_MOVING){
+
+        float scale = 0.95;
+
+        float scale_2 = scale * 0.5;
+
+        int x = GetSelectionX();
+        int y = GetSelectionY();
+        int cx = GetSelectionCx();
+        int cy = GetSelectionCy();
+
+        int selectionCenterX = x + cx / 2;
+        int selectionCenterY = y + cy / 2;
+
+        p1.SetXGlPixels(selectionCenterX - cx * scale_2);
+        p1.SetYGlPixels(selectionCenterY - cy * scale_2);
+        p2.SetXGlPixels(selectionCenterX + cx * scale_2);
+        p2.SetYGlPixels(selectionCenterY + cy * scale_2);
+
+        return true;
+    }
     return false;
 }
 
 bool SelectionTool::OnScrollDown() noexcept{
+    if(stage == STAGE_MOVING){
+        float scale = 1.05;
+
+        float scale_2 = scale * 0.5;
+
+        int x = GetSelectionX();
+        int y = GetSelectionY();
+        int cx = GetSelectionCx();
+        int cy = GetSelectionCy();
+
+        double selectionCenterX = x + cx / 2.0;
+        double selectionCenterY = y + cy / 2.0;
+
+        p1.SetXGlPixels(selectionCenterX - cx * scale_2);
+        p1.SetYGlPixels(selectionCenterY - cy * scale_2);
+        p2.SetXGlPixels(selectionCenterX + cx * scale_2);
+        p2.SetYGlPixels(selectionCenterY + cy * scale_2);
+        return true;
+    }
     return false;
 }
