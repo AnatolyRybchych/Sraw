@@ -4,6 +4,10 @@ Framebuffer::Framebuffer() noexcept{
     glGenFramebuffers(1, &glId);
 }
 
+GLuint Framebuffer::GetGLId() const noexcept{
+    return glId;
+}
+
 void Framebuffer::Bind() const noexcept{
     glBindFramebuffer(GL_FRAMEBUFFER, glId);
 }

@@ -22,6 +22,7 @@ private:
     CommitHandler &commitHandler;
     const DrawingTarget &drawingTarget;
     const Texture &bg;
+    const Texture &state;
 
     int cx, cy;
 
@@ -69,7 +70,7 @@ private:
 
     void SetCurrTool(DrawingTool *tool) noexcept;
 public:
-    SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget);
+    SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget, const Texture &state);
     void OpenToolMenu() noexcept;
     void OpenTool_ToolsMenu() noexcept;
     void OpenTool_PrimitivesMenu() noexcept;

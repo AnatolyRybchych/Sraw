@@ -2,8 +2,8 @@
 
 class Coords{
 private:
-    float glX;
-    float glY;
+    double winX;
+    double winY;
 
     int viewportCx;
     int viewportCy;

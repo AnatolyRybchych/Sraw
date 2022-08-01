@@ -2,132 +2,241 @@
 #include "../DrawImage.hpp"
 #include "../RectRenderer.hpp"
 
-Selection::Selection() noexcept{
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+enum stage{
+    STAGE_WAITING,
+    STAGE_SELECTING,
+    STAGE_SELECTED,
+    STAGE_MOVING,
+};
+
+int SelectionTool::GetSelectionX() const noexcept{
+    int p1x = p1.GetXGlPixels();
+    int p2x = p2.GetXGlPixels();
+    return p1x > p2x ? p2x : p1x;
+}
+
+int SelectionTool::GetSelectionY() const noexcept{
+    int p1y = p1.GetYGlPixels();
+    int p2y = p2.GetYGlPixels();
+    return p1y > p2y ? p2y : p1y;
+}
+
+int SelectionTool::GetSelectionCx() const noexcept{
+    int p1x = p1.GetXGlPixels();
+    int p2x = p2.GetXGlPixels();
+    return p1x > p2x ? (p1x - p2x) : (p2x - p1x);
+}
+
+int SelectionTool::GetSelectionCy() const noexcept{
+    int p1y = p1.GetYGlPixels();
+    int p2y = p2.GetYGlPixels();
+    return p1y > p2y ? (p1y - p2y) : (p2y - p1y);
+}
+
+bool SelectionTool::IsPointInSelectionRect(int x, int y) const noexcept{
+    int sx = GetSelectionX();
+    int sy = GetSelectionY();
+    return sx < x && sy < y && sx + GetSelectionCx() > x && sy + GetSelectionCy() > y;
+}
+
+void SelectionTool::CopyStateToSelection(int x, int y, int cx, int cy) noexcept{
+    glBindTexture(GL_TEXTURE_2D, selection);
+    char *data = new char[cx * cy * 4];
+    BindFramebuffer(state.GetGLID());
+    glReadPixels(x, y, cx, cy, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    UnbindFramebuffer();
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    delete[] data;
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Selection::~Selection() noexcept{
-    glDeleteTextures(1, &texture);
-}
-
-void Selection::CopyContentFromTexture(GLuint texture, int x, int y, int cx, int cy) noexcept{
-    if(cx < 0){ x += cx; cx = -cx;}
-    if(cy < 0){ y += cy; cy = -cy;}
-    if(x < 0) {x = 0;}
-    if(y < 0) {y = 0;}
-
-    srcX = x;
-    srcY = y;
-    srcCx = cx;
-    srcCy = cy;
+void SelectionTool::ErseRgn(int x, int y, int cx, int cy) noexcept{
     char *data = new char[cx * cy * 4];
-    fb.Bind();
-    fb.AttachTexture2D(texture);
+    
+    BindFramebuffer(GetBg().GetGLID());
     glReadPixels(x, y, cx, cy, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    fb.Unbind();
+    UnbindFramebuffer();
 
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, erseBuffer);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    BindFramebuffer(GetCommitBuffer().GetGLID());
+    int vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
+    glViewport(x, y, cx, cy);
+    DrawImage::GetRenderer().Draw(erseBuffer);
+    glViewport(vp[0], vp[1], vp[2], vp[3]);
+    UnbindFramebuffer();
+    Commit();
+    ClearCommitBuffer();
 
     delete[] data;
 }
 
-void Selection::UnsetContent() noexcept{
-    hasContent = false;
+void SelectionTool::PasteSelection(int x, int y, int cx, int cy) noexcept{
+    BindFramebuffer(GetCommitBuffer().GetGLID());
+    int vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
+    glViewport(x, y, cx, cy);
+    DrawImage::GetRenderer().Draw(selection);
+    glViewport(vp[0], vp[1], vp[2], vp[3]);
+    UnbindFramebuffer();
+    Commit();
+    ClearCommitBuffer();
 }
 
-void Selection::DrawStretch(int x, int y, int cx, int cy) const noexcept{
-    if(cx < 0){ x += cx; cx = -cx;}
-    if(cy < 0){ y += cy; cy = -cy;}
-    if(x < 0) {x = 0;}
-    if(y < 0) {y = 0;}
+SelectionTool::SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state)
+:DrawingTool(cx, cy, commitHandler, bg), state(state), p1(cx, cy), p2(cx, cy), lastMousePos(cx, cy){
+    stage = STAGE_WAITING;
+    glGenTextures(1, &selection);
+    glGenTextures(1, &erseBuffer);
+    glBindTexture(GL_TEXTURE_2D, selection);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
-    if(HasContent()){
-        int vp[4];
-        glGetIntegerv(GL_VIEWPORT, vp);
-
-        glViewport(x, y, cx, cy);
-        DrawImage::GetRenderer().Draw(texture);
-        glViewport(vp[0], vp[1], vp[2], vp[3]);
-    }
-}
-
-int Selection::GetSrcX() const noexcept{
-    return srcX;
-}
-
-int Selection::GetSrcY() const noexcept{
-    return srcY;
-}
-
-int Selection::GetSrcCx() const noexcept{
-    return srcCx;
-}
-
-int Selection::GetSrcCy() const noexcept{
-    return srcCy;
-}
-
-
-bool Selection::HasContent() const noexcept{
-    return hasContent;
-}
-
-SelectionTool::SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg)
-:DrawingTool(cx, cy, commitHandler, bg), p1(cx, cy), p2(cx, cy){
+    glBindTexture(GL_TEXTURE_2D, erseBuffer);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
 };
 
+SelectionTool::~SelectionTool(){
+    glDeleteTextures(1, &selection);
+    glDeleteTextures(1, &erseBuffer);
+}
+
 void SelectionTool::OnDraw() const noexcept{
-    if(isMouseDown || isSelected){
-        RectRenderer::GetRenderer().Fill(p1, p2, 0.6666, 0.6666, 1.0, 0.3);
+    if(stage == STAGE_SELECTED || stage == STAGE_MOVING || stage == STAGE_SELECTING){
+        if(stage != STAGE_SELECTING){
+            int vp[4];
+            glGetIntegerv(GL_VIEWPORT, vp);
+            glViewport(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+            DrawImage::GetRenderer().Draw(selection);
+            glViewport(vp[0], vp[1], vp[2], vp[3]);
+        }
+        if(IsPointInSelectionRect(lastMousePos.GetXGlPixels(), lastMousePos.GetYGlPixels()))
+            RectRenderer::GetRenderer().Fill(p1, p2, 0.6666, 0.6666, 1.0, 0.1);
+        else 
+            RectRenderer::GetRenderer().Fill(p1, p2, 0.6666, 0.6666, 1.0, 0.3);
     }
 }
 
 bool SelectionTool::OnMouseMove(int x, int y) noexcept{
-    if(isMouseDown && !isSelected){
-        p2.SetXWindows(x);
-        p2.SetYWindows(y);
+    bool ret = false;
+    switch(stage){
+        case STAGE_WAITING:{
+        } break;
+        case STAGE_SELECTING:{
+            p2.SetXWindows(x);
+            p2.SetYWindows(y);
+            ret = true;
+        } break;
+        case STAGE_SELECTED:{
+            ret = true;
+        } break;
+        case STAGE_MOVING:{
+            int offsetX = x - lastMousePos.GetXWindows();
+            int offsetY = y - lastMousePos.GetYWindows();
 
-        return true;
-    }
-    return false;
+            p1.SetXWindows(p1.GetXWindows() + offsetX);
+            p1.SetYWindows(p1.GetYWindows() + offsetY);
+            p2.SetXWindows(p2.GetXWindows() + offsetX);
+            p2.SetYWindows(p2.GetYWindows() + offsetY);
+            ret = true;
+        } break;
+    };
+
+    lastMousePos.SetXWindows(x);
+    lastMousePos.SetYWindows(y);
+    return ret;
 } 
 
 bool SelectionTool::OnLMouseDown(int x, int y) noexcept{
-    isMouseDown = true;
-    this->p1.SetXWindows(x);
-    this->p2.SetXWindows(x);
-    this->p1.SetYWindows(y);
-    this->p2.SetYWindows(y);
-    return false;
+    bool ret = false;
+    switch(stage){
+        case STAGE_WAITING:{
+            p1.SetXWindows(x);
+            p1.SetYWindows(y);
+            p2.SetXWindows(x);
+            p2.SetYWindows(y);
+
+            stage = STAGE_SELECTING;
+            ret = true;
+        } break;
+        case STAGE_SELECTING:{
+            p2.SetXWindows(x);
+            p2.SetYWindows(y);
+
+            ret = true;
+        } break;
+        case STAGE_SELECTED:{
+            if(IsPointInSelectionRect(x, GetViewportHeight() - y)){
+                stage = STAGE_MOVING;
+                if(!isControlDown)
+                    ErseRgn(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+                ret = true;
+            }
+            else{
+                stage = STAGE_WAITING;
+                ret = true;
+            }
+        } break;
+        case STAGE_MOVING:{
+        } break;
+    };
+
+    lastMousePos.SetXWindows(x);
+    lastMousePos.SetYWindows(y);
+    return ret;
 }
 
 bool SelectionTool::OnLMouseUp(int x, int y) noexcept{
-    if(isSelected){
+    bool ret = true;
+
+    switch(stage){
+        case STAGE_WAITING:{
            
-        isSelected = false;
-        return true;
-    }
-    if(isMouseDown){
-        isMouseDown = false;
-        isSelected = true;
-    }
-    
-    return false;
+        } break;
+        case STAGE_SELECTING:{
+            CopyStateToSelection(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+            stage = STAGE_SELECTED;
+        } break;
+        case STAGE_SELECTED:{
+
+        } break;
+        case STAGE_MOVING:{
+            PasteSelection(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+            stage = STAGE_SELECTED;
+            ret = true;
+        } break;
+    };
+
+    lastMousePos.SetXWindows(x);
+    lastMousePos.SetYWindows(y);
+    return ret;
 }
 
 bool SelectionTool::OnKeyDown(int vkCode, int repeat) noexcept{
+    switch (vkCode){
+    case VK_CONTROL:
+    case VK_LCONTROL:
+    case VK_RCONTROL:{
+        isControlDown = true;
+    } return false;
+    }
     return false;
 }
 
 bool SelectionTool::OnKeyUp(int vkCode) noexcept{
+    switch (vkCode){
+    case VK_CONTROL:
+    case VK_LCONTROL:
+    case VK_RCONTROL:{
+        isControlDown = false;
+    } return false;
+    }
     return false;
 }   
 

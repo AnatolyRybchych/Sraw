@@ -4,39 +4,28 @@
 #include <GL/glew.h>
 #include "../Coords.hpp"
 
-//uses opengl pixel coords
-class Selection{
-private:
-    Framebuffer fb;
-    GLuint texture;
-
-    int srcX, srcY, srcCx, srcCy;
-
-    bool hasContent = false;
-public:
-    Selection() noexcept;
-    ~Selection() noexcept;
-    void CopyContentFromTexture(GLuint texture, int x, int y, int cx, int cy) noexcept;
-    void UnsetContent() noexcept;
-    void DrawStretch(int x, int y, int cx, int cy) const noexcept;
-    bool HasContent() const noexcept;
-
-    int GetSrcX() const noexcept;
-    int GetSrcY() const noexcept;
-    int GetSrcCx() const noexcept;
-    int GetSrcCy() const noexcept;
-};
-
 class SelectionTool: public DrawingTool{
 private:
-    Selection selection;
-
     Coords p1;
     Coords p2;
+    Coords lastMousePos;
 
-    bool isMouseDown = false;
+    const Texture &state;
+    GLuint erseBuffer;
+
+    GLuint selection;
     bool isControlDown = false;
-    bool isSelected = false;
+
+    int stage;
+
+    int GetSelectionX() const noexcept;
+    int GetSelectionY() const noexcept;
+    int GetSelectionCx() const noexcept;
+    int GetSelectionCy() const noexcept;
+    bool IsPointInSelectionRect(int x, int y) const noexcept;
+    void CopyStateToSelection(int x, int y, int cx, int cy) noexcept;
+    void ErseRgn(int x, int y, int cx, int cy) noexcept;
+    void PasteSelection(int x, int y, int cx, int cy) noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 
@@ -48,5 +37,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg);
+    SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state);
+    ~SelectionTool();
 };

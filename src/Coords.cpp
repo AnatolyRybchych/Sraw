@@ -6,51 +6,51 @@ Coords::Coords(int viewportCx, int viewportCy) noexcept{
 }
 
 float Coords::GetXGl() const noexcept{
-    return glX;
+    return 2.0 * winX / (double)viewportCx  + 1.0;
 }
 
 float Coords::GetYGl() const noexcept{
-    return glY;
+    return 1.0 - 2.0 * winY / (double)viewportCy;
 }
 
 int Coords::GetXWindows() const noexcept{
-    return (glX * 0.5 + 0.5) * viewportCx;
+    return winX;
 }
 
 int Coords::GetYWindows() const noexcept{
-    return (0.5 - glY * 0.5) * viewportCy;
+    return winY;
 }
 
 float Coords::GetXGlPixels() const noexcept{
-    return (glX * 0.5 + 0.5) * (float)viewportCx;
+    return winX;
 }
 
 float Coords::GetYGlPixels() const noexcept{
-    return (glY * 0.5 + 0.5) * (float)viewportCy;
+    return viewportCy - winY;
 }
 
 void Coords::SetXGl(float x) noexcept{
-    glX = x;
+    winX = (x * 0.5 + 0.5) * viewportCx;
 }
 
 void Coords::SetYGl(float y) noexcept{
-    glY = y;
+    winY = (1.0 - y * 0.5) * viewportCy;
 }
 
 void Coords::SetXWindows(int x) noexcept{
-    glX = (x / (float)viewportCx) * 2.0 - 1.0;
+    winX = x;
 }
 
 void Coords::SetYWindows(int y) noexcept{
-    glY = 1.0 - (y / (float)viewportCy) * 2.0;
+    winY = y;
 }
 
 void Coords::SetXGlPixels(float x) noexcept{
-    glX = 2.0 * x / (float) viewportCx - 1.0;
+    winX = x;
 }
 
 void Coords::SetYGlPixels(float y) noexcept{
-    glY = 2.0 * y / (float) viewportCy - 1.0;
+    winY = viewportCy - y;
 }
 
 void Coords::SetViewport(int cx, int cy) noexcept{

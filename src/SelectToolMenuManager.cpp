@@ -3,11 +3,12 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget)
+SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget, const Texture &state)
     :emptyTexture((GLuint)0),
     commitHandler(commitHandler),
     quitable(quitable),
     drawingTarget(drawingTarget),
+    state(state),
     bg(bg){
 
     this->cx = cx;
@@ -223,7 +224,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
     textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
-    selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, commitHandler, bg));
+    selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, commitHandler, bg, state));
 
     diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
     actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));

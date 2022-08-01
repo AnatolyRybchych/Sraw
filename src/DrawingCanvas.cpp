@@ -15,8 +15,8 @@ const Texture &DrawingCanvas::GetCurrentState() const noexcept{
 
 DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarget &DrawingTarget, int cx, int cy)
     :bg(bg),
-    toolMenuManager(*this, cx, cy, bg, quitable, DrawingTarget),
-    currState(cx, cy){
+    currState(cx, cy),
+    toolMenuManager(*this, cx, cy, bg, quitable, DrawingTarget, currState){
 
     frameBuffer.Bind();
     glViewport(0, 0, cx, cy);
