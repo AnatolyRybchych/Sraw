@@ -10,8 +10,6 @@ private:
     static constexpr float scaleIncrement = 0.1; 
     static constexpr float scaleMin = 0.02; 
     static constexpr float scaleMax = 1.0; 
-    
-    const Texture &state;
     GLuint erseTex;
 
     bool isMouseDown = false;
@@ -33,7 +31,7 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state) noexcept;
+    EraserTool(int cx, int cy, const Texture &bg, const Texture &state) noexcept;
 
     ~EraserTool() noexcept;
 };

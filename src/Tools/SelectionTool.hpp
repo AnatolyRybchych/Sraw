@@ -10,9 +10,7 @@ private:
     Coords p2;
     Coords lastMousePos;
 
-    const Texture &state;
     GLuint erseBuffer;
-
     GLuint selection;
     bool isControlDown = false;
 
@@ -37,6 +35,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state);
+    SelectionTool(int cx, int cy, const Texture &bg, const Texture &state);
     ~SelectionTool();
 };

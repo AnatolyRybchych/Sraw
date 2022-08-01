@@ -50,6 +50,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept override;
     
 public:
-    BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalet) noexcept;
+    BrushTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalet) noexcept;
     ~BrushTool() noexcept;
 };

@@ -47,7 +47,6 @@ selectionTexture(ReadTexture(FileSelectionicon))
     drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
     menuItemProgram = BuildShaderProgram(FReadAllText(FileMenuItemVertex).c_str(), FReadAllText(FileMenuItemFragment).c_str());
     drawCircleProgram = BuildShaderProgram(FReadAllText(FileDrawCircleVertex).c_str(), FReadAllText(FileDrawCircleFragment).c_str());
-    erseProgram = BuildShaderProgram(FReadAllText(FileErseVertex).c_str(), FReadAllText(FileErseFragment).c_str());
     paletteProgram = BuildShaderProgram(FReadAllText(FilePaletteVertex).c_str(), FReadAllText(FilePaletteFragment).c_str());
     mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
     drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawActionDiagramBgVertex).c_str(), FReadAllText(FileDrawActionDiagramBgFragment).c_str());
@@ -184,10 +183,6 @@ GLuint ResourceProvider::GetMenuItemProgram() const noexcept{
 
 GLuint ResourceProvider::GetDrawCircleProgram() const noexcept{
     return drawCircleProgram;
-}
-
-GLuint ResourceProvider::GetErseProgram() const noexcept{
-    return erseProgram;
 }
 
 GLuint ResourceProvider::GetPaletteProgram() const noexcept{

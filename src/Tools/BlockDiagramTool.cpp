@@ -29,8 +29,8 @@ int BlockDiagramSetting::GetFontSize() const noexcept{
 }
 
 
-BlockDiagramTool::BlockDiagramTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, BlockDiagramSetting &settings)
-:DrawingTool(cx, cy, commitHandler, bg), settings(settings){
+BlockDiagramTool::BlockDiagramTool(int cx, int cy, const Texture &bg, const Texture &state, BlockDiagramSetting &settings)
+:DrawingTool(cx, cy, bg, state), settings(settings){
 }
 
 int BlockDiagramTool::GetCurrMPosX() const noexcept{
@@ -72,11 +72,9 @@ bool BlockDiagramTool::OnLMouseUp(int x, int y) noexcept{
     currY = y;
 
     if(isMouseDown){
-        BindFramebuffer(GetCommitBuffer().GetGLID());
+        BindFramebuffer(GetState().GetGLID());
         OnDraw();
         UnbindFramebuffer();
-        Commit();
-        ClearCommitBuffer();
     }
 
     isMouseDown = false;

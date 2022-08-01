@@ -34,13 +34,12 @@ void BrushTool::DrawLine(int x1, int y1, int x2,  int y2) const noexcept{
 
 void BrushTool::OnDraw() const noexcept{
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    DrawImage::GetRenderer().Draw(GetCommitBuffer().GetGLID());
     DrawCircle(prevX, prevY);
 }
 
 bool BrushTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
-        BindFramebuffer(GetCommitBuffer().GetGLID());
+        BindFramebuffer(GetState().GetGLID());
         DrawLine(prevX, prevY, x, y);
         UnbindFramebuffer();
     }
@@ -53,7 +52,7 @@ bool BrushTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     prevX = x;
     prevY = y;
-    BindFramebuffer(GetCommitBuffer().GetGLID());
+    BindFramebuffer(GetState().GetGLID());
     DrawCircle(x, y);
     UnbindFramebuffer();
     return true;
@@ -62,8 +61,6 @@ bool BrushTool::OnLMouseDown(int x, int y) noexcept{
 bool BrushTool::OnLMouseUp(int x, int y) noexcept{
     if(isMouseDown){
         isMouseDown = false;
-        Commit();
-        ClearCommitBuffer();
     }
     prevX = x;
     prevY = y;
@@ -114,8 +111,8 @@ bool BrushTool::OnScrollDown() noexcept{
     return true;
 }
 
-BrushTool::BrushTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalet) noexcept: 
-    DrawingTool(cx, cy, commitHandler, bg),
+BrushTool::BrushTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalet) noexcept: 
+    DrawingTool(cx, cy, bg, state),
     colorPalet(colorPalet){
 
     prog = ResourceProvider::GetProvider().GetDrawCircleProgram();

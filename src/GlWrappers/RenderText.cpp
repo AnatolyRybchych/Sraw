@@ -26,24 +26,22 @@ void RenderText::InitDefaultRenderer(const char *font_path){
     defaul_instance = new RenderText(*default_face);
 }
 
-RenderText::RenderText(FT_Face face, const char *attribVertexName, const char *uniformTextureName, const char *uniformTextColor3f, const char *uniformTextureUseAlphab, const char *vertex, const char *fragment){
+RenderText::RenderText(FT_Face face, const char *attribVertexName, const char *uniformTextureName, const char *uniformTextColor3f, const char *vertex, const char *fragment){
     this->face = face;
     prog = BuildShaderProgram(vertex, fragment);
     vertexPos = glGetAttribLocation(prog, attribVertexName);
     texPos = glGetUniformLocation(prog, uniformTextureName);
     colorPos = glGetUniformLocation(prog, uniformTextColor3f);
-    use_alphaPos = glGetUniformLocation(prog, uniformTextureUseAlphab);
 }
 
 GLuint RenderText::GetProgram() const noexcept{
     return prog;
 }
 
-void RenderText::Render(const __CH_TYPE_ *text, int space, int fontSize, int x, int y, float r, float g, float b, bool use_alpha) const noexcept{
+void RenderText::Render(const __CH_TYPE_ *text, int space, int fontSize, int x, int y, float r, float g, float b) const noexcept{
     FT_Set_Pixel_Sizes(face, 0, fontSize);
     glUseProgram(prog);
     glUniform3f(colorPos, r, g, b);
-    glUniform1i(use_alpha, use_alpha);
     render_text(face, text, space, (point){x, y}, vertexPos, texPos);
     glUseProgram(0);
 }

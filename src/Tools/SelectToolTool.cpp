@@ -1,8 +1,8 @@
 #include "SelectToolTool.hpp"
 #include <iostream>
 
-SelectToolTool::SelectToolTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, SelectToolNode &rootToolNode) noexcept
-    :DrawingTool(cx, cy, commitHandler, bg), rootNode(rootToolNode){
+SelectToolTool::SelectToolTool(int cx, int cy, const Texture &bg, const Texture &state, SelectToolNode &rootToolNode) noexcept
+    :DrawingTool(cx, cy, bg, state), rootNode(rootToolNode){
     currNode = &rootNode;
 }
 

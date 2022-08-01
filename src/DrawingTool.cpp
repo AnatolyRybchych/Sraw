@@ -1,19 +1,16 @@
 #include "DrawingTool.hpp"
 #include "DrawImage.hpp"
 
-DrawingTool::DrawingTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept
-    :commitHandler(commitHandler),
+DrawingTool::DrawingTool(int cx, int cy, const Texture &bg, const Texture &state) noexcept
+    :state(state),
     bg(bg),
-    buffer(cx, cy),
     framebuffer(){
     vpCx = cx;
     vpCy = cy;
-
-    ClearCommitBuffer();
 }
 
-const Texture &DrawingTool::GetCommitBuffer() const noexcept{
-    return buffer;
+const Texture &DrawingTool::GetState() const noexcept{
+    return state;
 }
 
 const Texture &DrawingTool::GetBg() const noexcept{
@@ -29,27 +26,12 @@ void DrawingTool::UnbindFramebuffer() const noexcept{
     framebuffer.Unbind();
 }
 
-void DrawingTool::ClearCommitBuffer() noexcept{
-    BindFramebuffer(buffer.GetGLID());
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    UnbindFramebuffer();
-}
-
-void DrawingTool::OnDrawCommit() noexcept{
-    DrawImage::GetRenderer().Draw(buffer.GetGLID());
-}
-
 int DrawingTool::GetViewportWidth() const noexcept{
     return vpCx;
 }
 
 int DrawingTool::GetViewportHeight() const noexcept{
     return vpCy;
-}
-
-void DrawingTool::Commit() noexcept{
-    commitHandler.HandleCommit(std::bind(OnDrawCommit, this));
 }
 
 void DrawingTool::Draw() const noexcept{

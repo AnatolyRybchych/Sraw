@@ -12,8 +12,7 @@
 #include "Quitable.hpp"
 #include "DrawingTarget.hpp"
 
-class DrawingCanvas: public CommitHandler
-{
+class DrawingCanvas{
 private:
     Texture &bg;
     Texture currState;
@@ -35,5 +34,4 @@ public:
     bool OnScrollDown() noexcept;
     bool OnTextInput(std::wstring str);
     void Draw();
-    virtual void HandleCommit(std::function<void()> drawCommit) noexcept override;
 };

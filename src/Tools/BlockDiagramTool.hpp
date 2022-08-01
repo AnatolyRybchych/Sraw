@@ -40,7 +40,7 @@ protected://handlers should return true if requires to redraw
     virtual void DrawBg() const noexcept = 0;
     virtual void DrawTxt() const noexcept = 0;
 public:
-    BlockDiagramTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, BlockDiagramSetting &settings);
+    BlockDiagramTool(int cx, int cy, const Texture &bg, const Texture &state, BlockDiagramSetting &settings);
 
     int GetCurrMPosX() const noexcept;
     int GetCurrMPosY() const noexcept;

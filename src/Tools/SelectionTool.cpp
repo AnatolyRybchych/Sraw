@@ -42,7 +42,7 @@ bool SelectionTool::IsPointInSelectionRect(int x, int y) const noexcept{
 void SelectionTool::CopyStateToSelection(int x, int y, int cx, int cy) noexcept{
     glBindTexture(GL_TEXTURE_2D, selection);
     char *data = new char[cx * cy * 4];
-    BindFramebuffer(state.GetGLID());
+    BindFramebuffer(GetState().GetGLID());
     glReadPixels(x, y, cx, cy, GL_RGBA, GL_UNSIGNED_BYTE, data);
     UnbindFramebuffer();
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -53,7 +53,7 @@ void SelectionTool::CopyStateToSelection(int x, int y, int cx, int cy) noexcept{
 void SelectionTool::ErseRgn(int x, int y, int cx, int cy) noexcept{
     glEnable(GL_SCISSOR_TEST);
     
-    BindFramebuffer(state.GetGLID());
+    BindFramebuffer(GetState().GetGLID());
     int vp[4];
     glGetIntegerv(GL_VIEWPORT, vp);
     glScissor(x, y, cx, cy);
@@ -64,19 +64,17 @@ void SelectionTool::ErseRgn(int x, int y, int cx, int cy) noexcept{
 }
 
 void SelectionTool::PasteSelection(int x, int y, int cx, int cy) noexcept{
-    BindFramebuffer(GetCommitBuffer().GetGLID());
+    BindFramebuffer(GetState().GetGLID());
     int vp[4];
     glGetIntegerv(GL_VIEWPORT, vp);
     glViewport(x, y, cx, cy);
     DrawImage::GetRenderer().Draw(selection);
     glViewport(vp[0], vp[1], vp[2], vp[3]);
     UnbindFramebuffer();
-    Commit();
-    ClearCommitBuffer();
 }
 
-SelectionTool::SelectionTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state)
-:DrawingTool(cx, cy, commitHandler, bg), state(state), p1(cx, cy), p2(cx, cy), lastMousePos(cx, cy){
+SelectionTool::SelectionTool(int cx, int cy, const Texture &bg, const Texture &state)
+:DrawingTool(cx, cy, bg, state), p1(cx, cy), p2(cx, cy), lastMousePos(cx, cy){
     stage = STAGE_WAITING;
     glGenTextures(1, &selection);
     glGenTextures(1, &erseBuffer);

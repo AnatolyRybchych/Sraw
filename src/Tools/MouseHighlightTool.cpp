@@ -2,8 +2,8 @@
 #include "../MouseHighlight.hpp"
 #include <math.h>
 
-MouseHighlightTool::MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept
-    :DrawingTool(cx, cy, commitHandler, bg){
+MouseHighlightTool::MouseHighlightTool(int cx, int cy, const Texture &bg, const Texture &state) noexcept
+    :DrawingTool(cx, cy, bg, state){
 
 }
 

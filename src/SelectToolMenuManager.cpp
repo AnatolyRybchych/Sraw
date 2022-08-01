@@ -3,9 +3,8 @@
 #include "ResourceProvider.hpp"
 
 
-SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget, const Texture &state)
+SelectToolMenuManager::SelectToolMenuManager(int cx, int cy, const Texture &bg, Quitable &quitable, const DrawingTarget &drawingTarget, const Texture &state)
     :emptyTexture((GLuint)0),
-    commitHandler(commitHandler),
     quitable(quitable),
     drawingTarget(drawingTarget),
     state(state),
@@ -219,20 +218,20 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     );
 
 
-    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, commitHandler, bg));
-    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
-    brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
-    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg, state));
-    textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
-    selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, commitHandler, bg, state));
+    mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, bg, state));
+    colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, bg, state, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
+    brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, bg, state, *colorPaletTool.get()));
+    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, bg, state));
+    textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, bg, state, *colorPaletTool.get()));
+    selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, bg, state));
 
     diagamSettings = std::unique_ptr<BlockDiagramSetting>(new BlockDiagramSetting(*colorPaletTool.get(), 48));
-    actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
-    conditionBlockDiagramTool = std::unique_ptr<ConditionBlockDiagramTool>(new ConditionBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
-    startEndBlockDiagramTool = std::unique_ptr<StartEndBlockDiagramTool>(new StartEndBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
-    inOutBlockDiagramTool = std::unique_ptr<InOutBlockDiagramTool>(new InOutBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
-    funcBlockDiagramTool = std::unique_ptr<FuncBlockDiagramTool>(new FuncBlockDiagramTool(cx, cy, commitHandler, bg, *diagamSettings.get()));
-    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, commitHandler, bg, *(SelectToolNode*)rootMenuNode.get()));
+    actionBlockDiagramTool = std::unique_ptr<ActionBlockDiagramTool>(new ActionBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+    conditionBlockDiagramTool = std::unique_ptr<ConditionBlockDiagramTool>(new ConditionBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+    startEndBlockDiagramTool = std::unique_ptr<StartEndBlockDiagramTool>(new StartEndBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+    inOutBlockDiagramTool = std::unique_ptr<InOutBlockDiagramTool>(new InOutBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+    funcBlockDiagramTool = std::unique_ptr<FuncBlockDiagramTool>(new FuncBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+    selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, bg, state, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
 }

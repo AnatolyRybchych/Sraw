@@ -16,7 +16,7 @@ const Texture &DrawingCanvas::GetCurrentState() const noexcept{
 DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarget &DrawingTarget, int cx, int cy)
     :bg(bg),
     currState(cx, cy),
-    toolMenuManager(*this, cx, cy, bg, quitable, DrawingTarget, currState){
+    toolMenuManager(cx, cy, bg, quitable, DrawingTarget, currState){
 
     frameBuffer.Bind();
     glViewport(0, 0, cx, cy);
@@ -34,13 +34,6 @@ void DrawingCanvas::Draw(){
     DrawImage::GetRenderer().Draw(currState.GetGLID());
     
     toolMenuManager.GetCurrTool().Draw();
-}
-
-void DrawingCanvas::HandleCommit(std::function<void()> drawCommit) noexcept{
-    frameBuffer.Bind();  
-    frameBuffer.AttachTexture2D(currState.GetGLID());
-    drawCommit();
-    frameBuffer.Unbind();
 }
 
 bool DrawingCanvas::OnMouseMove(int x, int y){

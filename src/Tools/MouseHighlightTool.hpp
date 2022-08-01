@@ -19,6 +19,6 @@ protected:
     virtual bool OnScrollDown() noexcept override;
     
 public:
-    MouseHighlightTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept;
+    MouseHighlightTool(int cx, int cy, const Texture &bg, const Texture &state) noexcept;
 };
 

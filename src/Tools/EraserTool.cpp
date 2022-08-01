@@ -7,7 +7,7 @@
 void EraserTool::Erse(int x, int y) const noexcept{
     glEnable(GL_SCISSOR_TEST);
     
-    BindFramebuffer(state.GetGLID());
+    BindFramebuffer(GetState().GetGLID());
     glScissor(x - GetViewportWidth() * scale * 0.5, (GetViewportHeight() - y) - GetViewportWidth() * scale * 0.5, GetViewportWidth() * scale, GetViewportWidth() * scale);
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -58,18 +58,13 @@ bool EraserTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     prevMousePos.SetXWindows(x);
     prevMousePos.SetYWindows(y);
-    BindFramebuffer(GetCommitBuffer().GetGLID());
     Erse(x, y);
-    UnbindFramebuffer();
     return true;
 }
 
 bool EraserTool::OnLMouseUp(int x, int y) noexcept{
     if(isMouseDown){
         isMouseDown = false;
-
-        Commit();
-        ClearCommitBuffer();
     }
     prevMousePos.SetXWindows(x);
     prevMousePos.SetYWindows(y);
@@ -112,8 +107,8 @@ bool EraserTool::OnScrollDown() noexcept{
 }
 
 
-EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state) noexcept
-    :DrawingTool(cx, cy, commitHandler, bg), state(state), prevMousePos(cx, cy){
+EraserTool::EraserTool(int cx, int cy, const Texture &bg, const Texture &state) noexcept
+    :DrawingTool(cx, cy, bg, state), prevMousePos(cx, cy){
     
     glGenTextures(1, &erseTex);
     glBindTexture(GL_TEXTURE_2D, erseTex);

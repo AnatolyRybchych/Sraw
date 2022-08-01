@@ -34,7 +34,6 @@ private:
     GLuint drawImageProgram;
     GLuint menuItemProgram;
     GLuint drawCircleProgram;
-    GLuint erseProgram;
     GLuint paletteProgram;
     GLuint mouseHighlightProgram;
     GLuint drawActionDiagramBgProgram;
@@ -72,7 +71,6 @@ public:
     GLuint GetDrawImageProgram() const noexcept;
     GLuint GetMenuItemProgram() const noexcept;
     GLuint GetDrawCircleProgram() const noexcept;
-    GLuint GetErseProgram() const noexcept;
     GLuint GetPaletteProgram() const noexcept;
     GLuint GetMouseHighlightProgram() const noexcept;
     GLuint GetDrawActionDiagramBgProgram() const noexcept;

@@ -31,6 +31,6 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    TextTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalete) noexcept;
+    TextTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalete) noexcept;
     std::wstring GetText() const noexcept;
 };

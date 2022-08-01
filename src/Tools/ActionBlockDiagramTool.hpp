@@ -9,7 +9,7 @@ protected:
     virtual void DrawBg() const noexcept override;
     virtual void DrawTxt() const noexcept override;
 public:
-    ActionBlockDiagramTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, BlockDiagramSetting &settings);
+    ActionBlockDiagramTool(int cx, int cy, const Texture &bg, const Texture &state, BlockDiagramSetting &settings);
 
     virtual int GetTextWidth() const noexcept override;
 };

@@ -80,8 +80,8 @@ bool ColorPaletTool::OnScrollDown() noexcept{
 }
 
 
-ColorPaletTool::ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, GLuint palette) noexcept
-    :DrawingTool(cx, cy, commitHandler, bg),
+ColorPaletTool::ColorPaletTool(int cx, int cy, const Texture &bg, const Texture &state, GLuint palette) noexcept
+    :DrawingTool(cx, cy, state, bg),
     palette(palette){
     
     glBindTexture(GL_TEXTURE_2D, palette);

@@ -11,8 +11,7 @@ void TextTool::OnDraw() const noexcept{
         currX - textWidth / 2, currY - fontSize / 2, 
         colorPalete.GetRed(),
         colorPalete.GetGreen(),
-        colorPalete.GetBlue(),
-        false);
+        colorPalete.GetBlue());
 }
 
 bool TextTool::OnMouseMove(int x, int y) noexcept{
@@ -33,11 +32,9 @@ bool TextTool::OnLMouseUp(int x, int y) noexcept{
     currY = y;
 
     if(isMouseDown){
-        BindFramebuffer(GetCommitBuffer().GetGLID());
+        BindFramebuffer(GetState().GetGLID());
         OnDraw();
         UnbindFramebuffer();
-        Commit();
-        ClearCommitBuffer();
     }
 
     isMouseDown = false;
@@ -99,8 +96,8 @@ bool TextTool::OnScrollDown() noexcept{
 }
 
 
-TextTool::TextTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, ColorPaletTool &colorPalete) noexcept
-:DrawingTool(cx, cy, commitHandler, bg), colorPalete(colorPalete){
+TextTool::TextTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalete) noexcept
+:DrawingTool(cx, cy, state, bg), colorPalete(colorPalete){
     
 }
 

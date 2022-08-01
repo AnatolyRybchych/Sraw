@@ -45,6 +45,6 @@ public:
     void SetRed(float value) noexcept;
     void SetGreen(float value) noexcept;
     void SetBlue(float value) noexcept;
-    ColorPaletTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, GLuint palette) noexcept;
+    ColorPaletTool(int cx, int cy, const Texture &bg, const Texture &state, GLuint palette) noexcept;
     ~ColorPaletTool() noexcept;
 };

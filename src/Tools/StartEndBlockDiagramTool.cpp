@@ -21,12 +21,11 @@ void StartEndBlockDiagramTool::DrawTxt() const noexcept{
         GetCurrMPosX() - GetTextWidth() / 2, GetCurrMPosY() - GetSettings().GetFontSize() / 2, 
         GetSettings().GetPalet().GetRed(),
         GetSettings().GetPalet().GetGreen(),
-        GetSettings().GetPalet().GetBlue(),
-        false);
+        GetSettings().GetPalet().GetBlue());
 }
 
-StartEndBlockDiagramTool::StartEndBlockDiagramTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, BlockDiagramSetting &settings):
-BlockDiagramTool(cx, cy, commitHandler, bg, settings), bgDrawingProgram(ResourceProvider::GetProvider().GetDrawStartEndDiagramBgProgram()){
+StartEndBlockDiagramTool::StartEndBlockDiagramTool(int cx, int cy, const Texture &bg, const Texture &state, BlockDiagramSetting &settings):
+BlockDiagramTool(cx, cy, bg, state, settings), bgDrawingProgram(ResourceProvider::GetProvider().GetDrawStartEndDiagramBgProgram()){
 
 }
 
