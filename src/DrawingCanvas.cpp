@@ -21,7 +21,8 @@ DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarge
     frameBuffer.Bind();
     glViewport(0, 0, cx, cy);
     frameBuffer.AttachTexture2D(currState.GetGLID());
-    DrawImage::GetRenderer().Draw(bg.GetGLID());
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
     frameBuffer.Unbind(); 
     this->cx = cx;
     this->cy = cy;
@@ -29,6 +30,7 @@ DrawingCanvas::DrawingCanvas(Texture &bg, Quitable &quitable, const DrawingTarge
 
 void DrawingCanvas::Draw(){
     glViewport(0, 0, cx, cy);
+    DrawImage::GetRenderer().Draw(bg.GetGLID());
     DrawImage::GetRenderer().Draw(currState.GetGLID());
     
     toolMenuManager.GetCurrTool().Draw();

@@ -2,6 +2,7 @@
 #include "../DrawingTool.hpp"
 #include "../GlWrappers/Texture.hpp"
 #include "../GlWrappers/Framebuffer.hpp"
+#include "../Coords.hpp"
 #include <memory>
 
 class EraserTool: public DrawingTool{
@@ -10,21 +11,14 @@ private:
     static constexpr float scaleMin = 0.02; 
     static constexpr float scaleMax = 1.0; 
     
-    GLuint prog;
-    GLuint VBO;
-
-    GLint vertex_pPos;
-    GLint posPos;
-    GLint viewportPos;
-    GLint scalePos;
-    GLint bgPos;
+    const Texture &state;
+    GLuint erseTex;
 
     bool isMouseDown = false;
 
     float scale = 0.1;
 
-    int prevX;
-    int prevY;
+    Coords prevMousePos;
 
     void Erse(int x, int y) const noexcept;
     void ErseLine(int x1, int y1, int x2, int y2) const noexcept;
@@ -39,7 +33,7 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollUp() noexcept override;
     virtual bool OnScrollDown() noexcept override;
 public:
-    EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept;
+    EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state) noexcept;
 
     ~EraserTool() noexcept;
 };

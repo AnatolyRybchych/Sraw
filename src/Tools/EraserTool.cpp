@@ -5,24 +5,15 @@
 #include "../Basics.hpp"
 
 void EraserTool::Erse(int x, int y) const noexcept{
-    glUseProgram(prog);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glEnableVertexAttribArray(vertex_pPos);
-    glBindTexture(GL_TEXTURE_2D, GetBg().GetGLID()); 
-    glActiveTexture(GL_TEXTURE0);
+    glEnable(GL_SCISSOR_TEST);
     
-    glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
-    glUniform2f(viewportPos, (float)GetViewportWidth(),(float)GetViewportHeight());
-    glUniform1i(bgPos, 0);
-    glUniform1f(scalePos, scale);
-
-    glVertexAttribPointer(vertex_pPos, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glDisableVertexAttribArray(vertex_pPos);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glUseProgram(0);
+    BindFramebuffer(state.GetGLID());
+    glScissor(x - GetViewportWidth() * scale * 0.5, (GetViewportHeight() - y) - GetViewportWidth() * scale * 0.5, GetViewportWidth() * scale, GetViewportWidth() * scale);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    UnbindFramebuffer();
+    
+    glDisable(GL_SCISSOR_TEST);
 }
 
 void EraserTool::ErseLine(int x1, int y1, int x2, int y2) const noexcept{
@@ -33,25 +24,40 @@ void EraserTool::ErseLine(int x1, int y1, int x2, int y2) const noexcept{
 }
 
 void EraserTool::OnDraw() const noexcept{
-    DrawImage::GetRenderer().Draw(GetCommitBuffer().GetGLID());
-    Erse(prevX, prevY);
+    int erseWidthPixels = GetViewportWidth() * scale;
+    
+    char *data = new char[erseWidthPixels * erseWidthPixels * 4];
+
+    BindFramebuffer(GetBg().GetGLID());
+    glReadPixels(prevMousePos.GetXGlPixels() - erseWidthPixels / 2, prevMousePos.GetYGlPixels() - erseWidthPixels / 2, erseWidthPixels, erseWidthPixels, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    UnbindFramebuffer();
+
+    glBindTexture(GL_TEXTURE_2D, erseTex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, erseWidthPixels, erseWidthPixels, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    int vp[4];
+    glGetIntegerv(GL_VIEWPORT, vp);
+    glViewport(prevMousePos.GetXGlPixels() - erseWidthPixels / 2, prevMousePos.GetYGlPixels() - erseWidthPixels / 2, erseWidthPixels, erseWidthPixels);
+    DrawImage::GetRenderer().Draw(erseTex);
+    glViewport(vp[0], vp[1], vp[2], vp[3]);
+
+    delete[] data;
 }
 
 bool EraserTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
-        BindFramebuffer(GetCommitBuffer().GetGLID());
-        ErseLine(prevX, prevY, x, y);
-        UnbindFramebuffer();
+        ErseLine(prevMousePos.GetXWindows(), prevMousePos.GetYWindows(), x, y);
     }
-    prevX = x;
-    prevY = y;
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     return true;
 } 
 
 bool EraserTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
-    prevX = x;
-    prevY = y;
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     BindFramebuffer(GetCommitBuffer().GetGLID());
     Erse(x, y);
     UnbindFramebuffer();
@@ -65,6 +71,8 @@ bool EraserTool::OnLMouseUp(int x, int y) noexcept{
         Commit();
         ClearCommitBuffer();
     }
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     return true;
 }
 
@@ -104,29 +112,16 @@ bool EraserTool::OnScrollDown() noexcept{
 }
 
 
-EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg) noexcept
-    :DrawingTool(cx, cy, commitHandler, bg){
-
-    prog = ResourceProvider::GetProvider().GetErseProgram();
-
-    vertex_pPos = glGetAttribLocation(prog, "vertex_p");
-    posPos = glGetUniformLocation(prog, "pos");
-    viewportPos = glGetUniformLocation(prog, "viewport");
-    scalePos = glGetUniformLocation(prog, "scale");
-    bgPos = glGetUniformLocation(prog, "bg");
-
+EraserTool::EraserTool(int cx, int cy, CommitHandler &commitHandler, const Texture &bg, const Texture &state) noexcept
+    :DrawingTool(cx, cy, commitHandler, bg), state(state), prevMousePos(cx, cy){
     
-    float vertices[] = {
-        -1, 1, 1, -1, 1, 1,
-        -1, 1, 1, -1, -1, -1
-    };
-
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glGenTextures(1, &erseTex);
+    glBindTexture(GL_TEXTURE_2D, erseTex);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 EraserTool::~EraserTool() noexcept{
-    glDeleteBuffers(1, &VBO);
+    glDeleteTextures(1, &erseTex);
 }

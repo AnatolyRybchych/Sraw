@@ -222,7 +222,7 @@ SelectToolMenuManager::SelectToolMenuManager(CommitHandler &commitHandler, int c
     mouseHighlightTool = std::unique_ptr<MouseHighlightTool>(new MouseHighlightTool(cx, cy, commitHandler, bg));
     colorPaletTool = std::unique_ptr<ColorPaletTool>(new ColorPaletTool(cx, cy, commitHandler, bg, ResourceProvider::GetProvider().GetPaletteTexture().GetGLID()));
     brushTool = std::unique_ptr<BrushTool>(new BrushTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
-    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg));
+    eraserTool = std::unique_ptr<EraserTool>(new EraserTool(cx, cy, commitHandler, bg, state));
     textTool = std::unique_ptr<TextTool>(new TextTool(cx, cy, commitHandler, bg, *colorPaletTool.get()));
     selectionTool = std::unique_ptr<SelectionTool>(new SelectionTool(cx, cy, commitHandler, bg, state));
 

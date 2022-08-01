@@ -51,27 +51,16 @@ void SelectionTool::CopyStateToSelection(int x, int y, int cx, int cy) noexcept{
 }
 
 void SelectionTool::ErseRgn(int x, int y, int cx, int cy) noexcept{
-    char *data = new char[cx * cy * 4];
+    glEnable(GL_SCISSOR_TEST);
     
-    BindFramebuffer(GetBg().GetGLID());
-    glReadPixels(x, y, cx, cy, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    UnbindFramebuffer();
-
-    glBindTexture(GL_TEXTURE_2D, erseBuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cx, cy, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    BindFramebuffer(GetCommitBuffer().GetGLID());
+    BindFramebuffer(state.GetGLID());
     int vp[4];
     glGetIntegerv(GL_VIEWPORT, vp);
-    glViewport(x, y, cx, cy);
-    DrawImage::GetRenderer().Draw(erseBuffer);
-    glViewport(vp[0], vp[1], vp[2], vp[3]);
+    glScissor(x, y, cx, cy);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
     UnbindFramebuffer();
-    Commit();
-    ClearCommitBuffer();
-
-    delete[] data;
+    glDisable(GL_SCISSOR_TEST);
 }
 
 void SelectionTool::PasteSelection(int x, int y, int cx, int cy) noexcept{
@@ -174,8 +163,10 @@ bool SelectionTool::OnLMouseDown(int x, int y) noexcept{
         case STAGE_SELECTED:{
             if(IsPointInSelectionRect(x, GetViewportHeight() - y)){
                 stage = STAGE_MOVING;
-                if(!isControlDown)
+                if(!isControlDown){
+                    CopyStateToSelection(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
                     ErseRgn(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+                }
                 ret = true;
             }
             else{
@@ -225,6 +216,12 @@ bool SelectionTool::OnKeyDown(int vkCode, int repeat) noexcept{
     case VK_RCONTROL:{
         isControlDown = true;
     } return false;
+    case VK_DELETE:{
+        if(stage == STAGE_SELECTED){
+            stage = STAGE_WAITING;
+            ErseRgn(GetSelectionX(), GetSelectionY(), GetSelectionCx(), GetSelectionCy());
+        }
+    } return true;
     }
     return false;
 }
