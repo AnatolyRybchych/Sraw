@@ -25,6 +25,7 @@ public:
     MainWindow(HINSTANCE hInstance, App &app);
     const Texture &GetCurrentStateTexture() const;
     HBITMAP CreateCurrentStateBitmap() const;
+    HBITMAP CreateBgBitmap() const;
     void ClearCurrentState() noexcept;
     void MakeCurrent() const noexcept;
     void SwapBuffers() const noexcept;

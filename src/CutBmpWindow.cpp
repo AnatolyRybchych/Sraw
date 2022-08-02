@@ -66,8 +66,20 @@ LRESULT CutBmpWindow::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
 }
 
+static int CursorPosX() noexcept{
+    POINT cursorPos;
+    GetCursorPos(&cursorPos);
+    return cursorPos.x;
+}
+
+static int CursorPosY() noexcept{
+    POINT cursorPos;
+    GetCursorPos(&cursorPos);
+    return cursorPos.y;
+}
+
 CutBmpWindow::CutBmpWindow(HINSTANCE hInst, HBITMAP bitmap, std::function<void(HBITMAP bmp)> onCut) noexcept
-:Window(hInst, (std::wstring(L"WndClassCutBmp") + std::to_wstring(counter++)).c_str(), L"Cut image", 0, 0, 100, 100, WS_POPUPWINDOW | WS_SYSMENU, nullptr, WS_EX_TOPMOST){
+:Window(hInst, (std::wstring(L"WndClassCutBmp") + std::to_wstring(counter++)).c_str(), L"Cut image", CursorPosX(), CursorPosY(), 100, 100, WS_POPUPWINDOW | WS_SYSMENU, nullptr, WS_EX_TOPMOST){
     BITMAP bitmapHdr;
     GetObject(bitmap, sizeof(bitmapHdr), &bitmapHdr);
     bmpCx = bitmapHdr.bmWidth;

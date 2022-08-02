@@ -7,11 +7,13 @@
 #include "GlWrappers/RenderText.hpp"
 #include <shlobj.h>
 
-
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 static BOOL SaveFileName(wchar_t *fileName, int filenameSize, const wchar_t *initialDir, const wchar_t *title, const wchar_t *filter, DWORD dwFlags){
     OPENFILENAMEW ofn;
@@ -131,17 +133,54 @@ void App::HideWindowAndResoreState() noexcept{
     window->ClearCurrentState();
 }
 
+static void DrawBitmapToAnother(HBITMAP src, HBITMAP dst){
+    HDC srcDc = CreateCompatibleDC(NULL);
+    HDC dstDc = CreateCompatibleDC(NULL);
+
+    SelectObject(srcDc, src);
+    SelectObject(dstDc, dst);
+
+    BITMAP bmpSrc;
+    BITMAP bmpDst;
+    GetObjectA(src, sizeof(bmpSrc), &bmpSrc);
+    GetObjectA(dst, sizeof(bmpDst), &bmpDst);
+
+    int x = 0;
+    int y = 0;
+    int cx = MAX(bmpSrc.bmWidth, bmpDst.bmWidth);
+    int cy = MAX(bmpSrc.bmHeight, bmpDst.bmHeight);
+
+    BLENDFUNCTION bl;
+    bl.BlendOp = AC_SRC_OVER;
+    bl.BlendFlags = 0;
+    bl.SourceConstantAlpha = 255;
+    bl.AlphaFormat = AC_SRC_ALPHA;
+
+    AlphaBlend(dstDc, x, y, cx, cy, srcDc, x, y, cx, cy, bl);
+    
+
+    DeleteDC(srcDc);
+    DeleteDC(dstDc);
+}
+
 void App::HideWindowSaveStateToFile() noexcept{
     HideWindow();
     HBITMAP state = window->CreateCurrentStateBitmap(); 
-    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, state, std::bind(SaveCutedImageToFile, this, std::placeholders::_1)));
+    HBITMAP bg = window->CreateBgBitmap(); 
+    DrawBitmapToAnother(state, bg);
+
+    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, bg, std::bind(SaveCutedImageToFile, this, std::placeholders::_1)));
     DeleteObject(state);  
+    DeleteObject(bg);  
 }
 
 void App::HideWindowCopyStateToClipboard() noexcept{
     HideWindow();
     HBITMAP state = window->CreateCurrentStateBitmap();
-    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, state, std::bind(CopyCutedImageToClipboard, this, std::placeholders::_1)));
+    HBITMAP bg = window->CreateBgBitmap(); 
+    DrawBitmapToAnother(state, bg);
+
+    cutBmpWindow = std::unique_ptr<CutBmpWindow>(new CutBmpWindow(hInstance, bg, std::bind(CopyCutedImageToClipboard, this, std::placeholders::_1)));
     DeleteObject(state);
 }
 

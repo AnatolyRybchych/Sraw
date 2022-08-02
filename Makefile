@@ -2,7 +2,7 @@
 
 LIB_INCLUDE_PATH	:= -I.\include -I.\include\freetype2
 LIB_BIN_PATH		:= -L.\dlls
-LIBS				:= -lgdi32 -lopengl32 -lglew32 -lfreetype -lComdlg32 -lGdiplus
+LIBS				:= -lMsimg32 -lgdi32 -lopengl32 -lglew32 -lfreetype -lComdlg32 -lGdiplus
 
 
 out		:= Sraw.exe

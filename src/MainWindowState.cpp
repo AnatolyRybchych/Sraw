@@ -10,6 +10,10 @@ const Texture &MainWindowState::GetStateTexture() const noexcept{
     return canvas->GetCurrentState();
 }
 
+const Texture &MainWindowState::GetBgTexture() const noexcept{
+    return canvas->GetBackground();
+}
+
 void MainWindowState::GetScreenshot() noexcept{
     MONITORINFO info = monitorInfo.Get();
     int cxMonitor = info.rcMonitor.right - info.rcMonitor.left;
