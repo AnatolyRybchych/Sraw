@@ -8,3 +8,6 @@ to open press lctrl + lwin
 
 menu opens using rclick on Sraw window independently of opened tool
 ![Menu](./Thumbnails/Menu.png)
+
+> Demo
+![Demo](./Thumbnails/Thumbnail.mp4)
