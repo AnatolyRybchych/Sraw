@@ -97,7 +97,7 @@ bool TextTool::OnScrollDown() noexcept{
 
 
 TextTool::TextTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalete) noexcept
-:DrawingTool(cx, cy, state, bg), colorPalete(colorPalete){
+:DrawingTool(cx, cy, bg, state), colorPalete(colorPalete){
     
 }
 
