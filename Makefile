@@ -50,19 +50,19 @@ objects	+= obj/FuncBlockDiagramTool.o
 objects	+= obj/SelectionTool.o
 
 build_exe:$(objects)
-	g++ -g -ggdb $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)
+	g++ -mwindows $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)
 
 obj/%.o:src/%.cpp
 	@mkdir -p obj
-	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
+	g++ $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 obj/%.o:src/GlWrappers/%.cpp
 	@mkdir -p obj
-	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
+	g++ $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 obj/%.o:src/Tools/%.cpp
 	@mkdir -p obj
-	g++ -g -ggdb $(LIB_INCLUDE_PATH) -c -o $@ $<
+	g++ $(LIB_INCLUDE_PATH) -c -o $@ $<
 
 #output dir
 bin_dir:
@@ -88,6 +88,3 @@ build: bin_dir build_exe dlls fonts images shaders
 
 run:build
 	cd ./bin ; ./$(out)
-
-gdb:build
-	cd ./bin ; gdb ./$(out)
