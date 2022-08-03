@@ -1,6 +1,7 @@
 #include "UnicodeWindows.hpp"
 #include "ResourceProvider.hpp"
 
+#include <stdio.h>
 #include <stb_image.h>
 #include "paths.hpp"
 #include "GlWrappers/ShaderProgram.hpp"
@@ -8,8 +9,10 @@
 
 std::unique_ptr<ResourceProvider> ResourceProvider::provider;
 
-static std::string FReadAllText(std::string path);
-static GLuint ReadTexture(std::string path);
+static std::string FReadAllText(std::wstring path);
+static std::wstring AbsolutePath(std::wstring rel) noexcept;
+static std::wstring AbsolutePath(std::string rel) noexcept;
+static GLuint ReadTexture(std::wstring path);
 
 void ResourceProvider::InitProvider(){
     if(provider != nullptr) throw std::logic_error("provider is already initialized");
@@ -22,62 +25,63 @@ const ResourceProvider &ResourceProvider::GetProvider(){
 }
 
 ResourceProvider::ResourceProvider() noexcept
-:mouseHighlightTexture(ReadTexture(FileMouseHighlightIcon)),
-brushTexture(ReadTexture(FileBrushIcon)),
-eraserTexture(ReadTexture(FileEraserIcon)),
-colorPaletteTexture(ReadTexture(FileColorPaletteIcon)),
-paletteTexture(ReadTexture(FilePalette)),
-quitTexture(ReadTexture(FileQuiticon)),
-clearTexture(ReadTexture(FileClearicon)),
-hideTexture(ReadTexture(FileHideicon)),
-saveToFileTexture(ReadTexture(FileSaveToFileicon)),
-copyToClipboardTexture(ReadTexture(FileCopyToClipboardicon)),
-toolsTexture(ReadTexture(FileToolsicon)),
-textTexture(ReadTexture(FileTexticon)),
-othersTexture(ReadTexture(FileOthersicon)),
-primitivesTexture(ReadTexture(FilePrimitivesicon)),
-blockDiagramTexture(ReadTexture(FileBlockDiagramicon)),
-blockDiagramConditionTexture(ReadTexture(FileBlockDiagramConditionicon)),
-blockDiagramStartEndTexture(ReadTexture(FileBlockDiagramStartEndicon)),
-blockDiagramInOutTexture(ReadTexture(FileBlockDiagramInOuticon)),
-blockDiagramFuncTexture(ReadTexture(FileBlockDiagramFuncicon)),
-selectionTexture(ReadTexture(FileSelectionicon)),
-circleTexture(ReadTexture(FileCircleicon)),
-graphTexture(ReadTexture(FileGraphicon)),
-lineTexture(ReadTexture(FileLineicon)),
-rectTexture(ReadTexture(FileRecticon)),
-rectOutlineTexture(ReadTexture(FileRectOutlineicon))
+:mouseHighlightTexture(ReadTexture(AbsolutePath(FileMouseHighlightIcon))),
+brushTexture(ReadTexture(AbsolutePath(FileBrushIcon))),
+eraserTexture(ReadTexture(AbsolutePath(FileEraserIcon))),
+colorPaletteTexture(ReadTexture(AbsolutePath(FileColorPaletteIcon))),
+paletteTexture(ReadTexture(AbsolutePath(FilePalette))),
+quitTexture(ReadTexture(AbsolutePath(FileQuiticon))),
+clearTexture(ReadTexture(AbsolutePath(FileClearicon))),
+hideTexture(ReadTexture(AbsolutePath(FileHideicon))),
+saveToFileTexture(ReadTexture(AbsolutePath(FileSaveToFileicon))),
+copyToClipboardTexture(ReadTexture(AbsolutePath(FileCopyToClipboardicon))),
+toolsTexture(ReadTexture(AbsolutePath(FileToolsicon))),
+textTexture(ReadTexture(AbsolutePath(FileTexticon))),
+othersTexture(ReadTexture(AbsolutePath(FileOthersicon))),
+primitivesTexture(ReadTexture(AbsolutePath(FilePrimitivesicon))),
+blockDiagramTexture(ReadTexture(AbsolutePath(FileBlockDiagramicon))),
+blockDiagramConditionTexture(ReadTexture(AbsolutePath(FileBlockDiagramConditionicon))),
+blockDiagramStartEndTexture(ReadTexture(AbsolutePath(FileBlockDiagramStartEndicon))),
+blockDiagramInOutTexture(ReadTexture(AbsolutePath(FileBlockDiagramInOuticon))),
+blockDiagramFuncTexture(ReadTexture(AbsolutePath(FileBlockDiagramFuncicon))),
+selectionTexture(ReadTexture(AbsolutePath(FileSelectionicon))),
+circleTexture(ReadTexture(AbsolutePath(FileCircleicon))),
+graphTexture(ReadTexture(AbsolutePath(FileGraphicon))),
+lineTexture(ReadTexture(AbsolutePath(FileLineicon))),
+rectTexture(ReadTexture(AbsolutePath(FileRecticon))),
+rectOutlineTexture(ReadTexture(AbsolutePath(FileRectOutlineicon)))
 {
-    menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
-    drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
-    menuItemProgram = BuildShaderProgram(FReadAllText(FileMenuItemVertex).c_str(), FReadAllText(FileMenuItemFragment).c_str());
-    drawCircleProgram = BuildShaderProgram(FReadAllText(FileDrawCircleVertex).c_str(), FReadAllText(FileDrawCircleFragment).c_str());
-    paletteProgram = BuildShaderProgram(FReadAllText(FilePaletteVertex).c_str(), FReadAllText(FilePaletteFragment).c_str());
-    mouseHighlightProgram = BuildShaderProgram(FReadAllText(FileMouseHighlightVertex).c_str(), FReadAllText(FileMouseHighlightFragment).c_str());
-    drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawActionDiagramBgVertex).c_str(), FReadAllText(FileDrawActionDiagramBgFragment).c_str());
-    drawConditionDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawConditionDiagramBgVertex).c_str(), FReadAllText(FileDrawConditionDiagramBgFragment).c_str());
-    drawStartEndDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawStartEndDiagramBgVertex).c_str(), FReadAllText(FileDrawStartEndDiagramBgFragment).c_str());
-    drawInOutDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawInOutDiagramBgVertex).c_str(), FReadAllText(FileDrawInOutDiagramBgFragment).c_str());
-    drawFuncDiagramBgProgram = BuildShaderProgram(FReadAllText(FileDrawFuncDiagramBgVertex).c_str(), FReadAllText(FileDrawFuncDiagramBgFragment).c_str());
-    fillRectProgram = BuildShaderProgram(FReadAllText(FileFillRectVertex).c_str(), FReadAllText(FileFillRectFragment).c_str());
-    renderTextProgram = BuildShaderProgram(FReadAllText(FileRenderTextVertex).c_str(), FReadAllText(FileRenderTextFragment).c_str());
+    menuBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileMenuBgVertex)).c_str(), FReadAllText(AbsolutePath(FileMenuBgFragment)).c_str());
+    drawImageProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawImageVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawImageFragment)).c_str());
+    menuItemProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileMenuItemVertex)).c_str(), FReadAllText(AbsolutePath(FileMenuItemFragment)).c_str());
+    drawCircleProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawCircleVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawCircleFragment)).c_str());
+    paletteProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FilePaletteVertex)).c_str(), FReadAllText(AbsolutePath(FilePaletteFragment)).c_str());
+    mouseHighlightProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileMouseHighlightVertex)).c_str(), FReadAllText(AbsolutePath(FileMouseHighlightFragment)).c_str());
+    drawActionDiagramBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawActionDiagramBgVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawActionDiagramBgFragment)).c_str());
+    drawConditionDiagramBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawConditionDiagramBgVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawConditionDiagramBgFragment)).c_str());
+    drawStartEndDiagramBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawStartEndDiagramBgVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawStartEndDiagramBgFragment)).c_str());
+    drawInOutDiagramBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawInOutDiagramBgVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawInOutDiagramBgFragment)).c_str());
+    drawFuncDiagramBgProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileDrawFuncDiagramBgVertex)).c_str(), FReadAllText(AbsolutePath(FileDrawFuncDiagramBgFragment)).c_str());
+    fillRectProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileFillRectVertex)).c_str(), FReadAllText(AbsolutePath(FileFillRectFragment)).c_str());
+    renderTextProgram = BuildShaderProgram(FReadAllText(AbsolutePath(FileRenderTextVertex)).c_str(), FReadAllText(AbsolutePath(FileRenderTextFragment)).c_str());
 }
 
 
-static std::string FReadAllText(std::string path){
-    std::ifstream file(path);
-    if(file.is_open() == false) throw std::runtime_error(std::string("cannot open file \"") + path + "\"");
-
-    std::string result((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+static std::string FReadAllText(std::wstring path){
+    std::wifstream file(path.c_str());
+    if(file.is_open() == false) throw std::runtime_error(std::string("cannot open file \"") + std::string(path.begin(), path.end()) + "\"");
+    
+    std::wstring result((std::istreambuf_iterator<wchar_t>(file)), std::istreambuf_iterator<wchar_t>());
     file.close();
-    return result;
+    return std::string(result.begin(), result.end());
 }
 
-static GLuint ReadTexture(std::string path){
+static GLuint ReadTexture(std::wstring path){
     int cx, cy, cnt;
-    unsigned char *data = stbi_load(path.c_str(), &cx, &cy, &cnt, 0);
+    FILE *file = _wfopen(path.c_str(), L"rb");
+    unsigned char *data = stbi_load_from_file(file, &cx, &cy, &cnt, 0);
 
-    if(data == nullptr) MessageBoxA(NULL, (std::string() + "Cannot find file \"" + path + "\"").c_str(), "ERROR" , MB_OK);
+    if(data == nullptr) MessageBoxA(NULL, (std::string() + "Cannot find file \"" + std::string(path.begin(), path.end()) + "\"").c_str(), "ERROR" , MB_OK);
 
     GLuint result;
     glGenTextures(1, &result);
@@ -246,5 +250,20 @@ GLuint ResourceProvider::GetFillRectProgram() const noexcept{
 
 GLuint ResourceProvider::GetRenderTextProgram() const noexcept{
     return renderTextProgram;
+}
+
+static std::wstring AbsolutePath(std::string rel) noexcept{
+    return AbsolutePath(std::wstring(rel.begin(), rel.end()));
+}
+
+static std::wstring AbsolutePath(std::wstring rel) noexcept{
+    static wchar_t fullFilename[MAX_PATH];
+
+    if(GetFullPathNameW(rel.c_str(), MAX_PATH, fullFilename, nullptr)){
+        return fullFilename;
+    }
+    else{
+        return L"";
+    }
 }
 
