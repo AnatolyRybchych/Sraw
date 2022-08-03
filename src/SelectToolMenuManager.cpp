@@ -101,9 +101,18 @@ SelectToolMenuManager::SelectToolMenuManager(int cx, int cy, const Texture &bg, 
         )
     );
 
+    lineToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+        ResourceProvider::GetProvider().GetPrimitivesTexture(),
+        L"Line", 
+        std::bind(SelectToolMenuManager::OpenLineTool, this)
+        )
+    );  
+
     primitivesMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
+            lineToolNode.get(),
         }, 
         L"Menu/Tools/Primitives", 
         ResourceProvider::GetProvider().GetPrimitivesTexture(),
@@ -231,6 +240,9 @@ SelectToolMenuManager::SelectToolMenuManager(int cx, int cy, const Texture &bg, 
     startEndBlockDiagramTool = std::unique_ptr<StartEndBlockDiagramTool>(new StartEndBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
     inOutBlockDiagramTool = std::unique_ptr<InOutBlockDiagramTool>(new InOutBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
     funcBlockDiagramTool = std::unique_ptr<FuncBlockDiagramTool>(new FuncBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
+
+    lineTool = std::unique_ptr<LineTool>(new LineTool(cx, cy, bg, state, *brushTool.get()));
+
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, bg, state, *(SelectToolNode*)rootMenuNode.get()));
 
     currTool = mouseHighlightTool.get();
@@ -309,7 +321,11 @@ void SelectToolMenuManager::OpenFuncDiagram() noexcept{
 void SelectToolMenuManager::OpenColorPalette() noexcept{
     SetCurrTool(colorPaletTool.get());
 }
-
 void SelectToolMenuManager::OpenMouseHighlightTool() noexcept{
     SetCurrTool(mouseHighlightTool.get());
 }
+
+void SelectToolMenuManager::OpenLineTool() noexcept{
+    SetCurrTool(lineTool.get());
+}
+

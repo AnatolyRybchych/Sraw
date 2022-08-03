@@ -13,6 +13,7 @@
 #include "Tools/StartEndBlockDiagramTool.hpp"
 #include "Tools/InOutBlockDiagramTool.hpp"
 #include "Tools/FuncBlockDiagramTool.hpp"
+#include "Tools/LineTool.hpp"
 #include "Quitable.hpp"
 #include "DrawingTarget.hpp"
 
@@ -39,6 +40,7 @@ private:
             std::unique_ptr<SelectActionToolNode> quitAppNode; 
         std::unique_ptr<SelectMenuToolNode> toolsMenuNode;
             std::unique_ptr<SelectMenuToolNode> primitivesMenuNode;
+                std::unique_ptr<SelectActionToolNode> lineToolNode; 
             std::unique_ptr<SelectActionToolNode> textToolNode; 
             std::unique_ptr<SelectMenuToolNode> blockDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> actionDiagramToolNode; 
@@ -64,6 +66,7 @@ private:
     std::unique_ptr<StartEndBlockDiagramTool> startEndBlockDiagramTool;
     std::unique_ptr<InOutBlockDiagramTool> inOutBlockDiagramTool;
     std::unique_ptr<FuncBlockDiagramTool> funcBlockDiagramTool;
+    std::unique_ptr<LineTool> lineTool;
 
     DrawingTool * currTool;
 
@@ -87,6 +90,7 @@ public:
     void OpenFuncDiagram() noexcept;
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
+    void OpenLineTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;
 };
     

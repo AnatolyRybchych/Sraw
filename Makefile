@@ -48,6 +48,8 @@ objects	+= obj/StartEndBlockDiagramTool.o
 objects	+= obj/InOutBlockDiagramTool.o
 objects	+= obj/FuncBlockDiagramTool.o
 objects	+= obj/SelectionTool.o
+objects	+= obj/PrimitiveTool.o
+objects	+= obj/LineTool.o
 
 build_exe:$(objects)
 	g++ -mwindows $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)

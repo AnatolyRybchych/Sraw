@@ -11,6 +11,7 @@ private:
     static constexpr float scaleIncrement = 0.1; 
     static constexpr float scaleMin = 0.004; 
     static constexpr float scaleMax = 1.0; 
+    static constexpr float powerIncrement = 0.1; 
     static constexpr float powerMin = 0.001; 
     static constexpr float powerMax = 0.5; 
 
@@ -28,15 +29,10 @@ private:
 
     float power = 0.5;
     float scale = 0.02;
-    float colorR = 1.0;
-    float colorG = 0.0;
-    float colorB = 0.0;
 
     int prevX;
     int prevY;
 
-    void DrawCircle(int x, int y) const noexcept;
-    void DrawLine(int x1, int y1, int x2,  int y2) const noexcept;
     ColorPaletTool &colorPalet;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
@@ -51,5 +47,14 @@ protected://handlers should return true if requires to redraw
     
 public:
     BrushTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalet) noexcept;
+    float GetPower() const noexcept;
+    float GetScale() const noexcept;
+    void IncScale(bool reverse) noexcept;
+    void IncPower(bool reverse) noexcept;
+    const ColorPaletTool &GetPalet() const noexcept;
+
+    void DrawCircle(int x, int y) const noexcept;
+    void DrawLine(int x1, int y1, int x2,  int y2) const noexcept;
+    
     ~BrushTool() noexcept;
 };

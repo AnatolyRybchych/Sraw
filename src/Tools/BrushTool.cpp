@@ -7,6 +7,7 @@
 #include <math.h>
 
 void BrushTool::DrawCircle(int x, int y) const noexcept{
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
@@ -33,7 +34,6 @@ void BrushTool::DrawLine(int x1, int y1, int x2,  int y2) const noexcept{
 }
 
 void BrushTool::OnDraw() const noexcept{
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     DrawCircle(prevX, prevY);
 }
 
@@ -71,20 +71,16 @@ bool BrushTool::OnKeyDown(int vkCode, int repeat) noexcept{
     switch (vkCode)
     {
     case VK_OEM_6:{
-        scale *= 1.0 + scaleIncrement;
-        if(scale > scaleMax) scale = scaleMax;
+        IncScale(false);
     } return true;
     case VK_OEM_4:{
-        scale *= 1.0 - scaleIncrement;
-        if(scale < scaleMin) scale = scaleMin;  
+        IncScale(true);
     } return true;
     case VK_OEM_1:{
-        power = pow(power, 1.1);
-        if(power < powerMin) power = powerMin;  
+        IncPower(false); 
     } return true;
     case VK_OEM_7:{
-        power = pow(power, 0.9);
-        if(power > powerMax) power = powerMax;  
+        IncPower(true);
     } return true;
     
     default: return false;
@@ -100,14 +96,12 @@ bool BrushTool::OnTextInput(std::wstring str) noexcept{
 }
 
 bool BrushTool::OnScrollUp() noexcept{
-    scale *= 1.0 + scaleIncrement;
-        if(scale > scaleMax) scale = scaleMax;
+    IncScale(false);
     return true;
 }
 
 bool BrushTool::OnScrollDown() noexcept{
-    scale *= 1.0 - scaleIncrement;
-        if(scale < scaleMin) scale = scaleMin;  
+    IncScale(true);
     return true;
 }
 
@@ -133,6 +127,40 @@ BrushTool::BrushTool(int cx, int cy, const Texture &bg, const Texture &state, Co
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+float BrushTool::GetPower() const noexcept{
+    return power;
+}
+
+float BrushTool::GetScale() const noexcept{
+    return scale;
+}
+
+const ColorPaletTool &BrushTool::GetPalet() const noexcept{
+    return colorPalet;
+}
+
+void BrushTool::IncScale(bool reverse) noexcept{
+    if(reverse){
+        scale *= 1.0 - scaleIncrement;
+        if(scale < scaleMin) scale = scaleMin;  
+    }
+    else{
+        scale *= 1.0 + scaleIncrement;
+        if(scale > scaleMax) scale = scaleMax;
+    }
+}
+
+void BrushTool::IncPower(bool reverse) noexcept{
+    if(reverse){
+        power = pow(power, 1.0 - powerIncrement);
+        if(power < powerMin) power = powerMin; 
+    }
+    else{
+        power = pow(power, 1.0 + powerIncrement);
+        if(power < powerMin) power = powerMin; 
+    }
 }
 
 BrushTool::~BrushTool() noexcept{
