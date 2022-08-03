@@ -21,19 +21,48 @@ menu opens using rclick on Sraw window independently of opened tool
 ![Menu](./Thumbnails/Menu.png)
 
 > Menu/Brush
+* ']}' To increase size
+* '[{' To reduce size
+* scroll up to reduce size
+* scroll down to increase size
+* ''"' To increase smooth
+* ';:' To reduce smooth
 ![Brush](./Thumbnails/Brush.gif)
 
 > Menu/Eraser
+* ']}' To increase size
+* '[{' To reduce size
+* scroll up to reduce size
+* scroll down to increase size
 ![Eraser](./Thumbnails/Eraser.gif)
 
 > Menu/Palete
+* changes color for each tool, that requires color
 ![Palete](./Thumbnails/Palete.gif)
 
 > Menu/Tools/Block diagram/
-![Block diagram](./Thumbnails/BlockDiagram.gif)
+* scroll up to reduce size
+* scroll down to increase size
+![Block diagrams](./Thumbnails/BlockDiagram.gif)
+
+> Menu/Tools/Primitives/*
+* ']}' To increase size
+* '[{' To reduce size
+* scroll up to reduce size
+* scroll down to increase size
+* ''"' To increase smooth
+* ';:' To reduce smooth
+* alt to keep primitive in center
+![Primitives](./Thumbnails/Selection.gif)
 
 > Menu/Tools/Selection
+* scroll up to reduce size
+* scroll down to increase size
 ![Selection](./Thumbnails/Selection.gif)
+* scroll up to reduce size of moving region
+* scroll down to increase size of moving region
+* delete to clear region
+* move with control to copy contents instead of cutting
 
 > Menu/Quit/Save to file
 ![Save to file](./Thumbnails/SaveToFile.gif)
