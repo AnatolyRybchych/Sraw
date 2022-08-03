@@ -46,6 +46,8 @@ protected://handlers should return true if requires to redraw
     virtual bool OnScrollDown() noexcept override;
     
 public:
+    static constexpr float LinePointsPeriod = 0.2; 
+
     BrushTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalet) noexcept;
     float GetPower() const noexcept;
     float GetScale() const noexcept;

@@ -14,6 +14,10 @@
 #include "Tools/InOutBlockDiagramTool.hpp"
 #include "Tools/FuncBlockDiagramTool.hpp"
 #include "Tools/LineTool.hpp"
+#include "Tools/RectOutlineTool.hpp"
+#include "Tools/RectTool.hpp"
+#include "Tools/GraphTool.hpp"
+#include "Tools/CircleTool.hpp"
 #include "Quitable.hpp"
 #include "DrawingTarget.hpp"
 
@@ -71,6 +75,10 @@ private:
     std::unique_ptr<InOutBlockDiagramTool> inOutBlockDiagramTool;
     std::unique_ptr<FuncBlockDiagramTool> funcBlockDiagramTool;
     std::unique_ptr<LineTool> lineTool;
+    std::unique_ptr<RectOutlineTool> rectOutlineTool;
+    std::unique_ptr<CircleTool> circleTool;
+    std::unique_ptr<GraphTool> graphTool;
+    std::unique_ptr<RectTool> rectTool;
 
     DrawingTool * currTool;
 

@@ -10,10 +10,10 @@ void PrimitiveTool::_DrawPrimitive() const noexcept{
         double cx = p1.GetXGlPixels() - p2.GetXGlPixels();
         double cy = p1.GetYGlPixels() - p2.GetYGlPixels();
 
-        _p1.SetXGlPixels(p1.GetXGlPixels() + cx * 0.5);
-        _p1.SetYGlPixels(p1.GetYGlPixels() + cy * 0.5);
-        _p2.SetXGlPixels(p2.GetXGlPixels() + cx * 0.5);
-        _p2.SetYGlPixels(p2.GetYGlPixels() + cy * 0.5);
+        _p1.SetXGlPixels(p1.GetXGlPixels() + cx * 1.0);
+        _p1.SetYGlPixels(p1.GetYGlPixels() + cy * 1.0);
+        _p2.SetXGlPixels(p2.GetXGlPixels() + cx * 0.0);
+        _p2.SetYGlPixels(p2.GetYGlPixels() + cy * 0.0);
     }
     else{
         _p1 = p1;
@@ -84,13 +84,17 @@ bool PrimitiveTool::OnLMouseDown(int x, int y) noexcept{
 }
 
 bool PrimitiveTool::OnLMouseUp(int x, int y) noexcept{
+    BindFramebuffer(GetState().GetGLID());
+    _DrawPrimitive();
+    UnbindFramebuffer();
     isMouseDown = false;
     lastMousePos.SetXWindows(x);
     lastMousePos.SetYWindows(y);
 
-    BindFramebuffer(GetState().GetGLID());
-    _DrawPrimitive();
-    UnbindFramebuffer();
+    p1.SetXWindows(-100);
+    p1.SetYWindows(-100);
+    p2.SetXWindows(-100);
+    p2.SetYWindows(-100);
 
     return true;
 }
@@ -145,7 +149,10 @@ bool PrimitiveTool::OnScrollDown() noexcept{
 
 PrimitiveTool::PrimitiveTool(int cx, int cy, const Texture &bg, const Texture &state, BrushTool &brush) noexcept
 :DrawingTool(cx, cy, bg, state), brush(brush), lastMousePos(cx, cy), p1(cx, cy), p2(cx, cy){
-
+    p1.SetXWindows(-100);
+    p1.SetYWindows(-100);
+    p2.SetXWindows(-100);
+    p2.SetYWindows(-100);
 }
 
 const BrushTool &PrimitiveTool::GetBrush() const noexcept{

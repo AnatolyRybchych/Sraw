@@ -278,6 +278,10 @@ SelectToolMenuManager::SelectToolMenuManager(int cx, int cy, const Texture &bg, 
     funcBlockDiagramTool = std::unique_ptr<FuncBlockDiagramTool>(new FuncBlockDiagramTool(cx, cy, bg, state, *diagamSettings.get()));
 
     lineTool = std::unique_ptr<LineTool>(new LineTool(cx, cy, bg, state, *brushTool.get()));
+    rectOutlineTool = std::unique_ptr<RectOutlineTool>(new RectOutlineTool(cx, cy, bg, state, *brushTool.get()));
+    circleTool = std::unique_ptr<CircleTool>(new CircleTool(cx, cy, bg, state, *brushTool.get()));
+    graphTool = std::unique_ptr<GraphTool>(new GraphTool(cx, cy, bg, state, *brushTool.get()));
+    rectTool = std::unique_ptr<RectTool>(new RectTool(cx, cy, bg, state, *brushTool.get()));
 
     selectToolmenu = std::unique_ptr<SelectToolTool>(new SelectToolTool(cx, cy, bg, state, *(SelectToolNode*)rootMenuNode.get()));
 
@@ -366,19 +370,19 @@ void SelectToolMenuManager::OpenLineTool() noexcept{
 }
 
 void SelectToolMenuManager::OpenCircleTool() noexcept{
-
+    SetCurrTool(circleTool.get());
 }
 
 void SelectToolMenuManager::OpenRectTool() noexcept{
-
+    SetCurrTool(rectTool.get());
 }
 
 void SelectToolMenuManager::OpenRectOutlineLineTool() noexcept{
-
+    SetCurrTool(rectOutlineTool.get());
 }
 
 void SelectToolMenuManager::OpenGraphTool() noexcept{
-
+    SetCurrTool(graphTool.get());
 }
 
 

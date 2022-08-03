@@ -50,6 +50,10 @@ objects	+= obj/FuncBlockDiagramTool.o
 objects	+= obj/SelectionTool.o
 objects	+= obj/PrimitiveTool.o
 objects	+= obj/LineTool.o
+objects	+= obj/RectTool.o
+objects	+= obj/RectOutlineTool.o
+objects	+= obj/GraphTool.o
+objects	+= obj/CircleTool.o
 
 build_exe:$(objects)
 	g++ -mwindows $(LIB_INCLUDE_PATH) -o bin/$(out) $^ $(LIB_BIN_PATH) $(LIBS)

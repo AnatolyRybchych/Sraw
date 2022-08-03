@@ -27,7 +27,7 @@ void BrushTool::DrawCircle(const Coords &pos) const noexcept{
 }
 
 void BrushTool::DrawLine(const Coords &from, const Coords &to) const noexcept{
-    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance_pixels(from, to)) * scale * 0.2;
+    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance_pixels(from, to)) * scale * LinePointsPeriod;
     for(float progress = 0.0; progress < 1.0; progress += step){
         Coords curr(GetViewportWidth(), GetViewportHeight());
         lerp(curr, from, to, progress);
