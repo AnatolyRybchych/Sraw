@@ -10,12 +10,13 @@ private:
 
     BrushTool &brush;
 
-    bool isMouseDown;
-    bool isAltDown;
+    bool isMouseDown = false;
+    bool isCtrlDown = false;
 
     Coords lastMousePos;
     Coords p1;
     Coords p2;
+    void _DrawPrimitive() const noexcept;
 protected://handlers should return true if requires to redraw
     virtual void OnDraw() const noexcept override;
     virtual bool OnMouseMove(int x, int y) noexcept override; 

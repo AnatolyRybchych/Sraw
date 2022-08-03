@@ -6,14 +6,14 @@
 
 #include <math.h>
 
-void BrushTool::DrawCircle(int x, int y) const noexcept{
+void BrushTool::DrawCircle(const Coords &pos) const noexcept{
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glUseProgram(prog);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glEnableVertexAttribArray(vertex_pPos);
     
     glUniform3f(colorPos, colorPalet.GetRed(), colorPalet.GetGreen(), colorPalet.GetBlue());
-    glUniform2f(posPos, (x / (float)GetViewportWidth() - 0.5) * 2.0, (0.5 - y / (float)GetViewportHeight()) * 2.0);
+    glUniform2f(posPos, pos.GetXGl(), pos.GetYGl());
     glUniform2f(viewportPos, (float)GetViewportWidth(),(float)GetViewportHeight());
     glUniform1f(powerPos, power);
     glUniform1f(scalePos, scale);
@@ -26,34 +26,40 @@ void BrushTool::DrawCircle(int x, int y) const noexcept{
     glUseProgram(0);
 }
 
-void BrushTool::DrawLine(int x1, int y1, int x2,  int y2) const noexcept{
-    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance2(x1, y1, x2, y2)) * scale * 0.2;
+void BrushTool::DrawLine(const Coords &from, const Coords &to) const noexcept{
+    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance_pixels(from, to)) * scale * 0.2;
     for(float progress = 0.0; progress < 1.0; progress += step){
-        DrawCircle(lerpi(x1, x2, progress), lerpi(y1, y2, progress));
+        Coords curr(GetViewportWidth(), GetViewportHeight());
+        lerp(curr, from, to, progress);
+        DrawCircle(curr);
     }
+    DrawCircle(to);
 }
 
 void BrushTool::OnDraw() const noexcept{
-    DrawCircle(prevX, prevY);
+    DrawCircle(prevMousePos);
 }
 
 bool BrushTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
         BindFramebuffer(GetState().GetGLID());
-        DrawLine(prevX, prevY, x, y);
+        Coords curr(GetViewportWidth(), GetViewportHeight());
+        curr.SetXWindows(x);
+        curr.SetYWindows(y);
+        DrawLine(prevMousePos, curr);
         UnbindFramebuffer();
     }
-    prevX = x;
-    prevY = y;
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     return true;
 }
 
 bool BrushTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
-    prevX = x;
-    prevY = y;
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     BindFramebuffer(GetState().GetGLID());
-    DrawCircle(x, y);
+    DrawCircle(prevMousePos);
     UnbindFramebuffer();
     return true;
 }
@@ -62,8 +68,8 @@ bool BrushTool::OnLMouseUp(int x, int y) noexcept{
     if(isMouseDown){
         isMouseDown = false;
     }
-    prevX = x;
-    prevY = y;
+    prevMousePos.SetXWindows(x);
+    prevMousePos.SetYWindows(y);
     return true;
 }
 
@@ -107,7 +113,7 @@ bool BrushTool::OnScrollDown() noexcept{
 
 BrushTool::BrushTool(int cx, int cy, const Texture &bg, const Texture &state, ColorPaletTool &colorPalet) noexcept: 
     DrawingTool(cx, cy, bg, state),
-    colorPalet(colorPalet){
+    colorPalet(colorPalet), prevMousePos(cx, cy){
 
     prog = ResourceProvider::GetProvider().GetDrawCircleProgram();
 

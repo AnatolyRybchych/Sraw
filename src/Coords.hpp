@@ -9,18 +9,18 @@ private:
     int viewportCy;
 public:
     Coords(int viewportCx, int viewportCy) noexcept;
-    float GetXGl() const noexcept;
-    float GetYGl() const noexcept;
+    double GetXGl() const noexcept;
+    double GetYGl() const noexcept;
     int GetXWindows() const noexcept;
     int GetYWindows() const noexcept;
-    float GetXGlPixels() const noexcept;
-    float GetYGlPixels() const noexcept;
+    double GetXGlPixels() const noexcept;
+    double GetYGlPixels() const noexcept;
 
-    void SetXGl(float x) noexcept;
-    void SetYGl(float y) noexcept;
+    void SetXGl(double x) noexcept;
+    void SetYGl(double y) noexcept;
     void SetXWindows(int x) noexcept;
     void SetYWindows(int y) noexcept;
-    void SetXGlPixels(float x) noexcept;
-    void SetYGlPixels(float y) noexcept;  
+    void SetXGlPixels(double x) noexcept;
+    void SetYGlPixels(double y) noexcept;  
     void SetViewport(int cx, int cy) noexcept;
 };

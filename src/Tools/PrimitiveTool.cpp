@@ -1,8 +1,31 @@
 #include "PrimitiveTool.hpp"
+#include "../Basics.hpp"
+
+void PrimitiveTool::_DrawPrimitive() const noexcept{
+
+    Coords _p1(GetViewportWidth(), GetViewportHeight());
+    Coords _p2(GetViewportWidth(), GetViewportHeight());
+
+    if(isCtrlDown){
+        double cx = p1.GetXGlPixels() - p2.GetXGlPixels();
+        double cy = p1.GetYGlPixels() - p2.GetYGlPixels();
+
+        _p1.SetXGlPixels(p1.GetXGlPixels() + cx * 0.5);
+        _p1.SetYGlPixels(p1.GetYGlPixels() + cy * 0.5);
+        _p2.SetXGlPixels(p2.GetXGlPixels() + cx * 0.5);
+        _p2.SetYGlPixels(p2.GetYGlPixels() + cy * 0.5);
+    }
+    else{
+        _p1 = p1;
+        _p2 = p2;
+    }
+
+    DrawPrimitive(_p1, _p2);
+}
 
 void PrimitiveTool::OnDraw() const noexcept{
     if(isMouseDown){
-        DrawPrimitive(p1, p2);
+        _DrawPrimitive();
     }
     else{
         if(lastMousePos.GetXGl() < 0){
@@ -66,7 +89,7 @@ bool PrimitiveTool::OnLMouseUp(int x, int y) noexcept{
     lastMousePos.SetYWindows(y);
 
     BindFramebuffer(GetState().GetGLID());
-    DrawPrimitive(p1, p2);
+    _DrawPrimitive();
     UnbindFramebuffer();
 
     return true;
@@ -86,12 +109,24 @@ bool PrimitiveTool::OnKeyDown(int vkCode, int repeat) noexcept{
     case VK_OEM_7:{
         brush.IncPower(true);
     } return true;
+    case VK_RCONTROL:
+    case VK_LCONTROL:
+    case VK_CONTROL:{
+        isCtrlDown = true;
+    } return true;
     default: return false;
     }
 }
 
 bool PrimitiveTool::OnKeyUp(int vkCode) noexcept{
-    return false;
+    switch (vkCode){
+    case VK_RCONTROL:
+    case VK_LCONTROL:
+    case VK_CONTROL:{
+        isCtrlDown = false;
+    } return true;
+    default: return false;
+    }
 }
 
 bool PrimitiveTool::OnTextInput(std::wstring str) noexcept{

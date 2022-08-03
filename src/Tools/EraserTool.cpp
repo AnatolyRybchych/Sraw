@@ -4,11 +4,11 @@
 #include "../DrawImage.hpp"
 #include "../Basics.hpp"
 
-void EraserTool::Erse(int x, int y) const noexcept{
+void EraserTool::Erse(const Coords &pos) const noexcept{
     glEnable(GL_SCISSOR_TEST);
     
     BindFramebuffer(GetState().GetGLID());
-    glScissor(x - GetViewportWidth() * scale * 0.5, (GetViewportHeight() - y) - GetViewportWidth() * scale * 0.5, GetViewportWidth() * scale, GetViewportWidth() * scale);
+    glScissor(pos.GetXGlPixels() - GetViewportWidth() * scale * 0.5, pos.GetYGlPixels() - GetViewportWidth() * scale * 0.5, GetViewportWidth() * scale, GetViewportWidth() * scale);
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     UnbindFramebuffer();
@@ -16,10 +16,12 @@ void EraserTool::Erse(int x, int y) const noexcept{
     glDisable(GL_SCISSOR_TEST);
 }
 
-void EraserTool::ErseLine(int x1, int y1, int x2, int y2) const noexcept{
-    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance2(x1, y1, x2, y2)) * scale * 0.2;
+void EraserTool::ErseLine(const Coords &from, const Coords &to) const noexcept{
+    float step = sqrt(GetViewportWidth() * GetViewportWidth() + GetViewportHeight() * GetViewportHeight()) / (distance_pixels(from , to)) * scale * 0.2;
     for(float progress = 0.0; progress < 1.0; progress += step){
-        Erse(lerpi(x1, x2, progress), lerpi(y1, y2, progress));
+        Coords curr(GetViewportWidth(), GetViewportHeight());
+        lerp(curr, from , to, progress);
+        Erse(curr);
     }
 }
 
@@ -47,7 +49,10 @@ void EraserTool::OnDraw() const noexcept{
 
 bool EraserTool::OnMouseMove(int x, int y) noexcept{
     if(isMouseDown){
-        ErseLine(prevMousePos.GetXWindows(), prevMousePos.GetYWindows(), x, y);
+        Coords curr(GetViewportWidth(), GetViewportHeight());
+        curr.SetXWindows(x);
+        curr.SetYWindows(y);
+        ErseLine(prevMousePos, curr);
     }
     prevMousePos.SetXWindows(x);
     prevMousePos.SetYWindows(y);
@@ -58,7 +63,7 @@ bool EraserTool::OnLMouseDown(int x, int y) noexcept{
     isMouseDown = true;
     prevMousePos.SetXWindows(x);
     prevMousePos.SetYWindows(y);
-    Erse(x, y);
+    Erse(prevMousePos);
     return true;
 }
 

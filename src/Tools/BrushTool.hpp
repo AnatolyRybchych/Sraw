@@ -4,6 +4,7 @@
 #include "ColorPaletTool.hpp"
 #include "../GlWrappers/Texture.hpp"
 #include "../GlWrappers/Framebuffer.hpp"
+#include "../Coords.hpp"
 
 
 class BrushTool:public DrawingTool{
@@ -30,8 +31,7 @@ private:
     float power = 0.5;
     float scale = 0.02;
 
-    int prevX;
-    int prevY;
+    Coords prevMousePos;
 
     ColorPaletTool &colorPalet;
 protected://handlers should return true if requires to redraw
@@ -53,8 +53,8 @@ public:
     void IncPower(bool reverse) noexcept;
     const ColorPaletTool &GetPalet() const noexcept;
 
-    void DrawCircle(int x, int y) const noexcept;
-    void DrawLine(int x1, int y1, int x2,  int y2) const noexcept;
+    void DrawCircle(const Coords &pos) const noexcept;
+    void DrawLine(const Coords &from, const Coords &to) const noexcept;
     
     ~BrushTool() noexcept;
 };
