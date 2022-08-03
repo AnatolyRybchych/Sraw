@@ -257,21 +257,13 @@ static std::wstring AbsolutePath(std::string rel) noexcept{
 }
 
 static std::wstring AbsolutePath(std::wstring rel) noexcept{
-    static wchar_t currPath[MAX_PATH];
+    static wchar_t fullFilename[MAX_PATH];
 
-    if(GetModuleFileNameW(NULL, currPath, MAX_PATH)){
-        int last = wcslen(currPath);
-        wchar_t *end = currPath + last;
-        wchar_t *start = currPath;
-
-        while(1){
-            if(end == start) return L"";
-            if(*end == L'\\'){
-                return std::wstring(start, end + 1) + rel;
-            }
-            end --;
-        }
+    if(GetFullPathNameW(rel.c_str(), MAX_PATH, fullFilename, nullptr)){
+        return fullFilename;
     }
-    return L"";
+    else{
+        return L"";
+    }
 }
 
