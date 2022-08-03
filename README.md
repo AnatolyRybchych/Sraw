@@ -59,7 +59,7 @@
 - ';:' To reduce smooth
 - alt to keep primitive in center of first point (where mouse was pressed down)
 
-![Primitives](./Thumbnails/Selection.gif)
+![Primitives](./Thumbnails/Primitives.gif)
 
 ## Menu/Tools/Selection
 - scroll up to reduce size
