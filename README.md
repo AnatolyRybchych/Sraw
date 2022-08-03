@@ -57,7 +57,7 @@
 - scroll down to increase size
 - ''"' To increase smooth
 - ';:' To reduce smooth
-- alt to keep primitive in center
+- alt to keep primitive in center of first point (where mouse was pressed down)
 
 ![Primitives](./Thumbnails/Selection.gif)
 
