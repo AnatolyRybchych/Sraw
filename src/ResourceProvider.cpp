@@ -41,7 +41,12 @@ blockDiagramConditionTexture(ReadTexture(FileBlockDiagramConditionicon)),
 blockDiagramStartEndTexture(ReadTexture(FileBlockDiagramStartEndicon)),
 blockDiagramInOutTexture(ReadTexture(FileBlockDiagramInOuticon)),
 blockDiagramFuncTexture(ReadTexture(FileBlockDiagramFuncicon)),
-selectionTexture(ReadTexture(FileSelectionicon))
+selectionTexture(ReadTexture(FileSelectionicon)),
+circleTexture(ReadTexture(FileCircleicon)),
+graphTexture(ReadTexture(FileGraphicon)),
+lineTexture(ReadTexture(FileLineicon)),
+rectTexture(ReadTexture(FileRecticon)),
+rectOutlineTexture(ReadTexture(FileRectOutlineicon))
 {
     menuBgProgram = BuildShaderProgram(FReadAllText(FileMenuBgVertex).c_str(), FReadAllText(FileMenuBgFragment).c_str());
     drawImageProgram = BuildShaderProgram(FReadAllText(FileDrawImageVertex).c_str(), FReadAllText(FileDrawImageFragment).c_str());
@@ -169,6 +174,27 @@ const Texture &ResourceProvider::GetBlockDiagramFuncTexture() const noexcept{
 const Texture &ResourceProvider::GetSelectionTexture() const noexcept{
     return selectionTexture;
 }
+
+const Texture &ResourceProvider::GetCircleTexture() const noexcept{
+    return circleTexture;
+}
+
+const Texture &ResourceProvider::GetGraphTexture() const noexcept{
+    return graphTexture;
+}
+
+const Texture &ResourceProvider::GetLineTexture() const noexcept{
+    return lineTexture;
+}
+
+const Texture &ResourceProvider::GetRectTexture() const noexcept{
+    return rectTexture;
+}
+
+const Texture &ResourceProvider::GetRectOutlineTexture() const noexcept{
+    return rectOutlineTexture;
+}
+
     
 GLuint ResourceProvider::GetMenuBgProgram() const noexcept{
     return menuBgProgram;

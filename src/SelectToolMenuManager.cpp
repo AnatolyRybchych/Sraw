@@ -103,16 +103,52 @@ SelectToolMenuManager::SelectToolMenuManager(int cx, int cy, const Texture &bg, 
 
     lineToolNode = std::unique_ptr<SelectActionToolNode>(
         new SelectActionToolNode(
-        ResourceProvider::GetProvider().GetPrimitivesTexture(),
+        ResourceProvider::GetProvider().GetLineTexture(),
         L"Line", 
         std::bind(SelectToolMenuManager::OpenLineTool, this)
         )
     );  
 
+    rectOutlineToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+        ResourceProvider::GetProvider().GetRectOutlineTexture(),
+        L"Rect outline", 
+        std::bind(SelectToolMenuManager::OpenRectOutlineLineTool, this)
+        )
+    ); 
+
+    circleToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+        ResourceProvider::GetProvider().GetCircleTexture(),
+        L"Circle", 
+        std::bind(SelectToolMenuManager::OpenCircleTool, this)
+        )
+    ); 
+
+    graphToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+        ResourceProvider::GetProvider().GetGraphTexture(),
+        L"Graph", 
+        std::bind(SelectToolMenuManager::OpenGraphTool, this)
+        )
+    ); 
+
+    rectToolNode = std::unique_ptr<SelectActionToolNode>(
+        new SelectActionToolNode(
+        ResourceProvider::GetProvider().GetRectTexture(),
+        L"Rect", 
+        std::bind(SelectToolMenuManager::OpenRectTool, this)
+        )
+    ); 
+
     primitivesMenuNode = std::unique_ptr<SelectMenuToolNode>(
         new SelectMenuToolNode(
         std::vector<SelectToolNode*>{
             lineToolNode.get(),
+            rectOutlineToolNode.get(),
+            circleToolNode.get(),
+            graphToolNode.get(),
+            rectToolNode.get(),
         }, 
         L"Menu/Tools/Primitives", 
         ResourceProvider::GetProvider().GetPrimitivesTexture(),
@@ -328,4 +364,21 @@ void SelectToolMenuManager::OpenMouseHighlightTool() noexcept{
 void SelectToolMenuManager::OpenLineTool() noexcept{
     SetCurrTool(lineTool.get());
 }
+
+void SelectToolMenuManager::OpenCircleTool() noexcept{
+
+}
+
+void SelectToolMenuManager::OpenRectTool() noexcept{
+
+}
+
+void SelectToolMenuManager::OpenRectOutlineLineTool() noexcept{
+
+}
+
+void SelectToolMenuManager::OpenGraphTool() noexcept{
+
+}
+
 

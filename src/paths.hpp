@@ -21,6 +21,11 @@ constexpr const char *FileBlockDiagramStartEndicon = IMAGES_DIR"BlockDiagramStar
 constexpr const char *FileBlockDiagramInOuticon = IMAGES_DIR"BlockDiagramInOutIcon.png";
 constexpr const char *FileBlockDiagramFuncicon = IMAGES_DIR"BlockDiagramFuncIcon.png";
 constexpr const char *FileSelectionicon = IMAGES_DIR"SelectionIcon.png";
+constexpr const char *FileCircleicon = IMAGES_DIR"CircleIcon.png";
+constexpr const char *FileGraphicon = IMAGES_DIR"GraphIcon.png";
+constexpr const char *FileLineicon = IMAGES_DIR"LineIcon.png";
+constexpr const char *FileRecticon = IMAGES_DIR"RectIcon.png";
+constexpr const char *FileRectOutlineicon = IMAGES_DIR"RectOutlineIcon.png";
 
 #define SHADERS_DIR "shaders/"
 constexpr const char *FileMenuBgFragment = SHADERS_DIR"MenuBgFragment.glsl";

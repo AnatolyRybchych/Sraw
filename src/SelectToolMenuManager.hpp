@@ -40,7 +40,11 @@ private:
             std::unique_ptr<SelectActionToolNode> quitAppNode; 
         std::unique_ptr<SelectMenuToolNode> toolsMenuNode;
             std::unique_ptr<SelectMenuToolNode> primitivesMenuNode;
-                std::unique_ptr<SelectActionToolNode> lineToolNode; 
+                std::unique_ptr<SelectActionToolNode> lineToolNode;
+                std::unique_ptr<SelectActionToolNode> rectToolNode;
+                std::unique_ptr<SelectActionToolNode> rectOutlineToolNode;
+                std::unique_ptr<SelectActionToolNode> circleToolNode;
+                std::unique_ptr<SelectActionToolNode> graphToolNode;
             std::unique_ptr<SelectActionToolNode> textToolNode; 
             std::unique_ptr<SelectMenuToolNode> blockDiagramToolNode; 
                 std::unique_ptr<SelectActionToolNode> actionDiagramToolNode; 
@@ -91,6 +95,10 @@ public:
     void OpenColorPalette() noexcept;
     void OpenMouseHighlightTool() noexcept;
     void OpenLineTool() noexcept;
+    void OpenCircleTool() noexcept;
+    void OpenRectTool() noexcept;
+    void OpenRectOutlineLineTool() noexcept;
+    void OpenGraphTool() noexcept;
     DrawingTool &GetCurrTool() noexcept;
 };
     
