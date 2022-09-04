@@ -33,7 +33,7 @@ void main(){
         
         float glow_mask = min(min(tex_data.b, viewport_mask), tex_data.a);
 
-        alpha_mask = body_mask + outline_mask + glow_mask;
+        alpha_mask = max(max(body_mask, outline_mask), glow_mask);
         color = mix(color_body * body_mask, color_outline, outline_mask);
         color = mix(color, color_glow, glow_mask); 
     }
@@ -41,7 +41,7 @@ void main(){
         vec3 color_body = vec3(0.3, 0.3, 0.6);    
         vec3 color_outline = vec3(0.6666, 0.6666, 1.0);
 
-        alpha_mask = body_mask + outline_mask;
+        alpha_mask = max(body_mask, outline_mask);
         color = mix(color_body * body_mask, color_outline, outline_mask);
     }
 
